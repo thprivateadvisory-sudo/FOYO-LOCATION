@@ -1,11 +1,27 @@
-# Mise en ligne de Foyo chez IONOS
+# Mise en ligne de Foyo
 
-Le site fonctionne en deux parties :
+## Situation actuelle : site sur GitHub Pages, sans serveur
 
-- **Le site** (`index.html`, dossier `img/`) : les pages visibles par les clients.
-- **Le serveur** (dossier `api/`, en PHP) : commandes, e-mails de confirmation et de suivi, suivi de commande, service client et espace de gestion.
+Le site est publié par GitHub Pages à partir de la branche `main`. GitHub Pages n'affiche que des pages : il ne peut pas faire tourner le dossier `api/`. Dans ce mode (`API:""` dans `CONFIG`, en haut du script de `index.html`) :
 
-GitHub Pages n'affiche que le site : les commandes, les e-mails et le service client ne fonctionnent que sur un hébergement PHP comme IONOS.
+- le client va jusqu'au bout de la commande et envoie une **demande de location** ;
+- les demandes de location et les messages du service client vous parviennent par e-mail ;
+- le client voit un message clair : un conseiller le recontacte sous 24 heures ouvrées pour finaliser le dossier avec le partenaire financier ;
+- il n'y a pas d'e-mails automatiques au client, pas de suivi en ligne ni d'espace de gestion : c'est vous qui répondez et tenez le client informé.
+
+**Recevoir les demandes (5 minutes, recommandé)** : créez un compte gratuit sur formspree.io, puis un formulaire relié à votre adresse e-mail. Copiez l'adresse fournie (par exemple `https://formspree.io/f/abcdwxyz`) dans `CONFIG.FORMSPREE`. Sans Formspree, le site ouvre la messagerie du client avec la demande déjà rédigée, à envoyer à `CONFIG.SUPPORT_EMAIL` : ça fonctionne, mais une partie des clients n'iront pas jusqu'à l'envoi.
+
+**Relier le domaine IONOS à GitHub Pages** (une fois le domaine acheté) :
+
+1. Dans GitHub : *Settings → Pages → Custom domain*, saisissez `www.votre-domaine.fr` et enregistrez. GitHub ajoute un fichier `CNAME` au dépôt.
+2. Chez IONOS : *Domaines → DNS* :
+   - un enregistrement **CNAME** `www` vers `thprivateadvisory-sudo.github.io` ;
+   - quatre enregistrements **A** pour `@` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153` et `185.199.111.153`.
+3. Une fois le DNS pris en compte (de quelques minutes à 24 h), cochez **Enforce HTTPS** dans GitHub Pages.
+
+## Plus tard : activer le serveur (e-mails automatiques, suivi, espace de gestion)
+
+Le serveur est déjà écrit et testé, dans le dossier `api/`. Il lui faut un hébergement PHP, par exemple une offre d'hébergement web IONOS sur `api.votre-domaine.fr`, pendant que le site reste sur GitHub. Une fois en place, indiquez son adresse dans `CONFIG.API` (par exemple `https://api.votre-domaine.fr/api/`) : le site bascule automatiquement sur le parcours complet. La suite de ce guide décrit cette installation. Dans ce cas, `site_url` dans `config.php` doit rester l'adresse du site (`https://www.votre-domaine.fr`), et le serveur accepte les requêtes venant de cette adresse.
 
 ## 1. Prérequis chez IONOS
 
@@ -17,13 +33,7 @@ GitHub Pages n'affiche que le site : les commandes, les e-mails et le service cl
 
 ## 2. Envoyer les fichiers
 
-Copiez tout le contenu du dépôt à la racine de l'hébergement (par SFTP avec FileZilla, ou avec IONOS Deploy Now relié à GitHub) :
-
-```
-index.html
-img/
-api/
-```
+Copiez le dossier `api/` sur l'hébergement PHP, par SFTP avec FileZilla. Si le serveur n'est pas à l'adresse `site_url` + `/api`, renseignez `api_url` dans `config.php` (par exemple `https://api.votre-domaine.fr/api`). Le logo des e-mails est chargé depuis le site.
 
 Les fichiers `.htaccess` du dossier `api/` doivent être copiés aussi : ils empêchent l'accès aux fichiers internes et aux données des clients.
 

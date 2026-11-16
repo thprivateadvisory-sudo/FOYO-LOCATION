@@ -63,4 +63,4 @@ notify_team("Nouvelle commande $order[number]",
   . "\n$d mois — " . eur($order['monthly']) . "/mois\nLivraison : $order[delivery_date], $order[delivery_slot], $order[zip] $order[city]");
 
 json_out(['ok' => true, 'number' => $order['number'], 'token' => $order['token'],
-          'redirect' => rtrim((string)cfg('site_url'), '/') . '/api/partner/start.php?o=' . rawurlencode($order['number']) . '&t=' . $order['token']]);
+          'redirect' => api_url() . '/partner/start.php?o=' . rawurlencode($order['number']) . '&t=' . $order['token']]);

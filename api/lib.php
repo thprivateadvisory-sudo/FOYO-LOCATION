@@ -57,6 +57,7 @@ function db(): PDO {
   return $pdo;
 }
 
+function api_url(): string { return rtrim((string)(cfg('api_url') ?: rtrim((string)cfg('site_url'), '/') . '/api'), '/'); }
 function now(): string { return date('Y-m-d H:i:s'); }
 
 /* ---------- Réponses JSON ---------- */
@@ -269,7 +270,7 @@ function send_status_email(array $o, string $detail = ''): bool {
       $t = 'Votre commande est enregistrée';
       $pre = 'Il reste à finaliser votre dossier pour confirmer la livraison.';
       $c = p("Bonjour $prenom,") . p("Nous avons bien reçu votre commande n° <b>$n</b>. Pour la confirmer, il reste à finaliser votre dossier auprès de $partner : vérification d'identité, signature électronique du contrat et premier loyer.")
-        . button('Finaliser mon dossier', rtrim((string)cfg('site_url'), '/') . '/api/partner/start.php?o=' . rawurlencode($o['number']) . '&t=' . $o['token'])
+        . button('Finaliser mon dossier', api_url() . '/partner/start.php?o=' . rawurlencode($o['number']) . '&t=' . $o['token'])
         . order_table($o) . delivery_block($o)
         . p('Votre créneau de livraison est réservé pendant 48 heures.');
       break;

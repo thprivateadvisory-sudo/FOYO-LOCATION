@@ -6,6 +6,8 @@
 return [
   // Adresse publique du site, sans « / » final
   'site_url'      => 'https://www.foyo.fr',
+  // Adresse du dossier api/ s'il est hébergé ailleurs que le site (ex. 'https://api.foyo.fr/api'). Vide = site_url + /api
+  'api_url'       => '',
 
   // E-mails
   'mail_from'      => 'commandes@foyo.fr',      // expéditeur des e-mails clients

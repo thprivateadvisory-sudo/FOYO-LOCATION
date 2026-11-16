@@ -711,10 +711,10 @@ footer.ft a:hover{color:#fff}
    RÉGLAGES : à compléter avant la mise en ligne
    ========================================================= */
 const CONFIG={
-  FORMSPREE:"",      // ex. "https://formspree.io/f/abcdwxyz" : reçoit chaque commande par e-mail
+  FORMSPREE:"",      // sans serveur : adresse Formspree (ex. "https://formspree.io/f/abcdwxyz") qui transmet commandes et messages par e-mail. Vide = ouverture de la messagerie du client
   PARTNER_URL:"",    // lien de souscription fourni par le partenaire financier (vérification + signature)
   AI_ENDPOINT:"",    // facultatif : adresse d'un service IA. Vide = conseiller intégré
-  API:"api/",        // serveur de commandes (dossier api/ sur l'hébergement IONOS)
+  API:"",            // serveur de commandes (voir DEPLOIEMENT.md), ex. "https://api.votre-domaine.fr/api/". Vide = site sans serveur (GitHub Pages)
   PARTNER_NAME:"notre partenaire financier",
   SUPPORT_PHONE:"",  // ex. "01 23 45 67 89" : affiché sur la page service client
   SUPPORT_HOURS:"du lundi au samedi, de 9 h à 19 h",
@@ -1204,7 +1204,18 @@ const api=(p,o)=>fetch(CONFIG.API+p,o).then(async r=>{let j=null;try{j=await r.j
 const postJ=(p,b)=>api(p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
 const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 const SLOTS=[["8 h - 13 h","Matin"],["13 h - 18 h","Après-midi"]];
-const STEPS=["Panier","Livraison","Paiement"];
+const STEPS=["Panier","Livraison",CONFIG.API?"Paiement":"Validation"];
+/* Sans serveur : envoi via Formspree, sinon préparation d'un e-mail dans la messagerie du client */
+async function sendNoServer(subject,fields,text){
+  if(CONFIG.FORMSPREE){
+    const r=await fetch(CONFIG.FORMSPREE,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({_subject:subject,...fields,_replyto:fields.email})}).catch(()=>null);
+    if(!r||!r.ok)throw new Error("L'envoi n'a pas abouti. Vérifiez votre connexion et réessayez.");
+    return "sent";
+  }
+  location.href=`mailto:${CONFIG.SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+  return "mail";
+}
+const refNo=p=>p+new Date().toISOString().slice(2,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
 function stepper(n){return `<ol class="stepper">${STEPS.map((t,i)=>`<li class="${i+1<n?"done":i+1===n?"on":""}"><span>${t}</span></li>`).join("")}</ol>`}
 function cartMonthly(d){return S.cart.reduce((a,id)=>a+monthly(BY[id].price,d),0)}
 function asideSum(){
@@ -1249,14 +1260,14 @@ function renderCommande(){
     main=`<div class="box"><h2>Vérifiez votre commande</h2><div class="recap">
       <div><b>Coordonnées</b>${esc(f.first_name+" "+f.last_name)}<br>${esc(f.email)}<br>${esc(f.phone)}<br><button class="linkbtn" type="button" data-flgo="2">Modifier</button></div>
       <div><b>Livraison</b>${esc(fdate(new Date(f.delivery_date+"T12:00:00"),{weekday:"long",day:"numeric",month:"long"}))}, ${esc(f.delivery_slot)}<br>${esc(f.address)}${f.address2?", "+esc(f.address2):""}<br>${esc(f.zip+" "+f.city)} · ${esc(f.floor)}${f.elevator?", ascenseur":""}<br><button class="linkbtn" type="button" data-flgo="2">Modifier</button></div></div></div>
-      <div class="box"><h2>Paiement et signature</h2>
-      <p style="color:var(--ink-2);margin:0 0 16px">Votre location avec option d'achat est financée par ${esc(CONFIG.PARTNER_NAME)}. Vous allez être redirigé vers son espace sécurisé pour :</p>
+      <div class="box"><h2>${CONFIG.API?"Paiement et signature":"Prochaines étapes"}</h2>
+      <p style="color:var(--ink-2);margin:0 0 16px">Votre location avec option d'achat est financée par ${esc(CONFIG.PARTNER_NAME)}. ${CONFIG.API?"Vous allez être redirigé vers son espace sécurisé pour :":"Après l'envoi de votre demande, un conseiller vous recontacte sous 24 heures ouvrées et vous envoie le lien sécurisé pour :"}</p>
       <ol class="how"><li><span><b>Vérifier votre identité</b> avec une pièce d'identité en cours de validité.</span></li><li><span><b>Renseigner votre RIB</b> pour le prélèvement mensuel des loyers.</span></li><li><span><b>Signer électroniquement</b> votre contrat. Le premier loyer de ${eur(cartMonthly(FL.d))} est prélevé à la signature.</span></li></ol>
       <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)">
       <label class="chk"><input type="checkbox" id="c_cgl"><span>J'ai lu et j'accepte les <button class="linkbtn" type="button" data-legal="cgl">conditions de location</button> et la <button class="linkbtn" type="button" data-legal="rgpd">politique de confidentialité</button>.</span></label>
       <label class="chk"><input type="checkbox" id="c_pt"><span>J'accepte que mes informations soient transmises à ${esc(CONFIG.PARTNER_NAME)} pour l'étude de mon dossier.</span></label></div>
       <p class="err" id="flErr" role="alert"></p>
-      <button class="btn btn-blue btn-full" type="button" id="flPay">Payer le premier loyer et signer · ${eur(cartMonthly(FL.d))}</button>
+      <button class="btn btn-blue btn-full" type="button" id="flPay">${CONFIG.API?`Payer le premier loyer et signer · ${eur(cartMonthly(FL.d))}`:"Envoyer ma demande de location"}</button>
       <p class="fine" style="margin-top:12px;text-align:center">Vous disposez d'un délai de rétractation de 14 jours après la signature. Un crédit vous engage et doit être remboursé.</p></div>
       <div class="fl-actions" style="justify-content:flex-start"><button class="linkbtn" type="button" data-flgo="2">Retour à la livraison</button></div>`;
   }
@@ -1278,11 +1289,37 @@ async function submitOrder(){
   if(FL.busy)return;
   if(!$("c_cgl").checked||!$("c_pt").checked){$("flErr").textContent="Cochez les deux cases pour continuer.";return}
   const b=$("flPay");FL.busy=true;b.disabled=true;b.textContent="Préparation de votre dossier…";$("flErr").textContent="";
+  if(!CONFIG.API){
+    const f=FL.f,d=FL.d,ref=refNo("DL"),m=cartMonthly(d);
+    const lignes=S.cart.map(id=>`- ${BY[id].brand} ${BY[id].name}${S.col[id]?" ("+S.col[id]+")":""} : ${eur(monthly(BY[id].price,d))}/mois`).join("\n");
+    const text=`Demande de location ${ref}\n\n${lignes}\n\nDurée : ${d} mois\nMensualité : ${eur(m)}\nTotal des loyers : ${eur(Math.round(m*d))}\n\n${f.first_name} ${f.last_name}\n${f.email} · ${f.phone}\n${f.address}${f.address2?", "+f.address2:""}\n${f.zip} ${f.city} · ${f.floor}${f.elevator?", ascenseur":""}\nLivraison souhaitée : ${f.delivery_date}, ${f.delivery_slot}\nReprise des anciens appareils : ${f.takeback?"oui":"non"}\n\nLe client accepte les conditions de location et la transmission de ses informations au partenaire financier.`;
+    try{
+      const how=await sendNoServer(`Demande de location ${ref} – ${f.first_name} ${f.last_name}`,{reference:ref,produits:lignes,duree:d+" mois",mensualite:eur(m),prenom:f.first_name,nom:f.last_name,email:f.email,telephone:f.phone,adresse:`${f.address} ${f.address2||""}, ${f.zip} ${f.city}`,etage:f.floor+(f.elevator?", ascenseur":""),livraison:`${f.delivery_date}, ${f.delivery_slot}`,reprise:f.takeback?"oui":"non"},text);
+      FL.sent={ref,how,text,email:f.email,first_name:f.first_name,m,d,date:f.delivery_date,slot:f.delivery_slot,items:S.cart.map(id=>({id,color:S.col[id]||""}))};
+      if(how==="sent"){S.cart=[];S.col={};saveCart();renderCartBtn();try{sessionStorage.removeItem("foyo_cmd")}catch(e){}}
+      location.hash="#commande/envoyee";
+    }catch(err){$("flErr").textContent=err.message;b.disabled=false;b.textContent="Réessayer"}
+    FL.busy=false;return;
+  }
   try{
     const r=await postJ("order.php",{duration:FL.d,items:S.cart.map(id=>({id,color:S.col[id]||""})),customer:FL.f,consents:{cgl:true,partner:true}});
     try{localStorage.setItem("foyo_derniere",JSON.stringify({o:r.number,t:r.token}))}catch(e){}
     location.href=r.redirect;
   }catch(err){$("flErr").textContent=err.message;b.disabled=false;b.textContent="Réessayer";FL.busy=false}
+}
+function renderEnvoyee(){
+  const el=$("flow"),x=FL.sent;
+  if(!x){location.hash="#commande";return}
+  const recap=`<div class="box"><h2>Demande ${esc(x.ref)}</h2>${x.items.map(i=>{const p=BY[i.id];return p?`<div class="mini"><span class="pic">${pic(p)}</span><span>${esc(p.brand+" "+p.name)}${i.color?`<small>${esc(i.color)}</small>`:""}</span><b class="num">${eur(monthly(p.price,x.d))}</b></div>`:""}).join("")}
+    <dl class="sum num" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)"><dt>Mensualité</dt><dd>${eur(x.m)} x ${x.d} mois</dd><dt>Livraison souhaitée</dt><dd>${esc(fdate(new Date(x.date+"T12:00:00"),{weekday:"long",day:"numeric",month:"long"}))}, ${esc(x.slot)}</dd></dl></div>`;
+  const head=x.how==="sent"
+    ?`<div class="big-ok g"><svg><use href="#i-check"/></svg></div><h1 class="fl-title">Merci ${esc(x.first_name)}, votre demande est envoyée</h1><p class="fl-sub">Votre demande n° <b>${esc(x.ref)}</b> est bien reçue. Un conseiller vous recontacte sous 24 heures ouvrées à <b>${esc(x.email)}</b> pour confirmer la livraison et vous envoyer le lien sécurisé de ${esc(CONFIG.PARTNER_NAME)} : vérification d'identité, signature électronique et premier loyer.</p><a class="btn btn-line" href="#catalogue">Retour au catalogue</a>`
+    :`<div class="big-ok a"><svg><use href="#i-check"/></svg></div><h1 class="fl-title">Dernière étape : envoyez l'e-mail</h1><p class="fl-sub">Votre messagerie s'est ouverte avec votre demande n° <b>${esc(x.ref)}</b> déjà rédigée. Il suffit de l'envoyer : un conseiller vous recontacte sous 24 heures ouvrées pour finaliser votre dossier.</p>
+      <p style="color:var(--ink-2)">La messagerie ne s'est pas ouverte ? Copiez le texte ci-dessous et envoyez-le à <a href="mailto:${esc(CONFIG.SUPPORT_EMAIL)}">${esc(CONFIG.SUPPORT_EMAIL)}</a>.</p>
+      <div class="fld"><textarea readonly id="sentTxt" style="min-height:220px">${esc(x.text)}</textarea></div>
+      <div class="fl-actions" style="justify-content:flex-start"><button class="btn btn-blue" type="button" id="copyTxt">Copier le texte</button><a class="btn btn-line" href="mailto:${esc(CONFIG.SUPPORT_EMAIL)}?subject=${encodeURIComponent("Demande de location "+x.ref)}&body=${encodeURIComponent(x.text)}">Rouvrir la messagerie</a></div>`;
+  el.innerHTML=`<div class="wrap fl-wrap"><div class="fl-grid"><div><div class="box">${head}</div></div><aside class="fl-aside">${recap}</aside></div></div>`;
+  const c=$("copyTxt");if(c)c.onclick=async()=>{try{await navigator.clipboard.writeText(x.text);c.textContent="Texte copié"}catch(e){$("sentTxt").select()}};
 }
 function tlHTML(o,timeline,labels,events){
   const at={};events.forEach(e=>{at[e.status]=e.at});
@@ -1314,6 +1351,7 @@ async function renderRetour(num,tok,flag){
 }
 async function renderSuivi(num,tok){
   const el=$("flow");
+  if(!CONFIG.API){el.innerHTML=`<div class="wrap fl-wrap"><h1 class="fl-title">Suivre ma commande</h1><p class="fl-sub">Votre conseiller vous tient informé par e-mail à chaque étape : confirmation du dossier, préparation, créneau de livraison. Pour toute question sur une commande en cours, écrivez-nous en indiquant votre numéro de demande.</p><a class="btn btn-blue" href="#aide">Contacter le service client</a></div>`;return}
   const form=(msg="")=>`<div class="wrap fl-wrap"><h1 class="fl-title">Suivre ma commande</h1><p class="fl-sub">Indiquez le numéro de commande reçu par e-mail (il commence par FY) et l'adresse e-mail utilisée lors de la commande.</p>
     <div class="help-grid"><form class="box" id="trkForm" novalidate><div class="fld"><label for="t_n">Numéro de commande</label><input id="t_n" name="number" placeholder="FY000000-XXXX" autocapitalize="characters" value="${esc(num||"")}" required></div><div class="fld"><label for="t_e">E-mail</label><input id="t_e" name="email" type="email" inputmode="email" autocomplete="email" required></div><p class="err" id="trkErr" role="alert">${esc(msg)}</p><button class="btn btn-blue btn-full" type="submit">Afficher le suivi</button></form>
     <div class="box"><h2>Besoin d'aide ?</h2><p style="color:var(--ink-2);margin:0 0 14px">Un problème avec une livraison, un appareil ou votre contrat : notre service client vous répond sous 24 heures ouvrées.</p><a class="btn btn-line btn-full" href="#aide">Contacter le service client</a></div></div></div>`;
@@ -1352,7 +1390,7 @@ function renderAide(num){
     const err=!d.topic?"Choisissez le sujet de votre demande.":!d.name?"Indiquez votre nom.":!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)?"L'adresse e-mail n'est pas valide.":d.message.length<10?"Décrivez votre demande en quelques mots.":"";
     if(err){$("ctErr").textContent=err;return}
     const b=fm.querySelector("button[type=submit]");b.disabled=true;b.textContent="Envoi…";
-    try{const r=await postJ("contact.php",d);fm.innerHTML=`<div class="big-ok g"><svg><use href="#i-check"/></svg></div><h2>Demande envoyée</h2><p style="color:var(--ink-2)">Merci ${esc(d.name)}. Votre demande n° <b>${esc(r.number)}</b> est enregistrée et un accusé de réception vous a été envoyé à <b>${esc(d.email)}</b>. Un conseiller vous répond sous 24 heures ouvrées.</p>`}
+    try{const r=CONFIG.API?await postJ("contact.php",d):await (async()=>{const ref=refNo("SC"),lab=(TOPICS.find(t=>t[0]===d.topic)||["",""])[1];const how=await sendNoServer(`[${ref}] ${lab} – ${d.name}`,{reference:ref,sujet:lab,nom:d.name,email:d.email,telephone:d.phone,commande:d.order_number,message:d.message},`Demande ${ref}\nSujet : ${lab}\n${d.name} · ${d.email} · ${d.phone}\nCommande : ${d.order_number||"-"}\n\n${d.message}`);if(how==="mail"){fm.innerHTML=`<h2>Dernière étape</h2><p style="color:var(--ink-2)">Votre messagerie s'est ouverte avec votre message déjà rédigé : il suffit de l'envoyer. Si elle ne s'est pas ouverte, écrivez-nous à <a href="mailto:${esc(CONFIG.SUPPORT_EMAIL)}">${esc(CONFIG.SUPPORT_EMAIL)}</a>.</p>`;return null}return {number:ref}})();if(!r)return;fm.innerHTML=`<div class="big-ok g"><svg><use href="#i-check"/></svg></div><h2>Demande envoyée</h2><p style="color:var(--ink-2)">Merci ${esc(d.name)}. Votre demande n° <b>${esc(r.number)}</b> est enregistrée${CONFIG.API?` et un accusé de réception vous a été envoyé à <b>${esc(d.email)}</b>`:""}. Un conseiller vous répond sous 24 heures ouvrées.</p>`}
     catch(x){$("ctErr").textContent=x.message;b.disabled=false;b.textContent="Envoyer ma demande"}};
 }
 document.addEventListener("click",e=>{
@@ -1367,7 +1405,7 @@ function route(){
   const fm=h.match(/^#(commande|suivi|aide)(?:\/(.*))?$/);
   $("flow").hidden=!fm;
   if(fm){$("top").hidden=true;$("pp").hidden=true;const a=(fm[2]||"").split("/");closePanel();
-    if(fm[1]==="commande"){if(a[0]==="retour"){document.title="Votre commande | Foyo";renderRetour(a[1],a[2],a[3])}else{document.title="Commande | Foyo";if(FL.step===3&&!FL.f.email)FL.step=2;renderCommande()}}
+    if(fm[1]==="commande"){if(a[0]==="envoyee"){document.title="Demande envoyée | Foyo";renderEnvoyee()}else if(a[0]==="retour"){document.title="Votre commande | Foyo";renderRetour(a[1],a[2],a[3])}else{document.title="Commande | Foyo";if(FL.step===3&&!FL.f.email)FL.step=2;renderCommande()}}
     else if(fm[1]==="suivi"){document.title="Suivre ma commande | Foyo";renderSuivi(a[0],a[1])}
     else{document.title="Service client | Foyo";renderAide(a[0])}
     window.scrollTo(0,0);return}

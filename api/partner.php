@@ -8,7 +8,7 @@
  */
 function partner_start_url(array $o): string {
   $site = rtrim((string)cfg('site_url'), '/');
-  $back = $site . '/api/partner/return.php?o=' . rawurlencode($o['number']) . '&t=' . $o['token'];
+  $back = api_url() . '/partner/return.php?o=' . rawurlencode($o['number']) . '&t=' . $o['token'];
   switch (cfg('partner_mode')) {
     case 'redirect':
       $u = (string)cfg('partner_url');
@@ -22,7 +22,7 @@ function partner_start_url(array $o): string {
       // enregistrer la référence renvoyée dans orders.partner_ref et renvoyer l'URL de souscription.
       throw new RuntimeException('Intégration API du partenaire à compléter');
     default:
-      return $site . '/api/partner/test.php?o=' . rawurlencode($o['number']) . '&t=' . $o['token'];
+      return api_url() . '/partner/test.php?o=' . rawurlencode($o['number']) . '&t=' . $o['token'];
   }
 }
 
