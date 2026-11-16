@@ -332,6 +332,60 @@ footer.ft a:hover{color:#fff}
 .cin button{height:48px;border:0;border-radius:6px;background:var(--blue);color:#fff;font-weight:700;padding:0 16px;cursor:pointer}
 .toast{position:fixed;left:50%;top:84px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:6px;font-weight:600;font-size:14px;z-index:90;display:none;box-shadow:0 8px 24px rgba(0,0,0,.2)}
 .toast.on{display:block}
+
+/* ---------- Page produit ---------- */
+.prod .plink{color:inherit;text-decoration:none;display:flex;flex-direction:column;gap:10px}
+.prod .plink:hover h3{text-decoration:underline;text-underline-offset:3px}
+#pp{background:var(--paper)}
+.pp-crumbs{padding-top:22px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px}
+.pp-crumbs a{color:var(--muted);text-decoration:none}.pp-crumbs a:hover{color:var(--ink);text-decoration:underline}
+.pp-main{display:grid;gap:28px;padding-top:18px;padding-bottom:56px}
+.pp-main>*,.pp-sec .wrap>*{min-width:0}
+@media(min-width:920px){.pp-main{grid-template-columns:7fr 5fr;gap:48px;align-items:start}.pp-media{position:sticky;top:96px}}
+.pp-img{background:var(--white);border:1px solid var(--rule);border-radius:var(--r);aspect-ratio:5/4;position:relative;overflow:hidden;display:grid;place-items:center;color:var(--ink-2)}
+.pp-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pp-img svg{width:34%;height:auto}
+.pp-img .badge{position:absolute;left:12px;top:12px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--white);border:1px solid var(--rule);padding:4px 7px;border-radius:4px;z-index:1}
+.pp-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+.pp-thumbs button{flex:none;width:72px;height:58px;padding:0;border:1px solid var(--rule);border-radius:6px;background:var(--white);overflow:hidden;cursor:pointer}
+.pp-thumbs button[aria-pressed=true]{border:2px solid var(--ink)}
+.pp-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.pp-buy{background:var(--white);border:1px solid var(--rule);border-radius:var(--r);padding:22px}
+@media(min-width:920px){.pp-buy{padding:28px}}
+.pp-buy .br{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.pp-buy h1{font-size:clamp(26px,3.2vw,34px);font-weight:700;margin-top:6px}
+.pp-buy .sp{color:var(--ink-2);margin:8px 0 0}
+.pp-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pp-price .big{font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1}
+.pp-price small{color:var(--muted);font-weight:600;font-size:14px}
+.pp-row{padding:18px 0 0;margin-top:18px;border-top:1px solid var(--rule)}
+.pp-row .label{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+.pp-row .label b{color:var(--ink);letter-spacing:0;text-transform:none;font-size:14px}
+.sws{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:34px;height:34px;border-radius:50%;border:1px solid rgba(16,26,44,.18);box-shadow:inset 0 0 0 3px var(--white);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}
+.pp-row .durs{width:100%}.pp-row .durs button{flex:1;padding:11px 8px;font-size:14px}
+.pp-sum{display:grid;grid-template-columns:1fr auto;gap:8px 16px;margin:16px 0 0;font-size:14.5px;color:var(--ink-2)}
+.pp-sum dd{margin:0;text-align:right;color:var(--ink);font-weight:700}
+.pp-cta{display:grid;gap:10px;margin-top:20px}
+.pp-inc{list-style:none;margin:20px 0 0;padding:16px 0 0;border-top:1px solid var(--rule);display:grid;gap:10px;font-size:14.5px;color:var(--ink-2)}
+.pp-inc li{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start}
+.pp-inc svg{width:18px;height:18px;color:var(--green);margin-top:2px}
+.pp-sec{border-top:1px solid var(--rule);background:var(--white)}
+.pp-sec .wrap{padding-top:48px;padding-bottom:48px;display:grid;gap:32px}
+@media(min-width:920px){.pp-sec .wrap{grid-template-columns:7fr 5fr;gap:48px}}
+.pp-sec h2{font-size:24px;font-weight:700;margin-bottom:16px}
+.spec{width:100%;border-collapse:collapse;font-size:14.5px}
+.spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.spec th{color:var(--muted);font-weight:600;width:42%;padding-right:16px}
+.spec td{color:var(--ink);font-weight:600}
+.score{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:14px;color:var(--ink-2);padding:6px 0}
+.score i{display:block;height:6px;border-radius:3px;background:var(--rule);overflow:hidden}.score i b{display:block;height:100%;background:var(--blue)}
+.ends-mini{display:grid;gap:12px}
+.ends-mini div{border:1px solid var(--rule);border-radius:var(--r);padding:14px 16px;font-size:14.5px;color:var(--ink-2)}
+.ends-mini b{display:block;color:var(--ink);margin-bottom:2px}
+.pp-more .wrap{padding-top:48px;padding-bottom:64px}
+.pp-more h2{font-size:24px;font-weight:700;margin-bottom:20px}
 </style>
 </head>
 <body>
@@ -533,6 +587,7 @@ footer.ft a:hover{color:#fff}
     <a class="btn" href="#top">Composer mon pack <svg class="arrow"><use href="#i-arrow"/></svg></a>
   </div></div>
 </main>
+<main id="pp" hidden></main>
 
 <footer class="ft">
   <div class="wrap">
@@ -649,9 +704,10 @@ const addMonths=(d,n)=>{const x=new Date(d);x.setMonth(x.getMonth()+n);return x}
 const sumM=(ids,d)=>ids.reduce((s,id)=>s+monthly(BY[id].price,d),0);
 
 /* ---------- État ---------- */
-const S={date:null,type:"appartement",size:2,people:2,budget:130,prio:[],dur:24,pack:[],locked:false,fmt:"petit",tab:0,cart:[],cmp:[]};
+const S={date:null,type:"appartement",size:2,people:2,budget:130,prio:[],dur:24,pack:[],locked:false,fmt:"petit",tab:0,cart:[],cmp:[],col:{}};
 try{const c=JSON.parse(localStorage.getItem("foyo_panier")||"[]");if(Array.isArray(c))S.cart=c.filter(id=>BY[id])}catch(e){}
-const saveCart=()=>{try{localStorage.setItem("foyo_panier",JSON.stringify(S.cart))}catch(e){}};
+const saveCart=()=>{try{localStorage.setItem("foyo_panier",JSON.stringify(S.cart));localStorage.setItem("foyo_coloris",JSON.stringify(S.col))}catch(e){}};
+try{S.col=JSON.parse(localStorage.getItem("foyo_coloris")||"{}")||{}}catch(e){}
 
 /* ---------- Composition du pack ---------- */
 function buildPack(o){
@@ -755,14 +811,15 @@ function renderPacks(){
 
 /* ---------- Catalogue ---------- */
 function renderFilters(){$("filters").innerHTML=TABS.map(([n],i)=>`<button type="button" role="tab" aria-selected="${i===S.tab}" data-tab="${i}">${n}</button>`).join("")}
-function renderGrid(){
-  const f=TABS[S.tab][1];
-  $("grid").innerHTML=P.filter(p=>!f||f.includes(p.cat)).map(p=>`<article class="prod">
-    <div class="plate">${pic(p)}<span class="dim num">${esc(p.dim)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:""}</div>
-    <div><div class="br">${esc(p.brand)}</div><h3>${esc(p.name)}</h3><p class="sp">${esc(p.spec)}</p></div>
+const card=p=>`<article class="prod">
+    <a class="plink" href="#produit/${p.id}"><div class="plate">${pic(p)}<span class="dim num">${esc(p.dim)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:""}</div>
+    <div><div class="br">${esc(p.brand)}</div><h3>${esc(p.name)}</h3><p class="sp">${esc(p.spec)}</p></div></a>
     <div class="pr num">${eur(monthly(p.price,24))}<small> /mois</small></div>
     <div class="act"><label class="cmpck"><input type="checkbox" data-cmp="${p.id}" ${S.cmp.includes(p.id)?"checked":""}>Comparer</label><button class="btn btn-ink btn-sm" type="button" data-add="${p.id}">Louer</button></div>
-  </article>`).join("");
+  </article>`;
+function renderGrid(){
+  const f=TABS[S.tab][1];
+  $("grid").innerHTML=P.filter(p=>!f||f.includes(p.cat)).map(card).join("");
 }
 function renderCmpBar(){const n=S.cmp.length;$("cmpBar").classList.toggle("on",n>0);$("cmpTxt").textContent=n<2?"Choisissez un deuxième produit":`${n} produits sélectionnés`;$("cmpGo").disabled=n<2}
 function compare(ids){
@@ -793,7 +850,7 @@ function addCart(ids,quiet){ids.forEach(i=>BY[i]&&S.cart.push(i));saveCart();ren
 function openCart(){
   if(!S.cart.length){panel(`<div class="ph"><h3>Panier</h3><button class="x" type="button" data-close aria-label="Fermer">×</button></div><div class="pb"><p style="color:var(--ink-2)">Votre panier est vide.</p><a class="btn btn-blue btn-full" href="#top" data-close style="margin-top:16px">Composer mon pack</a></div>`);return}
   panel(`<div class="ph"><h3>Panier</h3><button class="x" type="button" data-close aria-label="Fermer">×</button></div><div class="pb">
-  ${S.cart.map((id,i)=>{const p=BY[id];return `<div class="cline"><span class="pic">${pic(p)}</span><span><b style="display:block">${esc(p.name)}</b><span class="fine num">${eur(monthly(p.price,24))} /mois</span></span><button class="rm" type="button" data-rm="${i}">Retirer</button></div>`}).join("")}
+  ${S.cart.map((id,i)=>{const p=BY[id];return `<div class="cline"><span class="pic">${pic(p)}</span><span><b style="display:block">${esc(p.name)}</b><span class="fine num">${S.col[id]?esc(S.col[id])+" · ":""}${eur(monthly(p.price,24))} /mois</span></span><button class="rm" type="button" data-rm="${i}">Retirer</button></div>`}).join("")}
   <div class="sumbox"><div><span class="label">Total sur 24 mois</span><div class="big num">${eur(sumM(S.cart,24))}</div></div></div>
   <button class="btn btn-blue btn-full" type="button" data-checkout>Commander</button></div>`);
 }
@@ -1034,7 +1091,84 @@ function renderDemo(){
 
 /* ---------- Démarrage ---------- */
 initHero();renderSlip();renderPacks();renderFilters();renderGrid();renderCmpBar();renderCartBtn();renderTimeline();renderDemo();
+
+/* =========================================================
+   PAGES PRODUIT  (#produit/<id>)
+   ========================================================= */
+/* Coloris constructeur : [nom, couleur, photo du coloris (facultatif)] */
+const COL={
+ iph16:[["Outremer","#8C9DF2","img/iph16-ultramarine.jpg"],["Sarcelle","#B3D6D3","img/iph16-teal.jpg"],["Rose","#F2C3D6","img/iph16-pink.jpg"],["Blanc","#F4F4F2","img/iph16-white.jpg"],["Noir","#3A3B3D","img/iph16-black.jpg"]],
+ iph16p:[["Titane blanc","#F1F0EC","img/iph16p-whitetitanium.jpg"],["Titane naturel","#C3BDB3","img/iph16p-naturaltitanium.jpg"],["Titane sable","#C4A891","img/iph16p-deserttitanium.jpg"],["Titane noir","#3C3C3E","img/iph16p-blacktitanium.jpg"]],
+ s25:[["Bleu nuit","#2C3B5E"],["Bleu glacier","#C9D9E8"],["Menthe","#CFE3D3"],["Argent","#D5D6D8"]],
+ a56:[["Rose","#E9D3DE"],["Vert sauge","#C9D4C6"],["Graphite","#4A4B4D"],["Gris","#D4D5D7"]],
+ pix9a:[["Obsidienne","#2B2B2D"],["Porcelaine","#ECE6DB"],["Iris","#A9B4E6"],["Pivoine","#E9A6B6"]],
+ rn14:[["Noir minuit","#1F2023"],["Bleu océan","#5C7FA6"],["Violet lavande","#B8A6D6"]],
+ pc2:[["Bleu ciel","#CFE0EA"],["Argent","#E1E2E3"],["Lumière stellaire","#EDE4D6"],["Minuit","#2E3642"]]
+};
+const DIML={phone:"Stockage",tv:"Diagonale",console:"Stockage",frigo:"Volume",lavelinge:"Capacité",sechelinge:"Capacité",lavevaisselle:"Couverts",cuisson:"Foyers",four:"Volume",microondes:"Volume",aspirateur:"Autonomie",pc:"Mémoire"};
+const PP={id:null,c:0,d:24};
+const tabOf=cat=>Math.max(0,TABS.findIndex(t=>t[1]&&t[1].includes(cat)));
+function ppImg(p){const c=COL[p.id]&&COL[p.id][PP.c];const u=(c&&c[2])||(IMG[p.id]&&IMG[p.id].u);
+  return u?`<img src="${u}" alt="${esc(p.brand+" "+p.name+(c?" "+c[0]:""))}">`:ico(p.cat)}
+function renderPP(){
+  const p=BY[PP.id];if(!p)return;const cols=COL[p.id]||[];const d=PP.d;
+  const m=monthly(p.price,d),tot=Math.round(m*d),rach=Math.round(p.price*RES[d]);
+  const thumbs=cols.filter(c=>c[2]);
+  const rows=[["Marque",esc(p.brand)],["Modèle",esc(p.name)],["Catégorie",CAT[p.cat]],[DIML[p.cat]||"Format",esc(p.dim.replace(/"$/," pouces"))]];
+  if(p.cat==="tv"){rows.push(["Fréquence d'affichage",p.hz+" Hz"],["Adaptée aux consoles",p.gaming?"Oui, 4K 120 Hz":"Non"])}
+  p.spec.split(/,\s+/).forEach((x,i)=>rows.push([i?"":"Points forts",esc(x.charAt(0).toUpperCase()+x.slice(1))]));
+  if(cols.length)rows.push(["Coloris disponibles",cols.map(c=>c[0]).join(", ")]);
+  const sim=P.filter(x=>x.cat===p.cat&&x.id!==p.id).concat(P.filter(x=>tabOf(x.cat)===tabOf(p.cat)&&x.cat!==p.cat)).slice(0,4);
+  $("pp").innerHTML=`
+  <nav class="wrap pp-crumbs" aria-label="Fil d'Ariane"><a href="#top">Accueil</a><span>/</span><a href="#catalogue" data-tab="${tabOf(p.cat)}">${TABS[tabOf(p.cat)][0]}</a><span>/</span><span style="color:var(--ink)">${esc(p.brand+" "+p.name)}</span></nav>
+  <div class="wrap pp-main">
+    <div class="pp-media">
+      <div class="pp-img" id="ppImg">${ppImg(p)}${p.badge?`<span class="badge">${esc(p.badge)}</span>`:""}</div>
+      ${thumbs.length>1?`<div class="pp-thumbs">${cols.map((c,i)=>c[2]?`<button type="button" data-ppc="${i}" aria-pressed="${i===PP.c}" aria-label="${esc(c[0])}"><img src="${c[2]}" alt="" loading="lazy"></button>`:"").join("")}</div>`:""}
+    </div>
+    <div class="pp-buy">
+      <div class="br">${esc(p.brand)}</div>
+      <h1>${esc(p.name)}</h1>
+      <p class="sp">${esc(p.spec)}</p>
+      <div class="pp-price"><span class="big num">${eur(m)}</span><small>par mois pendant ${d} mois</small></div>
+      ${cols.length?`<div class="pp-row"><div class="label">Coloris <b>${esc(cols[PP.c][0])}</b></div><div class="sws" role="group" aria-label="Coloris">${cols.map((c,i)=>`<button type="button" class="sw" style="background:${c[1]}" data-ppc="${i}" aria-pressed="${i===PP.c}" aria-label="${esc(c[0])}" title="${esc(c[0])}"></button>`).join("")}</div></div>`:""}
+      <div class="pp-row"><div class="label">Durée du contrat</div><div class="durs" role="group" aria-label="Durée du contrat">${[12,24,36].map(x=>`<button type="button" data-ppd="${x}" aria-pressed="${x===d}">${x} mois</button>`).join("")}</div>
+        <dl class="pp-sum num"><dt>Mensualité</dt><dd>${eur(m)}</dd><dt>Total des ${d} loyers</dt><dd>${eur(tot)}</dd><dt>Prix de rachat en fin de contrat</dt><dd>${eur(rach)}</dd><dt>Prix de l'appareil neuf</dt><dd>${eur(p.price)}</dd></dl></div>
+      <div class="pp-cta"><button class="btn btn-blue btn-full" type="button" data-ppadd="${p.id}">Louer pour ${eur(m)} /mois</button><button class="btn btn-line btn-full btn-sm" type="button" data-chat>Poser une question au conseiller</button></div>
+      <ul class="pp-inc">
+        <li><svg><use href="#i-check"/></svg><span>Livraison${["phone","console","pc","aspirateur"].includes(p.cat)?"":" et installation"} la veille de votre arrivée</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Pannes couvertes pendant tout le contrat, réparation ou remplacement</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Reprise de votre ancien appareil le jour de la livraison</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Sans apport, seul le premier loyer est prélevé à la signature</span></li>
+      </ul>
+      <p class="fine" style="margin-top:14px">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager. Location avec option d'achat sous réserve d'acceptation de votre dossier.</p>
+    </div>
+  </div>
+  <section class="pp-sec"><div class="wrap">
+    <div><h2>Caractéristiques</h2><table class="spec">${rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("")}</table></div>
+    <div>${p.s?`<h2>Notre évaluation</h2>${[["Photo","photo"],["Batterie","batterie"],["Puissance","perf"],["Écran","ecran"]].map(([n,k])=>`<div class="score"><span>${n}</span><i><b style="width:${p.s[k]*10}%"></b></i><b class="num">${p.s[k]}/10</b></div>`).join("")}<div style="height:28px"></div>`:""}
+      <h2>À la fin du contrat</h2><div class="ends-mini"><div><b>Vous gardez</b>Vous réglez ${eur(rach)} et l'appareil est à vous.</div><div><b>Vous rendez</b>Nous venons le récupérer, vous ne payez plus rien.</div><div><b>Vous changez</b>Vous passez au modèle récent avec un nouveau contrat.</div></div></div>
+  </div></section>
+  ${sim.length?`<section class="pp-more"><div class="wrap"><h2>Vous pourriez aussi louer</h2><div class="grid">${sim.map(card).join("")}</div></div></section>`:""}`;
+}
+const TITLE0=document.title;
+function route(){
+  const mm=location.hash.match(/^#produit\/([\w-]+)$/);const p=mm&&BY[mm[1]];
+  $("top").hidden=!!p;$("pp").hidden=!p;
+  if(p){if(PP.id!==p.id){PP.id=p.id;PP.c=0;const sc=S.col[p.id];if(sc&&COL[p.id]){const k=COL[p.id].findIndex(c=>c[0]===sc);if(k>-1)PP.c=k}}
+    renderPP();document.title=`${p.brand} ${p.name} en location | Foyo`;window.scrollTo(0,0);return}
+  document.title=TITLE0;PP.id=null;
+  const t=location.hash.length>1&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)t.scrollIntoView();
+}
+window.addEventListener("hashchange",route);
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;const ds=t.dataset;
+  if(ds.ppc!==undefined){PP.c=+ds.ppc;renderPP();return}
+  if(ds.ppd){PP.d=+ds.ppd;renderPP();return}
+  if(ds.ppadd){const c=COL[ds.ppadd];if(c)S.col[ds.ppadd]=c[PP.c][0];addCart([ds.ppadd],true);toast(c?`Ajouté au panier, coloris ${c[PP.c][0]}`:"Ajouté au panier");return}
+});
 $("yr").textContent=new Date().getFullYear();
+route();
 if(window.claude&&window.claude.use)samplerP=window.claude.use("sample").catch(()=>null);
 </script>
 </body>
