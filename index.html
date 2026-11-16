@@ -474,25 +474,19 @@ footer.ft a:hover{color:#fff}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .skel{color:var(--muted);padding:40px 0;text-align:center}
 
-/* ---------- Mascotte du conseiller ---------- */
-.fab{padding-left:74px;overflow:visible}
-.fab .mascot{position:absolute;left:6px;bottom:0;width:62px;height:72px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}
-.mascot .m-body{animation:m-bob 3.2s ease-in-out infinite}
-.mascot .m-eyes{transform-box:fill-box;transform-origin:center;animation:m-blink 5.5s infinite}
-.mascot .m-arm{transform-box:view-box;transform-origin:22px 69px;animation:m-wave 6s ease-in-out infinite}
-.mascot .m-head{transform-box:view-box;transform-origin:40px 53px;animation:m-tilt 6s ease-in-out infinite}
-.fab:hover .mascot .m-arm,.fab:focus-visible .mascot .m-arm{animation-duration:1.6s}
-.mascot.still .m-body,.mascot.still .m-arm,.mascot.still .m-head{animation:none}
-@keyframes m-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
-@keyframes m-blink{0%,93%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
-@keyframes m-wave{0%,55%,100%{transform:rotate(0)}62%{transform:rotate(-22deg)}69%{transform:rotate(6deg)}76%{transform:rotate(-22deg)}83%{transform:rotate(6deg)}90%{transform:rotate(0)}}
-@keyframes m-tilt{0%,55%,92%,100%{transform:rotate(0)}65%,85%{transform:rotate(-4deg)}}
+/* ---------- Personnage du conseiller ---------- */
+.fab{padding-left:118px;overflow:visible}
+.fab .perso{position:absolute;left:4px;bottom:0;width:110px;height:auto;transform-origin:50% 100%;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));animation:p-idle 6s ease-in-out infinite;pointer-events:none}
+.fab:hover .perso,.fab:focus-visible .perso{animation:p-hop .7s ease-out}
+@keyframes p-idle{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-2px) rotate(-1.2deg)}40%{transform:translateY(0) rotate(.8deg)}
+  62%{transform:translateY(0) rotate(0) scale(1)}67%{transform:translateY(-6px) rotate(-1.5deg) scale(1.04)}72%{transform:translateY(0) rotate(0) scale(1)}77%{transform:translateY(-4px) rotate(1deg) scale(1.02)}82%{transform:translateY(0) rotate(0)}}
+@keyframes p-hop{0%{transform:none}35%{transform:translateY(-8px) scale(1.05) rotate(-2deg)}70%{transform:translateY(0) scale(.99)}100%{transform:none}}
 .fab-tip{position:fixed;right:16px;bottom:84px;z-index:50;max-width:240px;background:var(--white);color:var(--ink);border:1px solid var(--rule);border-radius:10px;padding:11px 14px;font:600 14px/1.4 var(--font-body);text-align:left;box-shadow:0 10px 28px rgba(16,26,44,.18);cursor:pointer;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .25s,transform .25s}
 .fab-tip::after{content:"";position:absolute;right:28px;bottom:-7px;width:12px;height:12px;background:var(--white);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transform:rotate(45deg)}
 .fab-tip.on{opacity:1;transform:none;pointer-events:auto}
 .fab-tip small{display:block;font-weight:500;color:var(--muted);font-size:13px;margin-top:2px}
-.demo-head .mascot{width:40px;height:40px;flex:none;background:var(--blue-wash);border-radius:10px}
-@media (prefers-reduced-motion: reduce){.mascot *{animation:none!important}}
+.demo-head .perso-av{width:40px;height:40px;flex:none;border-radius:10px;object-fit:cover;object-position:50% 20%;background:var(--blue-wash)}
+@media (prefers-reduced-motion: reduce){.fab .perso{animation:none!important}}
 </style>
 </head>
 <body>
@@ -715,41 +709,11 @@ footer.ft a:hover{color:#fff}
 
 <div class="cmpbar" id="cmpBar"><span id="cmpTxt"></span><button class="btn btn-blue btn-sm" type="button" id="cmpGo">Comparer</button></div>
 
-<button class="fab" type="button" data-chat aria-label="Ouvrir le conseiller"><svg class="mascot " viewBox="0 0 80 92" aria-hidden="true" focusable="false"><g class="m-body">
-<path d="M57 68c6 4 9 10 9 24H14c0-14 3-20 9-24 4-3 9-4 13-4h8c4 0 9 1 13 4z" fill="#183BCC"/>
-<path d="M34 64.5c3.5 4 8.5 4 12 0" fill="none" stroke="#0F2A9E" stroke-width="2.4" stroke-linecap="round"/>
-<text x="40" y="84" text-anchor="middle" font-family="Sora,Segoe UI,system-ui,sans-serif" font-weight="700" font-size="11" letter-spacing="-.3" fill="#fff">foyo</text>
-<path d="M32.6 74.6l2.9-2.3 2.9 2.3" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M58 70c4 4 6 10 6 24" fill="none" stroke="#183BCC" stroke-width="8.5" stroke-linecap="round"/>
-<rect x="35.5" y="51" width="9" height="9" rx="3" fill="#E3AE8A"/>
-<g class="m-head"><circle cx="22.6" cy="36.5" r="4" fill="#E3AE8A"/><circle cx="57.4" cy="36.5" r="4" fill="#E3AE8A"/>
-<circle cx="40" cy="35" r="18" fill="#F2C29E"/>
-<path d="M22.4 33.5C22 22 29.5 15.5 40.3 15.5c10 0 17 6 17.3 16.4-3.4-4.6-8.6-7.3-15.3-7.3-7.6 0-14 3.2-19.9 8.9z" fill="#101A2C"/>
-<g class="m-eyes"><ellipse cx="33.2" cy="36.6" rx="2.1" ry="2.6" fill="#101A2C"/><ellipse cx="46.8" cy="36.6" rx="2.1" ry="2.6" fill="#101A2C"/></g>
-<circle cx="29" cy="42.6" r="2.8" fill="#EE8E7C" opacity=".45"/><circle cx="51" cy="42.6" r="2.8" fill="#EE8E7C" opacity=".45"/>
-<path d="M34.6 44.2c3.2 3.3 7.6 3.3 10.8 0" fill="none" stroke="#101A2C" stroke-width="2" stroke-linecap="round"/></g>
-<g class="m-arm"><path d="M22 69c-4-3-6-6-7.5-10.5" fill="none" stroke="#183BCC" stroke-width="8.5" stroke-linecap="round"/>
-<path d="M14.6 58.5c-1.6-4.5-2-8.5-1.4-12.5" fill="none" stroke="#F2C29E" stroke-width="6" stroke-linecap="round"/>
-<circle cx="13.4" cy="43" r="4.6" fill="#F2C29E"/></g></g></svg>Conseiller</button>
+<button class="fab" type="button" data-chat aria-label="Ouvrir le conseiller"><img class="perso" src="img/conseiller.webp" alt="" width="110" height="102" decoding="async">Conseiller</button>
 <button class="fab-tip" type="button" data-chat id="fabTip">Une question ? Je vous aide à choisir.<small>Réponse immédiate, 7 j/7</small></button>
 
 <div class="chat" id="chat" role="dialog" aria-label="Conseiller Foyo">
-  <div class="demo-head"><svg class="mascot still" viewBox="13 11 54 54" aria-hidden="true" focusable="false"><g class="m-body">
-<path d="M57 68c6 4 9 10 9 24H14c0-14 3-20 9-24 4-3 9-4 13-4h8c4 0 9 1 13 4z" fill="#183BCC"/>
-<path d="M34 64.5c3.5 4 8.5 4 12 0" fill="none" stroke="#0F2A9E" stroke-width="2.4" stroke-linecap="round"/>
-<text x="40" y="84" text-anchor="middle" font-family="Sora,Segoe UI,system-ui,sans-serif" font-weight="700" font-size="11" letter-spacing="-.3" fill="#fff">foyo</text>
-<path d="M32.6 74.6l2.9-2.3 2.9 2.3" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M58 70c4 4 6 10 6 24" fill="none" stroke="#183BCC" stroke-width="8.5" stroke-linecap="round"/>
-<rect x="35.5" y="51" width="9" height="9" rx="3" fill="#E3AE8A"/>
-<g class="m-head"><circle cx="22.6" cy="36.5" r="4" fill="#E3AE8A"/><circle cx="57.4" cy="36.5" r="4" fill="#E3AE8A"/>
-<circle cx="40" cy="35" r="18" fill="#F2C29E"/>
-<path d="M22.4 33.5C22 22 29.5 15.5 40.3 15.5c10 0 17 6 17.3 16.4-3.4-4.6-8.6-7.3-15.3-7.3-7.6 0-14 3.2-19.9 8.9z" fill="#101A2C"/>
-<g class="m-eyes"><ellipse cx="33.2" cy="36.6" rx="2.1" ry="2.6" fill="#101A2C"/><ellipse cx="46.8" cy="36.6" rx="2.1" ry="2.6" fill="#101A2C"/></g>
-<circle cx="29" cy="42.6" r="2.8" fill="#EE8E7C" opacity=".45"/><circle cx="51" cy="42.6" r="2.8" fill="#EE8E7C" opacity=".45"/>
-<path d="M34.6 44.2c3.2 3.3 7.6 3.3 10.8 0" fill="none" stroke="#101A2C" stroke-width="2" stroke-linecap="round"/></g>
-<g class="m-arm"><path d="M22 69c-4-3-6-6-7.5-10.5" fill="none" stroke="#183BCC" stroke-width="8.5" stroke-linecap="round"/>
-<path d="M14.6 58.5c-1.6-4.5-2-8.5-1.4-12.5" fill="none" stroke="#F2C29E" stroke-width="6" stroke-linecap="round"/>
-<circle cx="13.4" cy="43" r="4.6" fill="#F2C29E"/></g></g></svg><div style="flex:1"><b>Conseiller Foyo</b><small>En ligne, répond tout de suite</small></div><button class="x" type="button" id="chatX" aria-label="Fermer le conseiller">×</button></div>
+  <div class="demo-head"><img class="perso-av" src="img/conseiller-avatar.webp" alt="" width="40" height="40"><div style="flex:1"><b>Conseiller Foyo</b><small>En ligne, répond tout de suite</small></div><button class="x" type="button" id="chatX" aria-label="Fermer le conseiller">×</button></div>
   <div class="cbody" id="cbody"></div>
   <div class="sugg" id="sugg"></div>
   <form class="cin" id="cform"><input id="cinput" type="text" autocomplete="off" enterkeyhint="send" placeholder="Votre question" aria-label="Votre message"><button type="submit">Envoyer</button></form>
