@@ -475,18 +475,23 @@ footer.ft a:hover{color:#fff}
 .skel{color:var(--muted);padding:40px 0;text-align:center}
 
 /* ---------- Personnage du conseiller ---------- */
-.fab{padding-left:118px;overflow:visible}
-.fab .perso{position:absolute;left:4px;bottom:0;width:110px;height:auto;transform-origin:50% 100%;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));animation:p-idle 6s ease-in-out infinite;pointer-events:none}
+.fab{padding:0;width:128px;height:118px;background:none;box-shadow:none;border-radius:0;overflow:visible;right:10px;bottom:6px}
+.fab:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:12px}
+.fab .perso{position:absolute;left:0;bottom:0;width:128px;height:auto;transform-origin:50% 100%;filter:drop-shadow(0 6px 10px rgba(16,26,44,.28));animation:p-idle 6s ease-in-out infinite;pointer-events:none}
+.fab .fab-dot{position:absolute;left:58px;top:2px;width:14px;height:14px;border-radius:50%;background:#22A06B;border:2px solid #fff;box-shadow:0 0 0 0 rgba(34,160,107,.5);animation:p-dot 2.4s ease-out infinite}
+@keyframes p-dot{0%{box-shadow:0 0 0 0 rgba(34,160,107,.5)}70%{box-shadow:0 0 0 8px rgba(34,160,107,0)}100%{box-shadow:0 0 0 0 rgba(34,160,107,0)}}
+@media(max-width:559px){.fab{width:100px;height:92px}.fab .perso{width:100px}.fab .fab-dot{left:44px}}
 .fab:hover .perso,.fab:focus-visible .perso{animation:p-hop .7s ease-out}
 @keyframes p-idle{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-2px) rotate(-1.2deg)}40%{transform:translateY(0) rotate(.8deg)}
   62%{transform:translateY(0) rotate(0) scale(1)}67%{transform:translateY(-6px) rotate(-1.5deg) scale(1.04)}72%{transform:translateY(0) rotate(0) scale(1)}77%{transform:translateY(-4px) rotate(1deg) scale(1.02)}82%{transform:translateY(0) rotate(0)}}
 @keyframes p-hop{0%{transform:none}35%{transform:translateY(-8px) scale(1.05) rotate(-2deg)}70%{transform:translateY(0) scale(.99)}100%{transform:none}}
-.fab-tip{position:fixed;right:16px;bottom:84px;z-index:50;max-width:240px;background:var(--white);color:var(--ink);border:1px solid var(--rule);border-radius:10px;padding:11px 14px;font:600 14px/1.4 var(--font-body);text-align:left;box-shadow:0 10px 28px rgba(16,26,44,.18);cursor:pointer;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .25s,transform .25s}
-.fab-tip::after{content:"";position:absolute;right:28px;bottom:-7px;width:12px;height:12px;background:var(--white);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transform:rotate(45deg)}
+.fab-tip{position:fixed;right:16px;bottom:128px;z-index:50;max-width:240px;background:var(--white);color:var(--ink);border:1px solid var(--rule);border-radius:10px;padding:11px 14px;font:600 14px/1.4 var(--font-body);text-align:left;box-shadow:0 10px 28px rgba(16,26,44,.18);cursor:pointer;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .25s,transform .25s}
+.fab-tip::after{content:"";position:absolute;right:62px;bottom:-7px;width:12px;height:12px;background:var(--white);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transform:rotate(45deg)}
 .fab-tip.on{opacity:1;transform:none;pointer-events:auto}
 .fab-tip small{display:block;font-weight:500;color:var(--muted);font-size:13px;margin-top:2px}
 .demo-head .perso-av{width:40px;height:40px;flex:none;border-radius:10px;object-fit:cover;object-position:50% 20%;background:var(--blue-wash)}
-@media (prefers-reduced-motion: reduce){.fab .perso{animation:none!important}}
+@media (prefers-reduced-motion: reduce){.fab .perso,.fab .fab-dot{animation:none!important}}
+@media(max-width:559px){.fab-tip{bottom:102px}}
 </style>
 </head>
 <body>
@@ -709,7 +714,7 @@ footer.ft a:hover{color:#fff}
 
 <div class="cmpbar" id="cmpBar"><span id="cmpTxt"></span><button class="btn btn-blue btn-sm" type="button" id="cmpGo">Comparer</button></div>
 
-<button class="fab" type="button" data-chat aria-label="Ouvrir le conseiller"><img class="perso" src="img/conseiller.webp" alt="" width="110" height="102" decoding="async">Conseiller</button>
+<button class="fab" type="button" data-chat aria-label="Ouvrir le conseiller"><img class="perso" src="img/conseiller.webp" alt="" width="110" height="102" decoding="async"><span class="fab-dot" aria-hidden="true"></span></button>
 <button class="fab-tip" type="button" data-chat id="fabTip">Une question ? Je vous aide à choisir.<small>Réponse immédiate, 7 j/7</small></button>
 
 <div class="chat" id="chat" role="dialog" aria-label="Conseiller Foyo">
