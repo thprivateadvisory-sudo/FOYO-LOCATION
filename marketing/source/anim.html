@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden}
+#st{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:"Plus Jakarta Sans",sans-serif}
+.l{position:absolute;will-change:transform}
+#bg{position:absolute;inset:0}
+#wipe{position:absolute;left:0;width:1080px;height:1920px;background:#183BCC}
+#tag,#h1,#h2,.pill,#cta{position:absolute;left:0;right:0;text-align:center}
+#tag{font:700 54px "Plus Jakarta Sans";color:#3C475C;letter-spacing:-.5px}
+#h1,#h2{font:800 84px/1.05 "Sora";letter-spacing:-2.5px;color:#fff}
+#h2{color:#8FA4FF}
+.pills{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 30px}
+.pill{position:static;display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border-radius:999px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);color:#fff;font:700 34px "Plus Jakarta Sans";white-space:nowrap}
+.pill i{width:14px;height:14px;border-radius:50%;background:#22A06B;display:inline-block}
+#cta{display:flex;justify-content:center}
+#cta span{display:inline-flex;align-items:center;gap:18px;background:#fff;color:#101A2C;font:800 46px "Sora";letter-spacing:-1px;padding:30px 54px;border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+#cta svg{width:42px;height:42px}
+#line{position:absolute;height:10px;border-radius:5px;background:#183BCC}
+</style></head><body><div id="st"><div id="bg"></div><div id="logo"></div><div id="line"></div><div id="tag"></div><div id="h1"></div><div id="h2"></div><div class="pills" id="pills"></div><div id="cta"></div><div id="wipe"></div></div>
+<script>
+const LAY={"letters": [[532, 145, 738, 557], [723, 252, 1048, 568], [1024, 254, 1358, 647], [1314, 249, 1640, 568]], "roof": [738, 144, 1038, 279]};
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+const eOut=x=>1-Math.pow(1-x,3), eInOut=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eBack=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const eBounce=x=>{const n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d)return n*(x-=1.5/d)*x+.75;if(x<2.5/d)return n*(x-=2.25/d)*x+.9375;return n*(x-=2.625/d)*x+.984375};
+const X0=LAY.letters[0][0],Y0=LAY.roof[1],X1=LAY.letters[3][2],Y1=LAY.letters[2][3];
+let MODE="intro";
+function build(mode){MODE=mode;const lg=document.getElementById("logo");lg.innerHTML="";
+  const pre=mode==="intro"?"l":"lw";
+  LAY.letters.forEach((b,i)=>{const im=new Image();im.src=pre+i+".png";im.className="l";im.id="L"+i;lg.appendChild(im)});
+  const r=new Image();r.src="roof.png";r.className="l";r.id="R";lg.appendChild(r);
+  document.getElementById("bg").style.background=mode==="intro"?"#FFFFFF":"#101A2C";
+  if(mode==="intro"){tag.textContent="Électroménager, TV & high-tech en location"}
+  else{h1.textContent="Votre logement équipé";h2.textContent="avant même d'y entrer.";
+    pills.innerHTML=["Livré et installé","Sans apport","Option d'achat"].map(t=>`<span class="pill"><i></i>${t}</span>`).join("");
+    cta.innerHTML=`<span>Lien en bio <svg viewBox="0 0 24 24" fill="none" stroke="#183BCC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>`}
+  return Promise.all([...document.images].map(i=>i.decode())).then(()=>document.fonts.ready);
+}
+function place(s,cx,cy){ // logo scale s centered at cx,cy ; returns fn(i)->[x,y,w,h]
+  const W=(X1-X0)*s,H=(Y1-Y0)*s,ox=cx-W/2,oy=cy-H/2;
+  return b=>[ox+(b[0]-X0)*s,oy+(b[1]-Y0)*s,(b[2]-b[0])*s,(b[3]-b[1])*s];
+}
+function set(el,[x,y,w,h],tx=0,ty=0,sc=1,rot=0,op=1,sy=1){el.style.left=x+"px";el.style.top=y+"px";el.style.width=w+"px";el.style.height=h+"px";el.style.transform=`translate(${tx}px,${ty}px) rotate(${rot}deg) scale(${sc},${sc*sy})`;el.style.opacity=op;el.style.transformOrigin="50% 100%"}
+function render(t){
+  if(MODE==="intro"){
+    const pulse=1+0.035*Math.sin(Math.PI*prog(t,1.15,1.55));
+    const P=place(0.72*pulse,540,860);
+    LAY.letters.forEach((b,i)=>{const p=prog(t,0.15+i*0.09,0.65+i*0.09);set(document.getElementById("L"+i),P(b),0,(1-eBack(p))*160,1,0,clamp(p*3))});
+    const pr=prog(t,0.72,1.25);const yy=-520*(1-eBounce(pr));const sq=pr>0.55&&pr<0.75?1-0.18*Math.sin(Math.PI*(pr-0.55)/0.2):1;
+    set(document.getElementById("R"),P(LAY.roof),0,yy,1,0,pr>0?1:0,sq);
+    const lt=prog(t,1.2,1.6);const lw=520*eOut(lt);line.style.cssText=`left:${540-lw/2}px;top:1120px;width:${lw}px;opacity:${lt>0?1:0}`;
+    const tg=eOut(prog(t,1.3,1.75));tag.style.cssText=`top:1160px;opacity:${tg};transform:translateY(${(1-tg)*30}px)`;
+    const w=eInOut(prog(t,2.05,2.5));wipe.style.top=(1920*(1-w))+"px";
+  }else{
+    const w=eInOut(prog(t,0,0.45));wipe.style.top=(-1920*w)+"px";
+    const up=eInOut(prog(t,1.35,1.85));
+    const P=place(0.66,540,860-230*up);
+    LAY.letters.forEach((b,i)=>{const p=prog(t,0.3+i*0.08,0.75+i*0.08);set(document.getElementById("L"+i),P(b),0,(1-eOut(p))*40,0.5+0.5*eBack(p),0,clamp(p*2.5))});
+    const pr=prog(t,0.8,1.3);set(document.getElementById("R"),P(LAY.roof),0,-420*(1-eBounce(pr)),1,0,pr>0?1:0);
+    const a1=eOut(prog(t,1.75,2.2)),a2=eOut(prog(t,1.9,2.35));
+    h1.style.cssText=`top:900px;opacity:${a1};transform:translateY(${(1-a1)*40}px)`;
+    h2.style.cssText=`top:995px;opacity:${a2};transform:translateY(${(1-a2)*40}px)`;
+    pills.style.top="1160px";[...pills.children].forEach((c,i)=>{const p=prog(t,2.4+i*0.12,2.75+i*0.12);c.style.opacity=clamp(p*2);c.style.transform=`scale(${0.7+0.3*eBack(p)})`});
+    const c=prog(t,3.05,3.45);const puls=t>3.6?1+0.04*Math.sin((t-3.6)*Math.PI*2/0.9):1;
+    cta.style.cssText=`top:1340px;opacity:${clamp(c*2)};transform:scale(${(0.6+0.4*eBack(c))*puls})`;
+  }
+}
+</script></body></html>
