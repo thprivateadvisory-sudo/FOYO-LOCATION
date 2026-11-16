@@ -785,7 +785,8 @@ const P=[
 const BY=Object.fromEntries(P.map(p=>[p.id,p]));
 /* Photos officielles des marques (dossier img/) */
 const IMG={"a56": {"u": "img/a56.jpg"}, "as2": {"u": "img/as2.jpg"}, "fo1": {"u": "img/fo1.jpg"}, "fo2": {"u": "img/fo2.jpg"}, "fr2": {"u": "img/fr2.jpg"}, "iph16": {"u": "img/iph16.jpg"}, "iph16p": {"u": "img/iph16p.jpg"}, "ll1": {"u": "img/ll1.jpg"}, "ll2": {"u": "img/ll2.jpg"}, "ll3": {"u": "img/ll3.jpg"}, "lv2": {"u": "img/lv2.jpg"}, "mo1": {"u": "img/mo1.jpg"}, "pc1": {"u": "img/pc1.jpg"}, "pc2": {"u": "img/pc2.jpg"}, "pix9a": {"u": "img/pix9a.jpg"}, "pl2": {"u": "img/pl2.jpg"}, "ps5": {"u": "img/ps5.jpg"}, "ps5p": {"u": "img/ps5p.jpg"}, "s25": {"u": "img/s25.jpg"}, "tv43": {"u": "img/tv43.jpg"}, "tv50": {"u": "img/tv50.jpg"}, "tv55q": {"u": "img/tv55q.jpg"}, "xsx": {"u": "img/xsx.jpg"}};
-function pic(p){const i=IMG[p.id];return i?`<img class="pimg" src="${i.u}" alt="${esc(p.brand+" "+p.name)}" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment(ico('${p.cat}')))">`:ico(p.cat)}
+function pic(p){const i=IMG[p.id];if(!i)return ico(p.cat);const sm=i.u.replace("img/","img/sm/");
+  return `<img class="pimg" src="${sm}" srcset="${sm} 800w, ${i.u} 1600w" sizes="(min-width:1080px) 280px, (min-width:760px) 33vw, 50vw" alt="${esc(p.brand+" "+p.name)}" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment(ico('${p.cat}')))">`}
 
 const CAT={phone:"Téléphone",tv:"Télévision",console:"Console",frigo:"Réfrigérateur",lavelinge:"Lave-linge",lavevaisselle:"Lave-vaisselle",cuisson:"Plaque de cuisson",four:"Four",microondes:"Micro-ondes",sechelinge:"Sèche-linge",aspirateur:"Aspirateur",pc:"Ordinateur"};
 const TABS=[["Tout",null],["Téléphones",["phone"]],["Télévisions",["tv"]],["Consoles",["console"]],["Cuisine",["frigo","lavevaisselle","cuisson","four","microondes"]],["Linge",["lavelinge","sechelinge"]],["Maison et bureau",["aspirateur","pc"]]];
@@ -1171,7 +1172,7 @@ const DIML={phone:"Stockage",tv:"Diagonale",console:"Stockage",frigo:"Volume",la
 const PP={id:null,c:0,d:24};
 const tabOf=cat=>Math.max(0,TABS.findIndex(t=>t[1]&&t[1].includes(cat)));
 function ppImg(p){const c=COL[p.id]&&COL[p.id][PP.c];const u=(c&&c[2])||(IMG[p.id]&&IMG[p.id].u);
-  return u?`<img src="${u}" alt="${esc(p.brand+" "+p.name+(c?" "+c[0]:""))}">`:ico(p.cat)}
+  return u?`<img src="${u}" srcset="${u.replace("img/","img/sm/")} 800w, ${u} 1600w" sizes="(min-width:920px) 58vw, 100vw" alt="${esc(p.brand+" "+p.name+(c?" "+c[0]:""))}">`:ico(p.cat)}
 function renderPP(){
   const p=BY[PP.id];if(!p)return;const cols=COL[p.id]||[];const d=PP.d;
   const m=monthly(p.price,d),tot=Math.round(m*d),rach=Math.round(p.price*RES[d]);
@@ -1186,7 +1187,7 @@ function renderPP(){
   <div class="wrap pp-main">
     <div class="pp-media">
       <div class="pp-img" id="ppImg">${ppImg(p)}${p.badge?`<span class="badge">${esc(p.badge)}</span>`:""}</div>
-      ${thumbs.length>1?`<div class="pp-thumbs">${cols.map((c,i)=>c[2]?`<button type="button" data-ppc="${i}" aria-pressed="${i===PP.c}" aria-label="${esc(c[0])}"><img src="${c[2]}" alt="" loading="lazy"></button>`:"").join("")}</div>`:""}
+      ${thumbs.length>1?`<div class="pp-thumbs">${cols.map((c,i)=>c[2]?`<button type="button" data-ppc="${i}" aria-pressed="${i===PP.c}" aria-label="${esc(c[0])}"><img src="${c[2].replace("img/","img/sm/")}" alt="" loading="lazy"></button>`:"").join("")}</div>`:""}
     </div>
     <div class="pp-buy">
       <div class="br">${esc(p.brand)}</div>
