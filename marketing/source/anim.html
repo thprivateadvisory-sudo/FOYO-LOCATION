@@ -17,7 +17,16 @@
 #cta span{display:inline-flex;align-items:center;gap:18px;background:#fff;color:#101A2C;font:800 46px "Sora";letter-spacing:-1px;padding:30px 54px;border-radius:999px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
 #cta svg{width:42px;height:42px}
 #line{position:absolute;height:10px;border-radius:5px;background:#183BCC}
-</style></head><body><div id="st"><div id="bg"></div><div id="logo"></div><div id="line"></div><div id="tag"></div><div id="h1"></div><div id="h2"></div><div class="pills" id="pills"></div><div id="cta"></div><div id="wipe"></div></div>
+#hl{position:absolute;left:80px;top:300px;font:800 112px/1.02 "Sora";letter-spacing:-4px;color:#101A2C}
+#hl .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:8px}#hl .w span{display:inline-block}
+#hl .b{color:#183BCC;position:relative}
+#ul{position:absolute;height:14px;background:#183BCC;border-radius:2px}
+#prod{position:absolute;left:70px;top:780px;width:940px;height:760px}
+#prod img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+#sub{position:absolute;left:0;right:0;text-align:center;font:600 50px/1.3 "Plus Jakarta Sans";color:#3C475C;letter-spacing:-.5px}
+#bio{position:absolute;left:0;right:0;text-align:center;font:800 52px "Sora";letter-spacing:-1.5px;color:#183BCC}
+#bio svg{width:44px;height:44px;vertical-align:-8px;margin-left:10px}
+</style></head><body><div id="st"><div id="bg"></div><div id="logo"></div><div id="line"></div><div id="tag"></div><div id="h1"></div><div id="h2"></div><div class="pills" id="pills"></div><div id="cta"></div><div id="hl"></div><div id="ul"></div><div id="prod"></div><div id="sub"></div><div id="bio"></div><div id="wipe"></div></div>
 <script>
 const LAY={"letters": [[532, 145, 738, 557], [723, 252, 1048, 568], [1024, 254, 1358, 647], [1314, 249, 1640, 568]], "roof": [738, 144, 1038, 279]};
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
@@ -28,12 +37,19 @@ const eBounce=x=>{const n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d)return n*
 const X0=LAY.letters[0][0],Y0=LAY.roof[1],X1=LAY.letters[3][2],Y1=LAY.letters[2][3];
 let MODE="intro";
 function build(mode){MODE=mode;const lg=document.getElementById("logo");lg.innerHTML="";
-  const pre=mode==="intro"?"l":"lw";
+  const pre=mode==="outro"?"lw":"l";
   LAY.letters.forEach((b,i)=>{const im=new Image();im.src=pre+i+".png";im.className="l";im.id="L"+i;lg.appendChild(im)});
   const r=new Image();r.src="roof.png";r.className="l";r.id="R";lg.appendChild(r);
-  document.getElementById("bg").style.background=mode==="intro"?"#FFFFFF":"#101A2C";
+  document.getElementById("bg").style.background=mode==="outro"?"#101A2C":"#FFFFFF";
+  if(mode==="outro2"){
+    const words=[["Tout",0],["votre",0],["logement,",1],["en",2],["location.",2]];
+    hl.innerHTML=[0,1,2].map(l=>words.filter(w=>w[1]===l).map((w,i)=>`<span class="w"><span class="${w[0]==="location."?"b":""}">${w[0]}</span></span>`).join(" ")).join("<br>");
+    prod.innerHTML=["p_fr2","p_ll1","p_tv43","p_ps5","p_iph16"].map(p=>`<img src="${p}.jpg">`).join("");
+    sub.innerHTML="Livré et installé<br>la veille de votre arrivée.";
+    bio.innerHTML=`Lien en bio<svg viewBox="0 0 24 24" fill="none" stroke="#183BCC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>`;
+  }
   if(mode==="intro"){tag.textContent="Électroménager, TV & high-tech en location"}
-  else{h1.textContent="Votre logement équipé";h2.textContent="avant même d'y entrer.";
+  else if(mode==="outro"){h1.textContent="Votre logement équipé";h2.textContent="avant même d'y entrer.";
     pills.innerHTML=["Livré et installé","Sans apport","Option d'achat"].map(t=>`<span class="pill"><i></i>${t}</span>`).join("");
     cta.innerHTML=`<span>Lien en bio <svg viewBox="0 0 24 24" fill="none" stroke="#183BCC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>`}
   return Promise.all([...document.images].map(i=>i.decode())).then(()=>document.fonts.ready);
@@ -53,6 +69,23 @@ function render(t){
     const lt=prog(t,1.2,1.6);const lw=520*eOut(lt);line.style.cssText=`left:${540-lw/2}px;top:1120px;width:${lw}px;opacity:${lt>0?1:0}`;
     const tg=eOut(prog(t,1.3,1.75));tag.style.cssText=`top:1160px;opacity:${tg};transform:translateY(${(1-tg)*30}px)`;
     const w=eInOut(prog(t,2.05,2.5));wipe.style.top=(1920*(1-w))+"px";
+  }else if(MODE==="outro2"){
+    const w=eInOut(prog(t,0,0.4));wipe.style.top=(-1920*w)+"px";
+    const out=eInOut(prog(t,2.35,2.75));
+    const ws=[...hl.querySelectorAll(".w > span")];
+    ws.forEach((e,i)=>{const p=eOut(prog(t,0.35+i*0.16,0.7+i*0.16));e.style.transform=`translateY(${(1-p)*120}%)`});
+    hl.style.transform=`translateY(${-out*140}px)`;hl.style.opacity=1-out;
+    const lw=document.querySelector("#hl .b");const r=lw.getBoundingClientRect();const u=eOut(prog(t,1.25,1.6));
+    ul.style.cssText=`left:${r.left}px;top:${r.bottom-6}px;width:${r.width*u}px;opacity:${1-out}`;
+    const imgs=[...prod.children];const k=Math.floor(prog(t,0.45,2.2)*imgs.length*0.9999);const ph=(t-0.45)/(1.75/imgs.length)%1;
+    imgs.forEach((im,i)=>{const on=t>=0.45&&i===Math.min(k,imgs.length-1);im.style.opacity=on?1:0;im.style.transform=`scale(${on?0.94+0.06*eOut(Math.min(1,ph*3)):1})`});
+    prod.style.opacity=t<0.45?0:1-out;prod.style.transform=`translateY(${out*160}px)`;
+    const P=place(0.72,540,860);const show=t>=2.55;
+    LAY.letters.forEach((b,i)=>{const p=prog(t,2.6+i*0.07,3.0+i*0.07);set(document.getElementById("L"+i),P(b),0,(1-eBack(p))*140,1,0,show?clamp(p*3):0)});
+    const pr=prog(t,3.05,3.5);set(document.getElementById("R"),P(LAY.roof),0,-480*(1-eBounce(pr)),1,0,pr>0?1:0);
+    const a=eOut(prog(t,3.45,3.85));sub.style.cssText=`top:1070px;opacity:${a};transform:translateY(${(1-a)*30}px)`;
+    const c=eOut(prog(t,3.75,4.1));const bob=t>4.1?Math.sin((t-4.1)*Math.PI*2/0.8)*6:0;
+    bio.style.cssText=`top:1290px;opacity:${c};transform:translateY(${(1-c)*30}px)`;const sv=bio.querySelector("svg");if(sv)sv.style.transform=`translateY(${bob}px)`;
   }else{
     const w=eInOut(prog(t,0,0.45));wipe.style.top=(-1920*w)+"px";
     const up=eInOut(prog(t,1.35,1.85));
