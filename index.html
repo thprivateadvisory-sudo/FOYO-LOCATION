@@ -670,7 +670,7 @@ const P=[
 ];
 const BY=Object.fromEntries(P.map(p=>[p.id,p]));
 /* Photos officielles des marques (dossier img/) */
-const IMG={"a56": {"u": "img/a56.jpg"}, "fo1": {"u": "img/fo1.jpg"}, "fr2": {"u": "img/fr2.jpg"}, "iph16": {"u": "img/iph16.jpg"}, "iph16p": {"u": "img/iph16p.jpg"}, "ll1": {"u": "img/ll1.jpg"}, "ll3": {"u": "img/ll3.jpg"}, "mo1": {"u": "img/mo1.jpg"}, "pc1": {"u": "img/pc1.jpg"}, "pc2": {"u": "img/pc2.jpg"}, "pix9a": {"u": "img/pix9a.jpg"}, "ps5": {"u": "img/ps5.jpg"}, "ps5p": {"u": "img/ps5p.jpg"}, "s25": {"u": "img/s25.jpg"}, "tv43": {"u": "img/tv43.jpg"}, "xsx": {"u": "img/xsx.jpg"}};
+const IMG={"a56": {"u": "img/a56.jpg"}, "fo1": {"u": "img/fo1.jpg"}, "fo2": {"u": "img/fo2.jpg"}, "fr2": {"u": "img/fr2.jpg"}, "iph16": {"u": "img/iph16.jpg"}, "iph16p": {"u": "img/iph16p.jpg"}, "ll1": {"u": "img/ll1.jpg"}, "ll2": {"u": "img/ll2.jpg"}, "ll3": {"u": "img/ll3.jpg"}, "lv2": {"u": "img/lv2.jpg"}, "mo1": {"u": "img/mo1.jpg"}, "pc1": {"u": "img/pc1.jpg"}, "pc2": {"u": "img/pc2.jpg"}, "pix9a": {"u": "img/pix9a.jpg"}, "pl2": {"u": "img/pl2.jpg"}, "ps5": {"u": "img/ps5.jpg"}, "ps5p": {"u": "img/ps5p.jpg"}, "s25": {"u": "img/s25.jpg"}, "tv43": {"u": "img/tv43.jpg"}, "xsx": {"u": "img/xsx.jpg"}};
 function pic(p){const i=IMG[p.id];return i?`<img class="pimg" src="${i.u}" alt="${esc(p.brand+" "+p.name)}" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment(ico('${p.cat}')))">`:ico(p.cat)}
 
 const CAT={phone:"Téléphone",tv:"Télévision",console:"Console",frigo:"Réfrigérateur",lavelinge:"Lave-linge",lavevaisselle:"Lave-vaisselle",cuisson:"Plaque de cuisson",four:"Four",microondes:"Micro-ondes",sechelinge:"Sèche-linge",aspirateur:"Aspirateur",pc:"Ordinateur"};
