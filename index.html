@@ -59,6 +59,9 @@ header.top{position:sticky;top:0;z-index:40;background:var(--white);border-botto
 .hbar .logo img{height:34px;width:auto}
 nav.main{display:none;gap:26px;margin-left:12px}
 nav.main a{text-decoration:none;font-weight:600;font-size:15px;color:var(--ink-2)}
+nav.main a{white-space:nowrap}
+@media(max-width:1240px){nav.main{gap:18px}nav.main a{font-size:14px}}
+@media(max-width:1100px){nav.main a[href='#suivi']{display:none}}
 nav.main a:hover{color:var(--blue)}
 @media(min-width:900px){nav.main{display:flex}}
 .hright{margin-left:auto;display:flex;gap:10px;align-items:center}
@@ -386,6 +389,90 @@ footer.ft a:hover{color:#fff}
 .ends-mini b{display:block;color:var(--ink);margin-bottom:2px}
 .pp-more .wrap{padding-top:48px;padding-bottom:64px}
 .pp-more h2{font-size:24px;font-weight:700;margin-bottom:20px}
+
+/* ---------- Commande, suivi, service client ---------- */
+#flow{background:var(--paper);min-height:70vh}
+.fl-wrap{padding-top:28px;padding-bottom:72px}
+.fl-title{font-size:clamp(26px,3.4vw,36px);font-weight:700;margin:0 0 6px}
+.fl-sub{color:var(--ink-2);margin:0 0 24px;max-width:62ch}
+.stepper{display:flex;gap:0;margin:0 0 24px;border:1px solid var(--rule);border-radius:var(--r);background:var(--white);overflow:hidden;counter-reset:st}
+.stepper li{list-style:none;flex:1;padding:12px 14px;font-size:14px;font-weight:700;color:var(--muted);display:flex;gap:8px;align-items:center;min-width:0}
+.stepper li+li{border-left:1px solid var(--rule)}
+.stepper li::before{counter-increment:st;content:counter(st);flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--paper);color:var(--muted)}
+.stepper li.on{color:var(--ink)}.stepper li.on::before{background:var(--ink);color:#fff}
+.stepper li.done{color:var(--ink-2)}.stepper li.done::before{background:var(--green);color:#fff;content:"✓"}
+.stepper span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:559px){.stepper li{justify-content:center}.stepper li:not(.on) span{display:none}}
+.fl-grid{display:grid;gap:20px}
+@media(min-width:960px){.fl-grid{grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start}.fl-aside{position:sticky;top:92px}}
+.box{background:var(--white);border:1px solid var(--rule);border-radius:var(--r);padding:20px}
+@media(min-width:720px){.box{padding:26px}}
+.box+.box{margin-top:16px}
+.box h2{font-size:19px;font-weight:700;margin:0 0 16px}
+.box h2 small{font-family:var(--font-body);font-weight:600;font-size:13px;color:var(--muted);margin-left:8px}
+.ln{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+.ln:first-of-type{padding-top:0}
+.ln .pic{width:64px;height:52px;border-radius:6px;border:1px solid var(--rule);background:var(--white);display:grid;place-items:center;overflow:hidden}
+.ln .pic svg{width:26px;height:26px}
+.ln b{display:block;font-size:15px}.ln .fine{display:block}
+.ln .rm{border:0;background:none;color:var(--muted);font-weight:600;font-size:13px;cursor:pointer;text-decoration:underline;padding:0;margin-top:4px}
+.ln .num{font-weight:700;white-space:nowrap}
+.sum{display:grid;grid-template-columns:1fr auto;gap:9px 16px;font-size:14.5px;color:var(--ink-2);margin:0}
+.sum dd{margin:0;text-align:right;color:var(--ink);font-weight:700}
+.sum dt{white-space:nowrap}
+.sum .tot{font-family:var(--font-display);font-size:26px;color:var(--ink);letter-spacing:-.02em}
+.mini{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:8px 0;font-size:14px}
+.mini .pic{width:44px;height:36px;border-radius:5px;border:1px solid var(--rule);display:grid;place-items:center;overflow:hidden;background:#fff}.mini .pic svg{width:18px;height:18px}
+.mini small{display:block;color:var(--muted)}
+.fld textarea{border:1px solid #C9CEDA;border-radius:6px;padding:12px 14px;font:inherit;font-size:16px;min-height:140px;resize:vertical;width:100%}
+.fld textarea:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+.fld .hint{font-size:13px;color:var(--muted)}
+.fld input[aria-invalid=true],.fld select[aria-invalid=true]{border-color:#B42318}
+@media(min-width:620px){.two{grid-template-columns:1fr 1fr}}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.slot-c{position:relative;border:1px solid #C9CEDA;border-radius:6px;padding:12px 14px;cursor:pointer;background:var(--white)}
+.slot-c input{position:absolute;opacity:0}
+.slot-c b{display:block;font-size:15px}.slot-c small{color:var(--muted);font-size:13px}
+.slot-c:has(input:checked){border:2px solid var(--blue);padding:11px 13px;background:var(--blue-wash)}
+.slot-c:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink-2);margin:10px 0;cursor:pointer}
+.chk input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--blue)}
+.recap{display:grid;gap:16px}@media(min-width:620px){.recap{grid-template-columns:1fr 1fr}}
+.recap div{font-size:14.5px;color:var(--ink-2);line-height:1.6}
+.recap b{display:block;color:var(--ink);margin-bottom:2px}
+.linkbtn{border:0;background:none;padding:0;color:var(--blue);font-weight:700;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.how{counter-reset:h;list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.how li{counter-increment:h;display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:14.5px;color:var(--ink-2)}
+.how li::before{content:counter(h);width:26px;height:26px;border-radius:50%;background:var(--blue-wash);color:var(--blue);font-weight:800;font-size:13px;display:grid;place-items:center}
+.how b{color:var(--ink)}
+.fl-actions{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:20px;flex-wrap:wrap}
+.fl-actions .btn{min-width:220px}
+@media(max-width:559px){.fl-actions{flex-direction:column-reverse;align-items:stretch}.fl-actions .btn{width:100%}}
+.notice{border-radius:var(--r);padding:14px 16px;font-size:14.5px;line-height:1.55}
+.notice.warn{background:#FFF4E5;color:#7A4108}.notice.ok{background:var(--green-wash);color:#0B5C40}.notice.info{background:var(--blue-wash);color:#122C99}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{position:relative;padding:0 0 22px 34px;color:var(--muted);font-size:14.5px}
+.tl li::before{content:"";position:absolute;left:8px;top:22px;bottom:0;width:2px;background:var(--rule)}
+.tl li:last-child::before{display:none}
+.tl li i{position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;border:2px solid var(--rule);background:var(--white)}
+.tl li.done{color:var(--ink-2)}.tl li.done i{background:var(--green);border-color:var(--green)}
+.tl li.done::before{background:var(--green)}
+.tl li.cur{color:var(--ink)}.tl li.cur i{border-color:var(--blue);box-shadow:inset 0 0 0 4px var(--white);background:var(--blue)}
+.tl b{display:block;color:inherit;font-size:15px}
+.big-ok{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px}
+.big-ok.g{background:var(--green-wash);color:var(--green)}.big-ok.a{background:#FFF4E5;color:var(--amber)}
+.big-ok svg{width:28px;height:28px}
+.help-grid{display:grid;gap:16px}@media(min-width:960px){.help-grid{grid-template-columns:minmax(0,1fr) 360px;align-items:start;gap:28px}}
+.qa{border-top:1px solid var(--rule)}
+.qa details{border-bottom:1px solid var(--rule)}
+.qa summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.qa summary::after{content:"+";font-size:20px;line-height:1;color:var(--muted)}
+.qa details[open] summary::after{content:"−"}
+.qa p{margin:0 0 14px;color:var(--ink-2);font-size:14.5px}
+.contact-l{list-style:none;margin:0;padding:0;display:grid;gap:14px;font-size:14.5px;color:var(--ink-2)}
+.contact-l b{display:block;color:var(--ink)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.skel{color:var(--muted);padding:40px 0;text-align:center}
 </style>
 </head>
 <body>
@@ -411,6 +498,7 @@ footer.ft a:hover{color:#fff}
       <a href="#conseiller">Conseiller</a>
       <a href="#fonctionnement">Comment ça marche</a>
       <a href="#questions">Questions</a>
+      <a href="#suivi">Suivre ma commande</a>
     </nav>
     <div class="hright">
       <button class="cartbtn" type="button" id="cartBtn" aria-label="Voir le panier">
@@ -588,12 +676,13 @@ footer.ft a:hover{color:#fff}
   </div></div>
 </main>
 <main id="pp" hidden></main>
+<main id="flow" hidden></main>
 
 <footer class="ft">
   <div class="wrap">
     <div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbgAAADGCAYAAACglZW2AABAwElEQVR42u2dd7hcVdX/P+vMTYCQEELvIFKkC0RQhIAVpCiidMRCExsq8iqvP3vBXhCkKgoCAiJKfVF6F0hoYqHXhBYCgYSUO7N+f+y1yeYwc+/MvVP2ObPX88xzb8rMnLPPXvu71nc1oSCiqhmQASoi1Tr/XgFWsNeywHhgJWA5e5/Yy/+O/awFH5MBA0DFfgfw3/UQcIuI3G3fJyKilFRsvRGRWvB344A1gLHATGBG7t8r9Z5NkiRJkvRCJPJDVgJQCw/SJYA1gbcA6wKTgdWA5YFl7ADuhMwBLgCOEpGnyghyfs09UKnq+sBuwHuAtYAVbX1fBJ4BbrU1+ZuIDNr7JXxeSZIkSZIkOGRVdSD3d2uo6oGqepaqPqSqC7Wx1OxVbfPLyx2quoRdp5Ro3SvB7xuq6pmqOk+bk7tVdf/g/QNlWpskSZIkaQewhYfsWFX9kKpeoKqz6hyqgwZ0gwZAHtg6JTVVnW+/H+kP8jLQkX7dVXUxVf1fVZ0d3He9NfYGxGAO/P9iXt/rQDNJkiRJ+hXcQmBbSlUPV9V/NgC0aoeBbCjxB/pNRffg8p6yqm6vqrfl7rXZdfZgp6r6gqoerapj/bNN3lySJEn62mtT1cVV9TOq+mCdg7NXgFbvIFdVvd+SLiji4Z0zKNZQ1d8E9zaa9R4Mfr9RVackby5JkiT9CG5Z8PuuFsfJe0qxib+mB1V1fNEALmdQjFXVL6nq03Xub7RUbhgjPUFVVwq+P0u7P0mSJGUGtwH7OUFVTyoAsBUe4HJe2xRVvSUXZ6t1YK38Zz6pqgenJJQkSZL0C7htqqp3BYdhzMBWD+CWLALAWRKJ2O/Lq+qvgvtY2AX6N6Qtr1bVyYm2TJIkSacl6wW4Wb3UrsA1wKbAoF1LkagrLUoSiYjURERV9SBgGvAZFhW5D3ShHrJi61UFdgCuV9Xvq+pEEalaEkqiLZMkSVIKz23/wKof1GKJ93weiNmDy9GRW6nqFQ08ql5koXr5j6p+MLzmRFsmSZKkcB5c4LntB/zBvrtm1n2SNtOR5hktq6o/Aa4H3mUelPZ4zb03NwisD/xZVc9T1fVEpGqeZtoTSZIkKQbAWY/CQVXdGfi9HXBaMEqyENmRAR35MVwbrSNxrbWqBi4xeEiCo0Zr9vowcKuqflNVJxg4Z8mbS5IkSdQAp6qZHVhbAH8MLPiig5sH6SjoSBFRW+fJqvp34DRg7Ui8tqH2X2bXOBH4BnCzqu4aAHXy5pIkSRIfwAWZe0vjaMkJJfLcar0GuBwdOUlVfw7cBLzbQKMWkddGk7TlRsBFqnq6qq5s9yYJ6JIkSRKbB5dZV/njgA2CbMkySM88uDp05H7AbcDngTEBHZkVbLJFSFt+BJiqqofa2J6q1c4lWjtJkiS9BTg/G0xV9wD2N3AbSEveVjpyM1W9DDgTeGPkdORIaMuVgZOAG1R1WxEZFJFaGRpcJ0mSpKAAZ9SkqupSwI9TQknb6Egfz5ygqscAtwA7BV5PEehIRlA7tw1wrXW8WU1EBlOReJIkSXrlwXlq8ghcokOthACXdQNMcnRkTVX3xNGRXwEWNwDISmpAiAGd3z+H4rItPxnEHlPtXJIkSboDcHbY1FR1ZeALZoWX8QCSTt9XnezIi4FzcfVjZaAjW92ngzja8gTgalXdKtXOJUmSpJseXCYiChwGTCqp99ZRgMvRkRNV9afAjcAuJaUjm5WBgLbcHtfy60eqOimonUtUeJIkSdoPcAFttBRwcIm9t27RkbsCNwNfZFGxdq/pyFrgPfaStqzamhwF/ENVPxysW6ItkyRJ0vaD0tNEuwGrlth7a3uZQI6OXEdV/whcxKLyil7TkRoAbCVo1kwEtXPrAuep6iWqukmiLZMkSdIJgKvaz4P7YO1q7TjgjVarBHVeRwJTgb2D7xjosSdcDTynu4Gzgv3Ta28urJ3bGbhFVb+uquPSpIIkSRLAtbMll6rqJsC2JU6AUDtMZwILjJbVUY6yqVqfzn8APwGWioiO9M/xeeBoYBsR2R8XA7s58OaqkdTOjQO+hcu23MW8uVoasJokSQK4dnzWHmZVVykWYFVxdFczrwy4zkohKqOgIwdVdUNVPQ+4BNgikuzIkI4U89i2EpEfiMgcu/7rDOSOBF4I0vlrkdTObQRcrKpnqeobrUg80ZZJkiQZkTfiX7fk5qbFKDWbSzbSa/yXqq7o77nVJBL7fTFV/Zqqzg6uKYY1C+e13amqu4Ujj4L+ouG8uXVV9fzgfd2YEt7M3D5/Dc+p6pGqulh+wnmSJEnKK9JGerKmquvhYjSLRZpBqXVm0M0CHgAexdGO+WndYTlABjwInCwiz7dCT/o4m/2+LY6K3JpFMa5KBDFFf4/PAt8HThCR+T6GZR5rvuYxC+7rQ8B3cIkxsdxXeA3TgC+LyBUBSNdGQjEnSZKk/yZ1HxTxlO7QO3pKVY9T1Z1UdaXRTEpocbL2Sqr6y+BaYvB0arnn9QdVXbPe9Q9Xt2e/T1TV76jqS8G6VyO7x1NUdZVW7jFJkiR93ADYfp4RKcBVg+v6QT1Qs0N6YIhXxV5NJSvk6MhMVQ9V1ScaAG4MdORtlujy6jNtlcbLgflGqvrn3HfFRFs+paqfDYyzRFsmSZKkYfxtjKreHWH8zV/Lo6o6JRdPqrQaR2vVu1PVd6nqTZEd9CGwTa8Tn8pGuR8Ggj/vqar/afDdsQD7jq165kmSJOkTgLOfq6nqCwElFAu41VR1hqqua9c5ppOHWDjkVVV/Exmw1YwW9b8faz1D207V+fo++32Cqn5fVecFaxEbbfkbVR2fQC5JkiT16Mm3RwZuIcC9z4Nbl7zZCap6XUQxqLzXcp0luoyYjhwhbbmFql4WYbalfz6XW3ZroiuTJCHVwYWyIa/NxiOC7LkM+KuIXGZF1QvpTlbq6cB2wILIirVnAJ8F3iEiN3hg862tOrIgrojd99icJiLvAz4GPMyiDi3VCMYeLQTeC/zcskVT95MkSRLAvXqor1cnxT6Ge/uVH8DahdE2NTu8d8cVhI+NqFj7t7hi7eN8C6tOAlsO5DTo9i8i8ntgK+CnwCtBkXivW34NAoer6jv99aYjIkkSEkWpqucFtFMsiSUPBMkT0iVq8tEIirZDOvJmVX13TCnxdWjLyyNJQvHffYPPlk1UZZIk/e3BeUpy+XYWj7fBewG4zRcqd9hT8Z//XmAN+/6sR7Qs5hE9A3wJ2F5ErgjpyF4/nDq05Y7AQcCTQVF2tUf6oMDbgI3tmSaAS5KkHwHOd/IwKmfpCAHujg4Odq33fXsG3VLowYw2T/X9GniLiPxURBZ0k44cBW35W2AycFwQM6x2eS0lGPG0fZf2TpIkSSJPMhmD6+Ie23091Y24oB+yiWvwK10+FAeDGW2XAduKyKdF5LGYvLah1s43QRaRp0TkswYu19o9ZcE8vG4aR2um4yFJkgRw4JIpJkTkwflreLzTABfEaBYPvNhu9o4cwPXHPFBEdhaRm/0MtNi8thZoy+uBdwAfp/vZlv55rh5ZVnCSJCNpfv+aV7+txUAbPbglImwiPauL37nQXt1sGL0AR+n9QESetQ3cEY+tkXK0E0Dts6q+eTfwO1W9GDgKV96wRC4ztJMe3EsRGWxJkuR1MWwCL8He1XxT9CHem88u979rWRqQD8Q0laAAE8vrHspGAy5Q1enAG7oAbBXcsNGjROTG3LQCHSFw5ZVGA4VpuOHrvJ9AcfyrJSD0Cmr39BzwZVU9F/ixeXZ0eFKBAtMTwCWJCMx8ApSffqHDvGcgp8c0896wE1Ed4NR+BbhYpdpFIK0CU4FtgkSFdo98qQBPAz8EjhORhcHIl2oLCpOF1GAzNG4dIMts0w82+f5KCHxDWZl52tKyVKdaucOhwDeBFTsEdF6xb2ug7L2SUo/1CUpHahGwP9Kr9c55WF5PXpO4pqrjgJWAVYD1gVWBZYDlgEnACsZ2aPBeBWqq+jwwG3gZx3C9YD8fBR7DjcqaEeg1DUqMCrEfpU1ZlMvi4kATI5sDt6mI3BNQXp0s8q6q6g7A1W0EuDwdeSLwExF5PJzD1wKg1d2UqjoRWMcUZjlc/GlVXExxor0WywGAn9o+B5hrSvOiAfCj5gE9iYuhvVivi0ygMNrEfXhAVRvn8/9wMTqfbdmO5J6afc50XMLQyzEl6IQzBcvWy7afZ/KFoJZ/vtYf9U322grXUOONBnDjO8BczDagexj4L3A7cA/wsIjMa2SUxPr82gVwyxnALRUBwGngKWwiIvd2GuByQHKdeXGj8Sx8FxLvYV8B/K+I3NbMoM4Q1OoozCrAusDmuPZqmxmYrdKh5/YsLpv1XnvdAfxHRB5sQIk0BLs6A1a3MW/uPbn2bDKKjNQBW+tjgrXeGFfnWa0T95DgOyVHz+b1rJazqLWOvmTByyfWvAjcaTS4lAUMwnuxUU0fsL1JHXotH3aQIZiDoWi4rM7ZF8aiZpuRerKIzO3kevs9X0dHN8FlEr8TeDOwVoM9HXp2WmdvDhVjrveeRgbiAuAh4E5jNm4C7hKRV3Jgp50+Z0cNcMHh2Ex7K/9/lgfuw2VSxgRwmwP/tPupdZIqCqaav9VALhuhVxEC41O4Cdkn+FT6Ib6/Lqip6iTgraYwWwObGp0xVN9KrXOIN5OYoXVozHoyx8DuNuAa4BYReaIO2DVc6/BgUNV9gK8F/VBHYlx4cLsD2E5E5qjqJ4BPA5vgEql6uafvBr4tIn/uhsHWLc/NvJBTgL0ju8TDReTETnjN9cBAVScDuwE72bk1ps65oDlDSjqUYBUaX4166d4PXAX8FbjGg11wDkXh1Ukj67jFB7Y4rpHv0pEB3Foi8li3qKKAqjzM6MSQYmylKfIC4FTgGBF5IsiOrA3n1QSU4/amML67SiPLjy4qTCNLcZZZhX8DLhKRh5uxDHO05UTgaOAIXMlGrYVEIw9us2zd7sX17vxoA8t3OMu4nmfQKmPSyMjYRUQuLTpdGfT5PBf4kD2DGEIbfi8cIyJfa+c65w1UVV0d1xxiL+Atub1a7bButqrHoQ7nz7P7gL8AZ4vInTF5dVKHKlgB16poA1w8pmavQXthQDYQlAhMsE06NjKA+xIuHpTV8TK0QXC53oHl/36+eRvPNqIuApA7BJfCP7bOZq1Xz+Y3zdXA0SLyj2HANE/XiU0w2AvYxWiNPOUpHU6xb1VhanUsxJfMMjwbuFREXmoC6CrBOrwF+K4BO0OsvQYGBbiayY+IyLWq+r/A93BlH5UIDhjsWsYA/8BR4IVN5Q50ZCdcc4LBSBLewvXcTkRubAfA1QG2HXCt6XbBJYWEoCaR7LdmDPJaoB/eOLga+ANwoYi80ExIpVsDS8eq6jdtwnOSxvK4qu6ds0IbNaDeQVWnNfm5D6vqIcHzqNT7/DoTs5ey991Up+H0oMY1XX244aP5RssPqer3VHW93CDVRusSNnHeX1XvbeK7F6jqH1R1De/9quojEc3xC9fIr9PmQ+2/AjVoPzs3hDeWmYm3+S5AoymOzu9VVX2fqv6tzndWI5ujOZLm9nndfURVv6Wqq3Vj7mRDD84ewOLA+cb/1ovFMExgVzpYk9SObh/ttPAqZqm8eagElsBKHQvsa1TEprh4pW8/NRsXh7oYODeweF73mXU8tkm40TyH4VKF8yNyitpDUYNsRn8PrwDnAceLyK1DeXQ52nJxYxY+aHGNFQMv8X7zhs4RkduD965lFOXikWUEh7HFX4jIF4pIUwaJaSsC/zYPJpZ19ut7iIicajMkB0eacBbo6juBr7AoGSpkL8pUZ6l1GKnngOOBX4nIzG5nA3tv4VfAZ3CxnzGpuLUpquhoEfnBUEqQByoDpRXt4c8HXrBCZoZy5XMU3PJGbxwW0JDVHvTA7CYNMhBQIH/ClUpMbSYeGvx5Aq4+SIDZIvJMDhQzERlU1bVxiUlLRAhw/lCcAWwoIi8ULavS64uqHoSLM1cjMY792j6FmyQxcyRrm9PVLQ3YPlyn7KfsktfdR4HvA6fl6ne10x7cJrgC5ayEFkUnJ4WfICKfHs4aGS6raKiMwdASNFryEODLLGoEXFZgG6oe0BsZp+ESAR5plIQTrH3D2J3/tyALdkXgP8SRMDWUl7G/iJxVNC8u8OCuxiX0xHLg+3X9lYh8rtV1Dfeg7aGjgU+ZMdxPwDac7v7DnIOru+HNZcABQUpqArfWxqo0PRbGt/TyvHwwJqZWrymyPXg/UuZdwA24MThrmidTC7rt98N6VwIKdgyuo8mtqnq4rVMtP8w1WPtabu19cXHVA18Ack/jklxib7T8kW5Mymh35qTpwcbA2yMbR+TDBr9rdV0DXa2p6r64sMMRtk+rEYdwuqm7fqTX1sCVqnqCqk60863SyYc6uUhKUugnbUoQvLRRsoQ9+KVV9Vjg77YxqoHbn/WxsnigWx74tapeqqrrhfPlhll7HaZs5vhcNi4R9ld9p6puXA/YC9A56aO5wz+Wln5XiMi0VuoMc7r6O+AsXCegai5LlzS55tWuQwCfBK5X1a2H0tt2fOlyBUlLLVUXmKFqg+yB72ju/GcDb6KSBnDWBbr3ATep6sfC+XIjHdkjIlfhmllLhF6cmKcxNvDiikJNVq311N6ReW/+/DulWd3OGaLbWR3nRxukzydZJJVgD28CXK2qnw30Nms3wCXvLQKAM2WpWVz0u8D/4frO9UucbTRAVwWWBU5T1dNUdelRUB/+PT+P2PDz17iXqi4ZNKWO/WDDjJHVg1g2kSSX3A9c3syAYE+12rp/wVrpbRAMH066SlON/mu4ZK5jrWRkqXYzEulBRABwlllWteD0pcBX+zwwPZLD03tzHwOuU9XNguScVsSDxYW49lhZF6dStBoDXgtXLFwEXfae8GGRGdX+Wn4rInOGW8cgGWmMqh4H/My86VofTGehAwyi19t9cLG5N7QzLpcArscAF6RNvw24EdgxaFuUnk/r3lxIfbzf1nagxaGrFRFZABwbcfKVBoARdUJMAAqbAFMatHvq1RpWcPWoZw2XXOJZFmsufymuT2k16NmYZHR6Oxm4SlW3GKFxmgCuQ219RkNLDlrm1ZW4MRjVZAmOmvqo4gqI/6yqB9kaV0bgxf0JN/Inxlict36nmLeqEXc2kSDzc0xEHrF/pheKyGNDJZcE8bbVcT1T322Hcoq1tVdv1zKQe0erxmkCuEgALheg/opZj0tEVPRKCShLH1s5VVW/5C3CZmJV5sVlIvIirulyjNmUEhhDH4nV07T1rlmh/X4RJpcocEowk20ocHsDLt62eUT9M8umt1Xc/Mm/quqOIzBO604vTtJdhffF298AjslNEkjS3vhyFfixqn7dOs402w9P7f+dhJt6nEVcMrCXBehjTDapmMGwB27uYCzJJf46brAXw0wIeQNwOS7xK4Fb50FugoHcO0ZDVyYPrjcKX1XVb+OGdQ6mMo2OWug+SeRbqvo/HuSa8OJqZog8aR62RJhs4u9tdWDXiGJb9ejeT0ZmILxa82jPujIEuK2Gm3qwbgK3rjIwiwHnq+qbR+rJJYDrIr0bJJR8ETegM3H43QW5H6rqp1tQFu/F/RrXp7UScVnNoRaDq0Y2FkeBLYGtIgJgT18/BFxsz7haJzGmauPDLsU1NE/g1n3jbRLwF1Vd1ReEJ4oywizKANwOBH4axNvS+ncX5H6lqrs0Q3v4ukQRudcmF8foxXlrdwpuhplG2Nlkv8jKLbyR8kdfGhB2tzHA80N0/4rLyk3g1ju6ck3gHFVdwuqEJXlwEQFckC25Gy5poZaMi551qwA4Q1U3smeSNfmcfx7ESWPz4nxbsU/F0p8y6FyyFG4IbyznjU/pn48bzPma9QoadAOcDrw1gVvPQW4hrnfpcRYnrSQPLpIsyoDq2MwUKkuNrXtKe9SM9jjXLHQdyiL0tIiI3Iwr5Yi1ZABgZ1VdyzeOjqRzyQeIK7nEzxq8TET+Xac0wM9x+x7w/gRuUcgYew6fUNWPtxKPSx5cBwHOD99U1WVxNVVLBd5bkt7SHhsCJ/vC7ia9uF9Gapx46nQ8bsBrDLrtQePjkSaXnJh/lkFSyc64cTepJjU+4/SXYWP15MH11oPzAxN/A6wTJJUk6T3IDeLS6z83nEUYpN9fjmvfFWMszsv+qjomyF7sVXJJTVU3BbaNKLnEe5F34TrdSDCcNLN6vRVxg1g1nY1RNjaYQFC3ONweT55EZ5XcN2P9QKI6ovXkjlHVNzXR/y4TkYW49l0S8QGwOfC2SPT7gMg6l3g50VqxVeoYoycBKyemJWrDdArwOTNOsmYBLlkrbUoyCeJuG+K4/NShJN7nNw44zluCQ1iENfu3PwKPBNmLsdGUAAfaYa09HouzT0SGtK91ewr4U1gaEBijB5sxmvQ1fsP0u6q6jull1sy4nDQ2p42HjXkDJ+BacCUDIm5leRdw8FAWYdCEeY491xh1xh/Ke6jqKn6SeY8SXvxYnFpEAAdwrog850sDAmpybeCHyXMrjGE6Hvih6aUkipKOTQGuS03iurxPSdZgIRRGzSJccRiL0Me1TgdmRezFTWJRskmlR7HpA4ORT0QyNWAecHLuOj01eRywTIFjbxoMW602eNVK4sh4w3QPVX3PUOGFDMdpJmlDJ5Mga3Il4DsFtQY1mNE0WEdBQgUaDP6+6NlZKwBfH8oiDJowPwWcGznz8TGfbNKDsTjrm1ccU+cSAS4XkXuD6/TU5IHmcRYpCcwD2mBwf37YaqXBKwvKXKrBqJ8iy/dtn2ujEQUPApslirJlAJhRh3r08Yf/NWuwWhCA08C6GxjFwRTOsZMCgtxBqnoScM8wo1MEOB6XAj8mMqvfF6JvAUwRkSsDVqFb9NGBxDUdw1+X994yVVXz1pfGxcmLMtOtFgxXDYvSFwDPAE/jRjy9EJxVFVwt4nK4riAT6+ht0SaRey9uMrC3iPzBd4vKA9xlAZ2RpPmOGNMaJJZsiqMnawWZsqyBhedlOvAf4D77/UFTHG/5LQesgptftz6wqSnQQJ2UbCnIM/XNXb8qIns3il0Fhd/3qOpfgT0jzJANx+hc2eWxOOOAfSOKO3s9vBu4Ikgu8fr6eWC1AoQSQl3158pU4CrgOtPRJ0TkpWGe0xrA2rjyjSnAdsDiwb4p0qBlH144WlXPAQYtyUnDZIgJtlDr4lqiDKSEiIZezqBZ7A/aof6Kp64C2uNCYLfIFUaDrDJwsYmbzNi5DvivzUJr9nCbiCuc3gHX1X7r4LOLBHTeOn6riExt5PkE1NbbcKNWYpsG4T3KZ4GNROTZoTzSNk+m3x24ICIDz+vhF0TkF9Z/1IPFqgZ8S0c+uT3U1YeB8+x1Z95jCeba5e9F6z1/y0TcA/gYsEFBdTYDdheRv+Z11qdGb2OH21I5Gq7VIG6MN9/uPobzgN1E5IrgoPM/tzWAiJnuCIH3UeAM4A8i8t86ilIZJs4kQC2vOObFfgz4KI6qpSAerV+bM0XkgKGovcCguc6s4VpkOuDv5WAR+U2nacpgPf4PeG8k6+H37UxgYxF52uLkPpRwDPCViI3R8LruwtVgnhd6aUFyhRqIaRPdlSSvu9bIeF/gKOBNBdPZDLhCRN6bN+Qk2JibAV81K3z55LC9Tl4EbgS+LSL/CBcyWMOLgV0iLerWAHifxU00OFlEZgUb38eihlWUBlZjBlT9e1V1LWt5dHDQTb5SgO4084BNROTBRp5PYNTsjauNi+3e/OF0U9BNhFae6wjAbUPgDmM5YrD+vR6eICKfMjDwz3IZ4F5cchEReuDeQJiJmxt5ovfW7D60VT0dAvCy4LPHAUfgxnktUZAscA2Yl9tDY07CDWq/rwS8oU7XdM1thJCrXcdqg8ZGFnA/GBdLqjeqQxt4aFIHFGrADBF5tM56+YNuMnBLpM2Uw016IvAdEZnuqaV6XlgblCZsgzTFrM/NCkB/+LX6toh8Ywia0l//4rh47PqRee7h/p4iIjd0yosLdOBH5gFUI/LeBoHJInJ3znv7AvCzCA/w8Jz9C3CEiDwWAFutQ0aKBI2mPQtzIq4rTuwg9zpD5nX7XFWzkXYgV9WJqvqyOqlpPLJuuy3VfL2F/7OqnmXfuVDjEn89z6jqh8KYSaeLgG29BrxlqKq/CK6rpnFK1X4+aLRNw+4mwbP/pL1nMLJ78ddzWmB4dOJgRFXHq+qjuTWM4d4vDvai2Gucqv7X9uBghHuvZkORu6ar4fMMdHYxVT02WM/YdfYZVZ0U7sssHO7oOx+oaqXJ14Ap+VKRIvt4u84xLdxTo1dma1Stkzm5NvDBCGOR3rK526z4872yiMhgJyxBcgNDfSNjEZkrIp/HpZDPb3OMlA6UDKzNolqubJj2XWfhUrOzyO7JX/fuqrpyhzqbhJ1L1ogobuPv84SQcbI9/25gvcj01a/bi7gY/8+809ENXQ0p7EBn54vI54CvB00NNOLp38sD7w3zB7IGN1ht5mXucjUoNIxO7Pqqzd7TEK/aEMq9v1FVMa2DTxW/EniniPzHZ7p1S1ny3fjt+8/AlaUMBmm+sdY67jtUkk1Q+D0bNzFCIhwNU8VlCe7Zoe5FGozFicVo8WDxT+DvvoQhuNZPRFakXwti4zuKyCWmK7VOZr42qbMVEfkO8MXIQc7r7O6ml7V2bHYdYdZldFO3Rwoi5s7vFVnczXPmlwM7i8hMP1W8h4aGtwzHiMglBh4aqcL4GOG7VHWZYTwfPzD1VGB2rr9rTHJgkCLfieSSd0TkEfn1/30wNUDsWtc0D47IBrDOAnayBLaBXupqzoCr2fX8HJfsUol0VFSlns5mHUijL9zU7VEE1hUXhN0owrqfacBeIrKgi50smlGahQZy5+OytWJUGG/xrwhsP9RhaBZ2JiKP4+q/YpsVVwnG6GxtNZuVNhuQH42IwfCJPrOAM3Op5Jgnu2RQ1ByD1wGwp4hMM90YjIgBUzPkKyLyLeC3xgzFqrPLA2/3Opt14EH1BcAFsmewuLFQHdMN3Gb7OGFktLEHueNw7ZNiVBj/PHdp4T2/jrQ9m7+mAzrQuWQ8sHdknUsEOEtEZgSGqG/Iu1dke6wCHGkt1cbYzMHYwjwaNCH/NHBrhI3GQ53dyV961iYLLlYPTjo882oc8P5I6I6QLj7QargGesXhNyGDpjCfx9UjVSJN0NhOVccGU72Hat91K/D3BmUpMYzR+aCqLjfUvbTymXbw7YTrb1iLRAcyXB3jCUGGp08u2dg82RiaQHum5WIR+bnRx9E2vvdNyEVknnnsL0fYbNzvv7f75JysILGu2K7Lr9vWESm3v4bjzBociInqGEJhXjGrsBphgga4fpsbNbGf/L/9LEKd8LTpisDubTLIakFySSwMTjWcGsCiWkx/r7tGwhb4WuHngUO9N9zt5K8RJp4MiMh/gG9HmDXsdW4DXBY0ZY/BdVp2iWTmlQe3x4BvmmdUjX3xgjZn1wKnRRaPk8DK3mI4UAi8oiuNwontGbwaLwuyCkebXPImhi+l6IUFf2Lunqs56opI9PU7IjLDYrhFGTlVtfPlV8a8xARyXmfHAlsmgBvFBrWH/F7i6b4t1n1jVjDEsQjisxC/bhZtTFmI/jqmNEnH+IPqF8RZK6TANriWRjqKwu8wuWSxSJJLPGjcBVwZxAjF7nVtFtGTWQTX+W/g136ieFEOvhxVeUyE577X0U3aDXB9IQGfvz6uKWmvW5OFNT9njNY674HC+CzEGcApkWUhev3YzKfYDxW7Cry4C4D7I6Rw/F45dKR6G8SfxxPXWBx/sJ1qiRo+RuhjbdsTT/akAD+2EoYiGaP5BgfnG1BnkTEvdMKDo88meW+Hayrba+vVK8fxpjBZARXGe3En4oLXA5F4cRL0Wl11qGnfvDb5Yh6ug4ZEGoT/gHU2GUmySRbQfTEll1RwhdLn5GKEfv3fHkFShF+rh4Bzi2aM1mlwMM/qP2PMu1hTVcdmBSqqjqVMoFXaqhtpxk8D5xdYYbwX9whwSUQdMTxALYkb8NrMPvegcQauE3xMlKv3jiexKPu3MorOJRrJc/Lewzk2+67iY1oBiG8RAT3p1+43IjKnoMZo/l4uMKO0EplRuiKwcvLgRkbPjCUOPt9vqEtE5NmC0h3h6CYBzo5sT9UCL64V6/a5oH1XjAk/BwTTrVtNLtkYeGck6fbee1uIq6l8VS+CGOMauIHOvdxX/jrn4sYrEWntcNNGqe2Hh1k0Nb4WEcBNAlbKKLdIhz5vleDAkwju78JgJltRxc+Ru9Y80lg8H38Na7bwvDXI5psbkXUbdjZ5G7BVi51N/L0fSDydS/w1XCEi9+Tm9/lrWxcY3+Pr9dd0s4g8ZMZyDUoRrrkoQu9S2glw/RKD8/e5KS4VtdZji9A3aL0pbDBaUItQ7XB6Abg5wmkDq7Vo3VbMur0gok43+SLj/UfAXkwE9olI76VBaUAom0bkMf01Es+3naB9A25CSCUyo3T11ItyZMq0XgQHsP/u2y3uUGQ+/1WL0DzRayM0alZp9ZnbvfwiwvZd/nD9sDWmbSbZxF//zsDqETU3EOC/wN/qPB9/T2/oMcBp0Knn+ohHRY30fH0IN1g6Ntp1hURRjuyBrhPR5ropokLbUd+TgfTUCO9peU8rNZN5aB00RERuB66KLBbnPcqVab6ziQajoWLpXOIB7vciMi/oO5k3AteOIP4G8CAurb7Q8bc6rMtC4F8R3Ze/hollb7bcKa9pvQgoGm+F31EWhQnW9wHc6JkY0uz9M14KVxYykhjFryOm8j8xXLFxkFyyHouSS2IpDZgNnJ7XgcAYGWARvdzr+NudIjK/DhCXwYmYGuG1LZO18QGWHuCC7g+rRWARCo73vr9EAOdlJvBEZPe12AjiJp76uwTX1iimWFwWJJsM19nE7/N9gSUiSS7xBdtnisiTYWlATsYDy0ay5veVOGfhsQjvbVzWxs1W6nE5AS01yaz5GB7mC7j2VmWjPBYEChOLBzfQ6vMOSgYWAsdFWPjtY4P7N9rPQcurJYb6fz0sDfi1XWOjdZ1oOtvL65aAoiybMerv5bkYQyVlj8F1YpMuEwBcrzfVEwZyZVzn6ZFd19gR6ouP2Z0JPBVZ+y5/P+9X1aUbJJtkwVicdSNLLvm7iPzTYp21BvtoWWBcJAD3aInPx+nAK7EBeEoyaf2zlsXVAGkEQeuZIjLoG8qW7Nk9VwZrN/DiXsK1NYqNpqzhKPedG5wJfv0PjijW3kxpgP+7FXqctajBmr5YYg/uRWBObNeWPLjWZVxEVNNLJeT0JYjDxXZdMspem6cQV1uj8ID6aB4IguSSDYgnucR7b/8B/tZEe7rxkazznADgyijz7BUTgGsal9O6LB/RQxyk/BmrhWcDgl6bjwHnRToxYQdV3TiXbCJBaUAsnUs8c3KyiMwPpgY0el5LRKKv84mQwqNPOuOTqM5C3qsmgCsc3X180EkktiGRh4R9QS0mtyTxdC7xySXP42KazeyTSgkYgCQJmPry4C0zwFXLlJFrYJGJyFTg6gi9OAX2U9WVrEh9wOi/dwFvjCS5xK/XuSLyzBClATGecVlwLQnourRfEsAVG1SWLvE6TyyhB+c/47jIDjofx1oO+HAw106BgyLa9xUcLX9iAfvkTrD1LassgaOxY1rzwSx5EoX2epcKYjxlMyBWi4gWA5f0Mr8NXpwAl+FaG0mEjMA+1v1jvo3F2TGXCdjrwu4rROQu84arBQA4CbzfJUucFLYU8ST0+Gt6InlwFJKi9A9wZVUdnytEL4ssGxngPiUiC9pQklGxQvZjIyv89mfBVsCmdo+H4zq41CIBCnCT0lsBibkxdbenvKVYq0dQPpWXmWUfl6Md6h4SDcCxqM5HyjBQ1gqjs+AwiMWDm9UmD74aDHZ9MugyHwtNOQbYU1UXYxFdGUNpQIZrS/e3Jg1N/9yejmgw8SYljsGtEqED8FCW4mUUkY71lv8SwFplUhrzHJbFJTbEdF/T23E9dn8VEZkNnBFZ4pK/t/cDR5nxpJEMNQU4vcHUgNiTlSQ3l65MIQUvGxMf0za97DE47cBnvZCbjNxrpd+yRACXBeOIJkVyuPrvf7wDz+4U4pr47dd/A+A7kay/Lw14ud7UgCb09fkgfqe9BjhVHd/syCWKFbJ5c2TTvF8EZqQYXOsyKxJe38vbS2QViin+5AgTMKa3y2iyAy4TkYeACyMrGQgPZIlo5tslIvJYk6UB5Fq+zY2kDGO1AAiyMoQUrDHAcsBmxBVSeLqdANcPWZRh1+zZEVnb26jqciWxCmtGPW0XoVfZ7rFEHsyPTzWpTYHtyS3u77BHYgx9Tb0B864SMi6bs4jOziI5px8XkflJqVob5fKq6xuBwngPZ3lgil1bVnBrsKaqSwUAl0VEdzze5v3kD7wbgZsj9OKIaJzPrcA1I2Qq5kair34v766qlZI9650jindqOAi67FmUHcA5UeDhSDxX//172nUV2ZPODKR3AFaKqO8hwEPA0x6E23nP9tyOS90thpSTbN2bTi4xg7QSkb76yQ2bAm81o65CsQ3SqqqOA3aNiIXwenR3uwFO+qjI+95IAM5fz66qupZ1rc8KnkG5V0S0t7+Gf5vH1e619bTyXwxEKyXNsBtp7K2Ci33+aYQeggQGSiz3lAGHl2C8VRa0clsnklZuGujQ3cmDG7k8GFGXhCqug4BXGimgNZjZYb86sFuEManrO/G8g5KBuSxqP5U6zb+WijxbRGa3WBqQN1Buj2RP+WzZD6vq+kHNZyGdOHseh0RokD4J3JcAbuRKd09Encp9htYhqrpKQZXGU7+H4Vr+DEaypzIzIKZ2MFPVF36fhktpzxLIvapbC4HfjuIA9e/5L7AggrX1cfPFgKOLbJBavHwy8L5IkkteY9CIyHxVrZQ9izLr0AI+ADwVSXq+V5pJwFeKpjSB97Y8cGhAM8SSnv6Ipzs6sc+Did/PAWelZJPX9J28XET+5Q/UEc7hAxeDuz+Ss8pTaPup6mSLY1UKmtn6VWAgknh5+Gxv8NdZdoCTDmRS+i4Ut0d07z6AfYiqblEwpfGJFl/FZYTWIqq/ArjRW4MdjJv4zz3RPI3CJh+0WW9/OVo9NnBcgGXVRRTjHAMc5/W0KCU+pgdVVX0v8IFIYm+h8VAlyLhtJ8DV+kz5ro6wddfiwImqOrYISmOHz6Cqbolr7BuTsvi1u6rTNLzRPRURuRe4uM+9OO+9TQWu8tl6bWBxrokonOKp762Br9v9VQrSK1ZtCO6xkTYEeBD4p7/kVOg9csv++iDTKybr5S3Ad/3QysiVRayp78m4idJERHX49lDXdNnyPzYNxUSAk31pQJv09TpgXmRt0arA11R1RzP0Ygc530XmR8D6QZ1iTOfy1Tb1oyIimgq9Rw7m9wCPRtZSKsMlaBylqh8TkYU22ytWZamasmwRqbJMFZFHRxoDGsnEbzuIbwkOwH7TrQrwDHBem4qHfYOGB4A7I+t4742YM1V1nZhDC6o6YCC8H/Apey6VCPMtLoh1eGchZrcFcbh5Rl9pZN3gfRD75MAyHBOZsoyx6/oC8DkD5RgV+9Iu64mPRx5L/9KTAGeJyKx2xD2DUgwFLie+JLgabnrG+aq6QowgF4DbdsCpkYUSwvrCh4Brw7M/a+ODkj4ZlxPKX+2+swhjhGOAc1V1q1g8OVUVU5aFqnoo8LMILUHvRSwALuqyxe9LBi7AxRKyPiv8rpixc1qHDN2Lg8NQIwstbApcpqqrGsgNRAZuWwB/xo3oio1C98/3QhunNOANoyzWjMWCeIZX4zotxHYQ+etZCrhEVXeyTSq9qpGz7xW7jkOAk4LDJjZlUeAaEfl3N+jJOt7GPNwoHemj+Lb33q4Xkbtt3avt234qOIryrggnVXiQ2wK40soHBlW10kt9DZLAtgcuA5aL0HsLSy/OzTs2qdB7dDTly8AfIx1X40FuOeBiVT1SRNQy9ga6lWEZeG01O2i+jUsqqUXa4s1f06k92tt+H52GG81U6SOQ68i6B7WGg7hJ6rF6r1Vc8sY1qnqwiFR7qa/23Z/AUfUrRApu/hy5B7gtn3VbdoDrxsP4Ha7jQiXS+/ddBn6iqn9T1U1EZNCDdKcUxxSlYqA6qKob4GIgX4sY3EIu/9JeGC5BycAzwJklngBdjxaebjRiJ+7ZGwnnAC9Fajh4T2RJ4BRVPUdV1+iRvq6mqmcDvwHGRQpu4XM9wwyYSicAQPtwfE7VrIV7WFQ5X424bq8KvAe4SVW/rqpLm4XoFWfUyuMpUM+B2xotqapfAm6y768WIGZ7pojMCbn87jNEKrjC74V90L7L683po+g72eyQ2cd6Zby0aJTWcI3H/6Gqh6nq4l3S1wFVPQg3omifgLLPIjaMZuO6AL3umWZtjluUupNJA4sLHOUWM00rAQUyHvgWcLuqftqGpVYD5ckCBcpMCaSOYnjlePX/ewrULMAlVfVA3KyzHwNLR5hQkleWDFf79tteHoBG54oVfl9a8sJvf0jNtbhjJw1mCTrGaMRZ5BKUiaxk13uTqn5cVSfW0deBNujr4qq6txnrpwIrR26MhobROSIyo960d2lT083VcQ1NlwiGRMYgW4jIHZ1KFAg20hK4ETprRq44YdcZDzSP47JBLwJusTZkQ90rjaxrK9reBNgd2BNYLze4MmYjYBBXGH+yiBzmWxJF0BLpHbhylFpJy3q80XOeiOzV6aSeYB9fhZs9GHsXkby+PgxciKNybx2lvo4F3oxrufVBYINcXEsKUI+80JJz/mVGYUcAblXceIJx/QRwuTTaLxBn2vtwXnd4rY8YlTjNem3OsNfc/GFvYLY8sCKwGfA24O3Am4LnXytIvaUfFjsfmAz8u56y9KDTi1+7m+26aiXsU+mB+73AFZYMUu2C4bAzcEmBDId6uvQoiybC34FrAP+06Wstd9/jcfV2KxqobQ5sB2xYQH0NDdKzRWS/Rmd82QFuSxGZ1mGA8/c6AdcDbbUCeHH1LMR6HtY8XOB/NvBiQAksgZtesLwpTaN+glnBvIiTROSTvfbe6hzGBwK/L5Dx1Cq4TcP1Zax2I+YZpN5fC2xbsHUNY2J5fZ1rBulsHNXu9XssLgtyWWBiCfTVG6RVYEs7d+saRu0EuP/isn9iArjJIjK1C7SHP4g+CZxQ4IMojKW2QinWciApBWy99jKu2PbRXntvdYyncabEa0WmX+0yLD4pIid5NqSLhkPRvLih9LXS4rprQfW1nvfW0CBNhd5t2mhmFf4WxwUXtQNFZopSCYqMPXhVc688GA4UIM42VPf6k0XkEbMEa7HUW+IKv+ewqD6sVrLkkpnAn7qZhRz0/fw/XNP0ovb9DPWVFvS1UmB99cA8H/iun3DQyzqxMrfqCg8isblTR5eoA4WnLUJF8q+sBEaNt9yfBX48nLL00HgSM55mlahkwAPKn0RkZofn7TWaIl8DvmweQRnKncqur6HOniIi/xrOIM060Bm7L8U3SRWRC4G/sCgtP0n81uAPROTpmLy3XMlAJiIzgDMoT8mAL2o+tReGRaCvN+PaxlX6rO9nkfV1BvAt88K1150+Su/B1SnQPRKXlCH9WARfsPjP7bjJylHTyravTqIcE789LXwTbrApPTIsfGjh67jYa5ZALnrvTYAvi8hzzcTKszZPlO63Qu9G1vZDwFf7dKZXUQwfwWWJHmzUMj3qWtKUt2HK/C9cKn1ZvLhTfJyxhzFOEZHngS9E2IQ5yesN0suBPzSb6ZxadXWO+jge14ViIIFclMqSAUeLyF31OiBEbKwdX/CkLl/L9zSuwUBPW9wF+noBru9i0td4DdKXgM+YYaKxNCPuywdilNJhOL44UR9xgdsAcLmI/CKWmrcWkk3+juuaU1Rvw1/z+SLyYg+SSxrpa4YLLTyY4ufRGqRHisgDrRikCeA6S1U+YSAnQXFikt57DzOAT0SaNTncyJeFuJKBosZ3PXj8JjJ9RUReBA7ApaAnZoqoat5OF5FTWjVIE8B1lvoYEJGLgG8mqzCa7gcLgQNFZHqMWZNNenFn4kobijYrzieXXBV0GKrGAnJ2eN6Ci58nfY2HbbkDOHwkiWAJ4Dr8gExpvgVcYA9rMC1LT4PUnxWRK8z4qBZt0K6B8rO41l0U9BA+IcbzJ4jH/RRXd5j0tfdsy0xgbxGZawlB2guA6/s6uCEOJG91fwT4Rwpi95Tm+Hk3W0J1OL57EvBKgbw4f2DdB1xi91CNuCvRp3FdThLI9a4cYB6wh4jcP9JYefLgupeKPAc3kuKhRH/0jMP/oqoWeu2DWXEP4BoKFKVkIJy8vMBakGmk+oqIzMONfZqaQK4n+0SB/UXkutGwLe0CuFjbwGSR8fszgN1wHfoTyHUP3P6ESyrJgFqs9W6tbCnzgH5dkBE6vtbtFVz8MOqemsH07+eB9+P6yyaQ6+5kk4NE5M+qOmY0bEvqZNJ9fv9fwPtws5sSyHUe3P4M7OebzZYA3Ais2ZuAOwvgxflGv5eIyMOdnu7RZpCbDuyYQK5rZ7WfLvE789wWxuDhaOTFsbFlVt4N7IIrdq0kpWm7onhwOxfY1/4sZQA337bL7mUx3Gy+2Au/fYz+d0UqUg+YlydwA1nvsn21MKlZR2ojq8BH2xknTx5c95Vm0JRmGvAu4IFkGba9FGAAN7x0b4v3SMHKAZo13NYA3hg5aHjK6SHgyqKN/AmYlyfNk7sVGJP0lXYXcc8H9hKR09uZBJYArrdKcy8wBbgmyK5MxaWjq7HKgG/YZG4xb6dsXWQyi8FtgZvWXI0Y4Px+Pl1E5kXSuWRE8+Ns4sS7cS3Gkr7SljBCBXgS2ElELmh3hnOWhp32HORmADvh6JtKiRrp9kJRXgL2FZFvW7YkZaEl86Bh9/XugiSXzAnoSS1q9qqB3Esisjvwo6Svo9oXvoj7NmCKiFxr5+FgjFmGsdbBSUEsw/ki8nHgUywah5IoEJqiv2qmKFOBHUTkj75mpozgZh5pVVUnAbtGzsT4g/8CEXm0IE2thwU5ewZfBg4y8Pb6mry55pmWCq5d2ztE5KFO9YQtO0UpBVEaMaA7AdgBlxk3EBzgSRpz9xlwLLC9tX8qXIcSWu/lCK6mcoXI6Ul/vpxmlKqUpM8sdiD/1kIM00xfkzc3vNfmu5N8XEQOFpE5nWzZlrU5uJ9khMWlBnQDNmF4ih3a/gBP1uHrvbYK8DDwARE5whSlUuAOJa102hjAddrQAiSX3IvrCEJZDn/TV58RPQ3YFkdZDgalP0lf63ttlwFvtTKASqdj5Fmb61yStCfD8iUROQIXY7kzsA77GehqOa/tZOAtInJhoCjVks9g8hTfvrgEE42YhfH79EyrZaqUjTI2fc1E5BWjLKcAN+Ric9rnwObjsLOAI0Rk52DkTcfDCGX14Py1DBQ0+URsA1wJbAMchRvxMtCHihMCWwVX3PxuETlMRGaWOd6WA7fM+lBOAr4X+fP3wDsXOLtopQEjDDF49mUH4AhcZmClTw3TENj89IstReRYi2F2bYpEuwBuwD5LI6uHWlBwCqRi1uFPgMnAz1gU1PaKUysxX18LgO0u4EBgWxG5sl+8Np9YEoz2OQ5YPVibmJvlXiIijxQ9uaRJffXeXFVEjjUP+0e4zN5+YGC0DrBdBGwnIgdYB5uKiNS6uRekHR0VVHUirpBzGVyVf9Zj62Es8BiwkQFCYdPF7XB7NbakqusAX8RNJxifo4izggfya4GCeJkG/BI4R0TmB1Rd3wTzfW2Qqv4P8MMgWE/k8bd3e2OkX55XHX19A3A4LuNymVwsMitB4k09nb0I+ImIXBewD/TCyJE2xQWqqvpZ4BeRWJUvAYdaynhWBusxsOKr9ud1zaPZD1i7Tmp2UZRHA4vf752FwN9xcbaLcplr/QRsmXVhqarq5wzoq5E/W39904CtytL/sw36uiZwCPBxYBVeW8OZFWzkWJjo5a/5RQO2k0Xk+vz+LXQafeDJbQ68qc6MqjBGp8N8f6P/28z1ejd5mrnEUjblym8aVV0SeA9wAK5f3oQ6XHhMCqS5ruGhQfQArjnyGSLyz9CIKskUgFaecRZ4AUcD3w8MASmA9/YREflDwWfvdUJflwE+ZPr69pznE6txqkEoJH9ttwPnAOeJyKMBuEfRQUja+SBj8pTK4rk1qzj2d2vgxvHsgYvZLdUg+Jt1qUBfc6+sjof/FHA5cD5wlc3Ne/X++gXYvMUfTgsweuvHdiAWBdwEuB/YDJjfj95bC/q6oenr+4Etcc2zyXl3knt1ywAdSmfvw6X7nw/cGDIsuWkXlKoQOjiUYmhlVOsnKiS/sVR1LeCtuIbOk4ENcbHJRt0mqFNXJS0OKAzf02gvzAPuwdVGXQncYnO3Xo03GajVCrDuo9E5f2Bpg2d3MK6zzaQCxNzCvVQBPiMix/cbpdyivr7GcDOwe4+xMG8Blh+mHEtzoCcjHCqa19t6+2wOcAdwtRmjt1kT85BhifLMTT0kS0htAdWc8lRwnee3MbB7C7AmsCKuM3qnZA6ua8FjwM24uMwtIvJIPo7rFTh2i79Th7aqLouLWe2D61IyIQcaFCAuI7ji+82KntzVY31dBlgPR2FuYfq6MouSyjop84xVeQBHP94CTLWRQYXT2QRwJadEjBYZrPPv44E34FLO17DXqrhMrwnA4vZz3BAW4Mu4As5X7PU08Li9HsHVAk0XkVfqZQZ6br8oh2AY01XVpQPg0SFqQfP00tLmlU3EtdraCNjUDrJV6zSQlgLVPvlhlScl723E+vo6T8h0ZU1gHdsjb7Q/rwAsazo7yXR2TJ094729BQZgz5vevmCvx3G08sMGbI+JyLx62aFF09kEcP1Di0hQq9jUBlXVsbyW1pTcgT6/mQSCQDko6mRtH9NV1Q8BnzcLO8utCQ3aZ4U00uK4IaXSZHYaBfLe7gM2t9lemry3tujrkHS9AeM48+7G2N4a0yBpb649m5eBucN8bghohQ35JIBLSiR1wKtpCy33OfUO+8IfdAG4HQCc0ebC2NDLywpcC5UyJ7uvq6OKVQfxQCmbziaAS9KWJIo+aJHlS2AmAP/G1TANMvo2cFKitkwV3Liirct2QBZMT1tJCuuL+OhA2iJJ+hG4WgQixcU/VrE/DyTj8HXyjaC9XBrx1Bs9TTpLf82DS5KENs5hSwdIfe/tCuDSbjbRTZIkAVySJO2fTp3k9Zl5XzJPInm1SRLAJUlCildTgia7GfArEbkrlQUkSQCXJEkCuTKB22PA9yxVPcXdkiSAS5KEYtNySRbRk0eJyCxrJpDWJkkCuCRJklCGxJK/iMi5iZpMkgAuSZIklIiafBb4rNVgJc8tSQK4JElI9GTR79+35Drcmu9mqeYtSQK4JEkSwFECanIA+JGInG/tuBI1mSQBXJIkpAzKMoDbdcDRljWZwC1JArgkSZKUIqnkMWAfT0mmrMkkCeCSJEkeHCVIKpkDfEhEZqRek0kSwCVJUk6Akz4DNzEPbi8RuT2VBCRJAJckCSnJpCT3qsCBInJpSipJkgAuSZIEcmXx3AQ3wPTsNMA0SQK4JEnKf/DTBwklGW5CwD4icpbRkgnckpAGniZJkqSo4qeUzwb2E5FLkueWJHlwSZIkoeC0qwe3fwHvNHBLnluSBHBJkiShyJSkGLhdAEwRkakpWzJJArgkSZJQ4HiiL+B+GfiyiOwhIjMTuCUhxeCSJElCcRsmV+zPlxm43WOTAUjgliR5cEmSkDqZFNBjEwO3B4ADRGRnA7eKiGhqv5UkeXBJkvSnzA9aVxXJW8uCa34KOB44XkRmmdcmyWtLkgAuSRL6urj7CdygzxUj9eY0eImBmqci7wZOA84UkWcBglhb8tqSJIBLkqQfRUTUwGC2qp4HfM68ubE9AjptAGiV3PVMB/4GnAtcISILPbABteS1JUlxhSRJkmDzzwCWA64GNmyifZd2OWZeBf4J3ABcAVwvIjODexgAqinOliQBXJIkSfIgJ+bNrQx8F3gfjq7MehALfAl4DvgvcB+OgrwL+HdYnG3eGuaxJWBLkgAuSZIkQ4Oc/b4ysC6wQo4yHGt/HgNMDPRsLLAYsPgw43fy1ONLuFq1OcBM4En7OVNE5ta5xgRqSZKY/H92DDkXtrKGxwAAAABJRU5ErkJggg==" alt="Foyo"><p>Électroménager, TV, consoles et téléphones en location avec option d'achat, livrés et installés partout en France.</p></div>
     <div><h4>Louer</h4><ul><li><a href="#packs">Packs déménagement</a></li><li><a href="#catalogue">Catalogue</a></li><li><a data-chat>Conseiller</a></li></ul></div>
-    <div><h4>Aide</h4><ul><li><a href="#fonctionnement">Comment ça marche</a></li><li><a href="#questions">Questions fréquentes</a></li><li><a href="mailto:contact@groupecohesif.fr">contact@groupecohesif.fr</a></li></ul></div>
+    <div><h4>Aide</h4><ul><li><a href="#fonctionnement">Comment ça marche</a></li><li><a href="#aide">Service client</a></li><li><a href="#suivi">Suivre ma commande</a></li><li><a href="#questions">Questions fréquentes</a></li></ul></div>
     <div><h4>Informations</h4><ul><li><a data-legal="mentions">Mentions légales</a></li><li><a data-legal="cgl">Conditions de location</a></li><li><a data-legal="rgpd">Confidentialité</a></li></ul></div>
     <div class="legal">
       <p class="warn">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p>
@@ -624,7 +713,12 @@ footer.ft a:hover{color:#fff}
 const CONFIG={
   FORMSPREE:"",      // ex. "https://formspree.io/f/abcdwxyz" : reçoit chaque commande par e-mail
   PARTNER_URL:"",    // lien de souscription fourni par le partenaire financier (vérification + signature)
-  AI_ENDPOINT:""     // facultatif : adresse d'un service IA. Vide = conseiller intégré
+  AI_ENDPOINT:"",    // facultatif : adresse d'un service IA. Vide = conseiller intégré
+  API:"api/",        // serveur de commandes (dossier api/ sur l'hébergement IONOS)
+  PARTNER_NAME:"notre partenaire financier",
+  SUPPORT_PHONE:"",  // ex. "01 23 45 67 89" : affiché sur la page service client
+  SUPPORT_HOURS:"du lundi au samedi, de 9 h à 19 h",
+  SUPPORT_EMAIL:"contact@groupecohesif.fr"
 };
 
 /* ---------- Tarifs (exemples à ajuster avec le partenaire) ---------- */
@@ -857,61 +951,11 @@ function openCart(){
 
 /* ---------- Commande ---------- */
 const CO={step:0,d:24,info:{}};
-function checkout(){CO.step=0;CO.d=S.dur;rCO()}
-function rCO(){
-  const ids=S.cart,d=CO.d,t=sumM(ids,d),r=ids.reduce((s,id)=>s+BY[id].price*RES[d],0);
-  const bar=`<div class="steps">${[0,1,2].map(i=>`<i class="${i<=CO.step?"on":""}"></i>`).join("")}</div>`;
-  const H=x=>`<div class="ph"><h3>${x}</h3><button class="x" type="button" data-close aria-label="Fermer">×</button></div>`;
-  if(CO.step===0){
-    panel(H("Votre commande")+`<div class="pb">${bar}
-    ${ids.map(id=>`<div class="row"><span>${esc(BY[id].name)}</span><span class="num">${eur(monthly(BY[id].price,d))}</span></div>`).join("")}
-    <div class="fld" style="margin-top:16px"><label>Durée du contrat</label><div class="durs" id="coDur" style="width:max-content">${[12,24,36].map(x=>`<button type="button" data-cod="${x}" aria-pressed="${x===d}">${x} mois</button>`).join("")}</div></div>
-    <div class="sumbox"><div><span class="label">Mensualité</span><div class="big num">${eur(t)}</div></div><div class="fine num" style="text-align:right">Total des loyers : ${eur(Math.round(t*d))}<br>Prix de rachat final : ${eur(Math.round(r))}<br>Premier loyer à la signature</div></div>
-    <button class="btn btn-blue btn-full" type="button" data-step="1">Continuer</button>
-    <p class="fine" style="margin-top:12px">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p></div>`);
-  }else if(CO.step===1){
-    const i=CO.info,v=k=>esc(i[k]||"");
-    panel(H("Vos coordonnées")+`<div class="pb">${bar}<form id="coForm" novalidate>
-    <div class="two"><div class="fld"><label for="cPre">Prénom</label><input id="cPre" autocomplete="given-name" value="${v("prenom")}"></div><div class="fld"><label for="cNom">Nom</label><input id="cNom" autocomplete="family-name" value="${v("nom")}"></div></div>
-    <div class="fld"><label for="cMail">E-mail</label><input id="cMail" type="email" autocomplete="email" inputmode="email" value="${v("email")}"></div>
-    <div class="fld"><label for="cTel">Téléphone mobile</label><input id="cTel" type="tel" autocomplete="tel" inputmode="tel" value="${v("tel")}"></div>
-    <div class="fld"><label for="cAdr">Adresse de livraison</label><input id="cAdr" autocomplete="street-address" value="${v("adresse")}"></div>
-    <div class="two"><div class="fld"><label for="cCp">Code postal</label><input id="cCp" autocomplete="postal-code" inputmode="numeric" value="${v("cp")}"></div><div class="fld"><label for="cVille">Ville</label><input id="cVille" autocomplete="address-level2" value="${v("ville")}"></div></div>
-    <div class="fld"><label for="cLiv">Date de livraison souhaitée</label><input id="cLiv" type="date" value="${(i.livraison||addDays(S.date,-1).toISOString().slice(0,10))}"></div>
-    <label class="cmpck" style="margin:6px 0 4px;align-items:flex-start;color:var(--ink-2)"><input type="checkbox" id="cOk" style="margin-top:3px" ${i.ok?"checked":""}><span>J'accepte que mes informations soient transmises au partenaire financier pour l'étude de mon dossier.</span></label>
-    <p class="err" id="coErr"></p>
-    <button class="btn btn-blue btn-full" type="submit" id="coSend">${CONFIG.PARTNER_URL?"Valider et passer à la signature":"Valider ma commande"}</button></form></div>`);
-    $("coForm").onsubmit=submitCO;
-  }else{
-    const liv=CO.info.livraison?fdate(new Date(CO.info.livraison+"T12:00:00")):"";
-    panel(`<div class="ph"><h3>Commande enregistrée</h3><button class="x" type="button" data-close data-clear aria-label="Fermer">×</button></div><div class="pb">${bar}
-    <div class="done-ic"><svg><use href="#i-check"/></svg></div>
-    <h2 style="font-size:26px">Merci ${esc(CO.info.prenom||"")}.</h2>
-    <p style="margin:10px 0 16px;color:var(--ink-2)">Vous allez recevoir à l'adresse <b>${esc(CO.info.email||"")}</b> le lien sécurisé de vérification d'identité et de signature électronique. Une fois signé, votre livraison est confirmée pour le <b>${esc(liv)}</b>.</p>
-    <div class="row"><span>Mensualité</span><b class="num">${eur(t)}</b></div><div class="row"><span>Durée</span><b>${d} mois</b></div><div class="row"><span>Appareils</span><b>${ids.length}</b></div>
-    <button class="btn btn-ink btn-full" type="button" data-close data-clear style="margin-top:16px">Terminer</button></div>`);
-  }
-}
-async function submitCO(e){
-  e.preventDefault();
-  const g=id=>$(id).value.trim();
-  const i={prenom:g("cPre"),nom:g("cNom"),email:g("cMail"),tel:g("cTel"),adresse:g("cAdr"),cp:g("cCp"),ville:g("cVille"),livraison:g("cLiv"),ok:$("cOk").checked};
-  CO.info=i;
-  const err=!i.prenom||!i.nom?"Indiquez votre prénom et votre nom.":!/^\S+@\S+\.\S+$/.test(i.email)?"L'adresse e-mail n'est pas valide.":i.tel.replace(/\D/g,"").length<10?"Indiquez un numéro de mobile à 10 chiffres.":!i.adresse||!/^\d{5}$/.test(i.cp)||!i.ville?"Complétez l'adresse de livraison avec un code postal à 5 chiffres.":!i.livraison?"Choisissez une date de livraison.":!i.ok?"Cochez la case pour que votre dossier puisse être étudié.":"";
-  if(err){$("coErr").textContent=err;return}
-  const btn=$("coSend");btn.disabled=true;btn.textContent="Envoi en cours…";
-  const payload={...i,duree:CO.d+" mois",mensualite:eur(sumM(S.cart,CO.d)),produits:S.cart.map(id=>`${BY[id].name} (${eur(monthly(BY[id].price,CO.d))})`).join(" | "),date_emmenagement:S.date.toISOString().slice(0,10)};
-  if(CONFIG.FORMSPREE){
-    try{const r=await fetch(CONFIG.FORMSPREE,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});if(!r.ok)throw 0}
-    catch(x){$("coErr").textContent="L'envoi n'a pas abouti. Vérifiez votre connexion et réessayez.";btn.disabled=false;btn.textContent="Réessayer";return}
-  }
-  if(CONFIG.PARTNER_URL){location.href=CONFIG.PARTNER_URL;return}
-  CO.step=2;rCO();
-}
+function checkout(){FL.d=S.dur||FL.d;FL.step=1;if(location.hash==="#commande")route();else location.hash="#commande"}
 
 /* ---------- Mentions ---------- */
 const LEGAL={
-  mentions:["Mentions légales",`<p><b>Éditeur du site</b><br>Foyo, marque du Groupe Cohesif<br>[Forme juridique et capital à compléter]<br>200 rue de la Croix-Nivert, 75015 Paris<br>SIREN : [à compléter] · RCS Paris<br>Directeur de la publication : le Président<br>Contact : contact@groupecohesif.fr</p><p style="margin-top:14px"><b>Intermédiaire en opérations de banque</b><br>Immatriculation ORIAS n° [à compléter]</p><p style="margin-top:14px"><b>Hébergement</b><br>GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>`],
+  mentions:["Mentions légales",`<p><b>Éditeur du site</b><br>Foyo, marque du Groupe Cohesif<br>[Forme juridique et capital à compléter]<br>200 rue de la Croix-Nivert, 75015 Paris<br>SIREN : [à compléter] · RCS Paris<br>Directeur de la publication : le Président<br>Contact : contact@groupecohesif.fr</p><p style="margin-top:14px"><b>Intermédiaire en opérations de banque</b><br>Immatriculation ORIAS n° [à compléter]</p><p style="margin-top:14px"><b>Hébergement</b><br>IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Allemagne</p>`],
   cgl:["Conditions de location",`<p>Les contrats de location avec option d'achat sont proposés par notre partenaire financier [nom à compléter], sous réserve d'acceptation du dossier. Le contrat précise la durée, le montant des loyers, le coût total et le prix de rachat. Vous disposez d'un délai de rétractation de 14 jours à compter de la signature. À la fin du contrat, vous pouvez lever l'option d'achat, restituer le bien ou le renouveler.</p><p style="margin-top:12px">Les conditions générales complètes sont remises avec votre contrat avant signature.</p>`],
   rgpd:["Confidentialité",`<p>Les informations saisies servent uniquement à traiter votre commande, organiser la livraison et permettre à notre partenaire financier d'étudier votre dossier. Elles ne sont ni vendues ni utilisées à d'autres fins.</p><p style="margin-top:12px">Vous pouvez y accéder, les corriger ou demander leur suppression en écrivant à contact@groupecohesif.fr. Le panier est conservé uniquement dans votre navigateur.</p>`]
 };
@@ -940,8 +984,6 @@ document.addEventListener("click",e=>{
   if(ds.cmpids){compare(ds.cmpids.split(","));return}
   if(ds.rm!==undefined){S.cart.splice(+ds.rm,1);saveCart();renderCartBtn();openCart();return}
   if(ds.checkout!==undefined){checkout();return}
-  if(ds.step){CO.step=+ds.step;rCO();return}
-  if(ds.cod){CO.d=+ds.cod;rCO();return}
   if(ds.legal){legal(ds.legal);return}
   if(ds.clear!==undefined){S.cart=[];saveCart();renderCartBtn()}
   if(ds.close!==undefined){closePanel();if(t.tagName==="BUTTON")return}
@@ -1134,7 +1176,7 @@ function renderPP(){
       ${cols.length?`<div class="pp-row"><div class="label">Coloris <b>${esc(cols[PP.c][0])}</b></div><div class="sws" role="group" aria-label="Coloris">${cols.map((c,i)=>`<button type="button" class="sw" style="background:${c[1]}" data-ppc="${i}" aria-pressed="${i===PP.c}" aria-label="${esc(c[0])}" title="${esc(c[0])}"></button>`).join("")}</div></div>`:""}
       <div class="pp-row"><div class="label">Durée du contrat</div><div class="durs" role="group" aria-label="Durée du contrat">${[12,24,36].map(x=>`<button type="button" data-ppd="${x}" aria-pressed="${x===d}">${x} mois</button>`).join("")}</div>
         <dl class="pp-sum num"><dt>Mensualité</dt><dd>${eur(m)}</dd><dt>Total des ${d} loyers</dt><dd>${eur(tot)}</dd><dt>Prix de rachat en fin de contrat</dt><dd>${eur(rach)}</dd><dt>Prix de l'appareil neuf</dt><dd>${eur(p.price)}</dd></dl></div>
-      <div class="pp-cta"><button class="btn btn-blue btn-full" type="button" data-ppadd="${p.id}">Louer pour ${eur(m)} /mois</button><button class="btn btn-line btn-full btn-sm" type="button" data-chat>Poser une question au conseiller</button></div>
+      <div class="pp-cta"><button class="btn btn-blue btn-full" type="button" data-ppbuy="${p.id}">Louer pour ${eur(m)} /mois</button><button class="btn btn-line btn-full btn-sm" type="button" data-ppadd="${p.id}">Ajouter au panier</button><button class="linkbtn" type="button" data-chat style="justify-self:center;margin-top:4px">Une question ? Demandez au conseiller</button></div>
       <ul class="pp-inc">
         <li><svg><use href="#i-check"/></svg><span>Livraison${["phone","console","pc","aspirateur"].includes(p.cat)?"":" et installation"} la veille de votre arrivée</span></li>
         <li><svg><use href="#i-check"/></svg><span>Pannes couvertes pendant tout le contrat, réparation ou remplacement</span></li>
@@ -1151,8 +1193,184 @@ function renderPP(){
   </div></section>
   ${sim.length?`<section class="pp-more"><div class="wrap"><h2>Vous pourriez aussi louer</h2><div class="grid">${sim.map(card).join("")}</div></div></section>`:""}`;
 }
+
+/* =========================================================
+   COMMANDE · SUIVI · SERVICE CLIENT  (#commande, #suivi, #aide)
+   ========================================================= */
+const FL={step:1,d:24,f:{},busy:false};
+try{const x=JSON.parse(sessionStorage.getItem("foyo_cmd")||"null");if(x){FL.f=x.f||{};FL.d=x.d||24}}catch(e){}
+const saveFL=()=>{try{sessionStorage.setItem("foyo_cmd",JSON.stringify({f:FL.f,d:FL.d}))}catch(e){}};
+const api=(p,o)=>fetch(CONFIG.API+p,o).then(async r=>{let j=null;try{j=await r.json()}catch(e){}if(!j)throw new Error("Le service est momentanément indisponible. Réessayez dans un instant ou contactez le service client.");if(!r.ok||j.ok===false)throw new Error(j.error||"Une erreur est survenue.");return j});
+const postJ=(p,b)=>api(p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
+const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const SLOTS=[["8 h - 13 h","Matin"],["13 h - 18 h","Après-midi"]];
+const STEPS=["Panier","Livraison","Paiement"];
+function stepper(n){return `<ol class="stepper">${STEPS.map((t,i)=>`<li class="${i+1<n?"done":i+1===n?"on":""}"><span>${t}</span></li>`).join("")}</ol>`}
+function cartMonthly(d){return S.cart.reduce((a,id)=>a+monthly(BY[id].price,d),0)}
+function asideSum(){
+  const d=FL.d,m=cartMonthly(d),rach=Math.round(S.cart.reduce((a,id)=>a+BY[id].price*RES[d],0));
+  return `<div class="box"><h2>Récapitulatif</h2>
+  ${S.cart.map(id=>{const p=BY[id];return `<div class="mini"><span class="pic">${pic(p)}</span><span>${esc(p.brand+" "+p.name)}${S.col[id]?`<small>${esc(S.col[id])}</small>`:""}</span><b class="num">${eur(monthly(p.price,d))}</b></div>`}).join("")}
+  <dl class="sum num" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--rule)"><dt>Durée</dt><dd>${d} mois</dd><dt>Total des loyers</dt><dd>${eur(Math.round(m*d))}</dd><dt>Prix de rachat final</dt><dd>${eur(rach)}</dd><dt>Livraison et installation</dt><dd>Offertes</dd><dt style="align-self:end">Par mois</dt><dd class="tot">${eur(m)}</dd></dl>
+  <p class="fine" style="margin-top:14px">Premier loyer prélevé à la signature, sans apport. Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p></div>`;
+}
+function renderCommande(){
+  const el=$("flow");
+  if(!S.cart.length){el.innerHTML=`<div class="wrap fl-wrap"><h1 class="fl-title">Votre panier est vide</h1><p class="fl-sub">Choisissez un appareil dans le catalogue ou composez votre pack déménagement.</p><a class="btn btn-blue" href="#catalogue">Voir le catalogue</a></div>`;return}
+  const st=FL.step,v=k=>esc(FL.f[k]||"");
+  let main="";
+  if(st===1){
+    main=`<div class="box"><h2>Votre panier <small>${S.cart.length} appareil${S.cart.length>1?"s":""}</small></h2>
+      ${S.cart.map((id,i)=>{const p=BY[id];return `<div class="ln"><a class="pic" href="#produit/${id}">${pic(p)}</a><span><b>${esc(p.brand+" "+p.name)}</b><span class="fine">${S.col[id]?esc(S.col[id])+" · ":""}${esc(p.spec)}</span><button class="rm" type="button" data-flrm="${i}">Retirer</button></span><span class="num">${eur(monthly(p.price,FL.d))}<small class="fine"> /mois</small></span></div>`}).join("")}
+      <a class="linkbtn" href="#catalogue" style="display:inline-block;margin-top:14px">Ajouter un autre appareil</a></div>
+      <div class="box"><h2>Durée du contrat</h2><div class="durs" role="group" aria-label="Durée du contrat" style="width:100%">${[12,24,36].map(x=>`<button type="button" style="flex:1;padding:12px" data-fld="${x}" aria-pressed="${x===FL.d}">${x} mois</button>`).join("")}</div>
+      <p class="fine" style="margin-top:10px">Plus la durée est longue, plus la mensualité est basse. Le prix de rachat en fin de contrat est fixé dès la signature.</p></div>
+      <div class="fl-actions"><a class="linkbtn" href="#catalogue">Continuer mes achats</a><button class="btn btn-blue" type="button" data-flgo="2">Continuer vers la livraison</button></div>`;
+  }else if(st===2){
+    const min=ymd(addDays(new Date(),2)),max=ymd(addDays(new Date(),90));
+    const def=FL.f.delivery_date||ymd(S.date&&S.date>addDays(new Date(),2)?addDays(S.date,-1):addDays(new Date(),3));
+    main=`<form id="flForm" novalidate><div class="box"><h2>Vos coordonnées</h2>
+      <div class="two"><div class="fld"><label for="f_fn">Prénom</label><input id="f_fn" name="first_name" autocomplete="given-name" value="${v("first_name")}" required></div><div class="fld"><label for="f_ln">Nom</label><input id="f_ln" name="last_name" autocomplete="family-name" value="${v("last_name")}" required></div></div>
+      <div class="two"><div class="fld"><label for="f_em">E-mail</label><input id="f_em" name="email" type="email" autocomplete="email" inputmode="email" value="${v("email")}" required><span class="hint">Pour la confirmation et le suivi de commande</span></div><div class="fld"><label for="f_ph">Téléphone mobile</label><input id="f_ph" name="phone" type="tel" autocomplete="tel" inputmode="tel" value="${v("phone")}" required><span class="hint">Le livreur vous appelle avant d'arriver</span></div></div></div>
+      <div class="box"><h2>Adresse de livraison</h2>
+      <div class="fld"><label for="f_ad">Adresse</label><input id="f_ad" name="address" autocomplete="address-line1" value="${v("address")}" required></div>
+      <div class="fld"><label for="f_a2">Complément <span class="hint">(bâtiment, digicode…)</span></label><input id="f_a2" name="address2" autocomplete="address-line2" value="${v("address2")}"></div>
+      <div class="two"><div class="fld"><label for="f_zp">Code postal</label><input id="f_zp" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="5" value="${v("zip")}" required></div><div class="fld"><label for="f_ct">Ville</label><input id="f_ct" name="city" autocomplete="address-level2" value="${v("city")}" required></div></div>
+      <div class="two"><div class="fld"><label for="f_fl">Étage</label><select id="f_fl" name="floor">${["Rez-de-chaussée","1er","2e","3e","4e","5e","6e et plus","Maison"].map(x=>`<option${FL.f.floor===x?" selected":""}>${x}</option>`).join("")}</select></div>
+      <div class="fld"><label>&nbsp;</label><label class="chk" style="margin:12px 0 0"><input type="checkbox" name="elevator" ${FL.f.elevator?"checked":""}>Ascenseur dans l'immeuble</label></div></div></div>
+      <div class="box"><h2>Date et créneau</h2>
+      <div class="fld"><label for="f_dt">Jour de livraison</label><input id="f_dt" name="delivery_date" type="date" min="${min}" max="${max}" value="${esc(def)}" required><span class="hint">Du lundi au samedi, à partir de J+2. Livraison et installation offertes.</span></div>
+      <div class="slots" role="radiogroup" aria-label="Créneau">${SLOTS.map(([k,t],i)=>`<label class="slot-c"><input type="radio" name="delivery_slot" value="${k}" ${(FL.f.delivery_slot||SLOTS[0][0])===k?"checked":""}><b>${t}</b><small>${k}</small></label>`).join("")}</div>
+      <label class="chk" style="margin-top:16px"><input type="checkbox" name="takeback" ${FL.f.takeback!==false?"checked":""}><span>Reprendre gratuitement mes anciens appareils le jour de la livraison</span></label></div>
+      <p class="err" id="flErr" role="alert"></p>
+      <div class="fl-actions"><button class="linkbtn" type="button" data-flgo="1">Retour au panier</button><button class="btn btn-blue" type="submit">Continuer vers le paiement</button></div></form>`;
+  }else{
+    const f=FL.f;
+    main=`<div class="box"><h2>Vérifiez votre commande</h2><div class="recap">
+      <div><b>Coordonnées</b>${esc(f.first_name+" "+f.last_name)}<br>${esc(f.email)}<br>${esc(f.phone)}<br><button class="linkbtn" type="button" data-flgo="2">Modifier</button></div>
+      <div><b>Livraison</b>${esc(fdate(new Date(f.delivery_date+"T12:00:00"),{weekday:"long",day:"numeric",month:"long"}))}, ${esc(f.delivery_slot)}<br>${esc(f.address)}${f.address2?", "+esc(f.address2):""}<br>${esc(f.zip+" "+f.city)} · ${esc(f.floor)}${f.elevator?", ascenseur":""}<br><button class="linkbtn" type="button" data-flgo="2">Modifier</button></div></div></div>
+      <div class="box"><h2>Paiement et signature</h2>
+      <p style="color:var(--ink-2);margin:0 0 16px">Votre location avec option d'achat est financée par ${esc(CONFIG.PARTNER_NAME)}. Vous allez être redirigé vers son espace sécurisé pour :</p>
+      <ol class="how"><li><span><b>Vérifier votre identité</b> avec une pièce d'identité en cours de validité.</span></li><li><span><b>Renseigner votre RIB</b> pour le prélèvement mensuel des loyers.</span></li><li><span><b>Signer électroniquement</b> votre contrat. Le premier loyer de ${eur(cartMonthly(FL.d))} est prélevé à la signature.</span></li></ol>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)">
+      <label class="chk"><input type="checkbox" id="c_cgl"><span>J'ai lu et j'accepte les <button class="linkbtn" type="button" data-legal="cgl">conditions de location</button> et la <button class="linkbtn" type="button" data-legal="rgpd">politique de confidentialité</button>.</span></label>
+      <label class="chk"><input type="checkbox" id="c_pt"><span>J'accepte que mes informations soient transmises à ${esc(CONFIG.PARTNER_NAME)} pour l'étude de mon dossier.</span></label></div>
+      <p class="err" id="flErr" role="alert"></p>
+      <button class="btn btn-blue btn-full" type="button" id="flPay">Payer le premier loyer et signer · ${eur(cartMonthly(FL.d))}</button>
+      <p class="fine" style="margin-top:12px;text-align:center">Vous disposez d'un délai de rétractation de 14 jours après la signature. Un crédit vous engage et doit être remboursé.</p></div>
+      <div class="fl-actions" style="justify-content:flex-start"><button class="linkbtn" type="button" data-flgo="2">Retour à la livraison</button></div>`;
+  }
+  el.innerHTML=`<div class="wrap fl-wrap"><h1 class="fl-title">Commande</h1>${stepper(st)}<div class="fl-grid"><div>${main}</div><aside class="fl-aside">${asideSum()}</aside></div></div>`;
+  if(st===2)$("flForm").onsubmit=submitStep2;
+  if(st===3)$("flPay").onclick=submitOrder;
+}
+function submitStep2(e){
+  e.preventDefault();const fm=e.target,g=n=>(fm.elements[n].value||"").trim();
+  const f={first_name:g("first_name"),last_name:g("last_name"),email:g("email"),phone:g("phone").replace(/[^\d+]/g,""),address:g("address"),address2:g("address2"),zip:g("zip"),city:g("city"),floor:g("floor"),elevator:fm.elements.elevator.checked,takeback:fm.elements.takeback.checked,delivery_date:g("delivery_date"),delivery_slot:(fm.querySelector("[name=delivery_slot]:checked")||{}).value||""};
+  fm.querySelectorAll("[aria-invalid]").forEach(x=>x.removeAttribute("aria-invalid"));
+  const dt=f.delivery_date?new Date(f.delivery_date+"T12:00:00"):null;
+  const checks=[["first_name",!f.first_name||!f.last_name,"Indiquez votre prénom et votre nom."],["email",!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email),"L'adresse e-mail n'est pas valide."],["phone",!/^(\+33|0)[67]\d{8}$/.test(f.phone),"Indiquez un numéro de mobile français (06 ou 07)."],["address",!f.address||!f.city,"Complétez l'adresse de livraison."],["zip",!/^(0[1-9]|[1-8]\d|9[0-5])\d{3}$/.test(f.zip),"Nous livrons en France métropolitaine : vérifiez le code postal."],["delivery_date",!dt||dt<addDays(new Date(),1)||dt.getDay()===0,"Choisissez un jour de livraison à partir de J+2, hors dimanche."]];
+  const bad=checks.find(c=>c[1]);
+  if(bad){$("flErr").textContent=bad[2];const x=fm.elements[bad[0]];if(x){x.setAttribute("aria-invalid","true");x.focus()}return}
+  FL.f=f;saveFL();FL.step=3;renderCommande();window.scrollTo(0,0);
+}
+async function submitOrder(){
+  if(FL.busy)return;
+  if(!$("c_cgl").checked||!$("c_pt").checked){$("flErr").textContent="Cochez les deux cases pour continuer.";return}
+  const b=$("flPay");FL.busy=true;b.disabled=true;b.textContent="Préparation de votre dossier…";$("flErr").textContent="";
+  try{
+    const r=await postJ("order.php",{duration:FL.d,items:S.cart.map(id=>({id,color:S.col[id]||""})),customer:FL.f,consents:{cgl:true,partner:true}});
+    try{localStorage.setItem("foyo_derniere",JSON.stringify({o:r.number,t:r.token}))}catch(e){}
+    location.href=r.redirect;
+  }catch(err){$("flErr").textContent=err.message;b.disabled=false;b.textContent="Réessayer";FL.busy=false}
+}
+function tlHTML(o,timeline,labels,events){
+  const at={};events.forEach(e=>{at[e.status]=e.at});
+  const map={dossier_en_etude:"dossier_en_attente"};const cur=map[o.status]||o.status;const ci=timeline.indexOf(cur);
+  return `<ol class="tl">${timeline.map((k,i)=>`<li class="${i<ci||(i===ci&&k==="livree")?"done":i===ci?"cur":""}"><i></i><b>${esc(k==="dossier_en_attente"&&o.status==="dossier_en_etude"?labels.dossier_en_etude:labels[k])}</b>${at[k]?`<span class="fine">${esc(new Date(at[k].replace(" ","T")).toLocaleDateString("fr-FR",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}))}</span>`:""}</li>`).join("")}</ol>`;
+}
+function orderCard(o){
+  return `<div class="box"><h2>Commande ${esc(o.number)}</h2>
+  ${o.items.map(i=>{const p=BY[i.id];return `<div class="mini"><span class="pic">${p?pic(p):""}</span><span>${esc(i.name)}${i.color?`<small>${esc(i.color)}</small>`:""}</span><b class="num">${eur(i.monthly)}</b></div>`}).join("")}
+  <dl class="sum num" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)"><dt>Mensualité</dt><dd>${eur(o.monthly)} x ${o.duration} mois</dd><dt>Total des loyers</dt><dd>${eur(o.total)}</dd><dt>Prix de rachat</dt><dd>${eur(o.buyback)}</dd><dt>Livraison</dt><dd>${o.delivery_date?esc(fdate(new Date(o.delivery_date+"T12:00:00"),{weekday:"long",day:"numeric",month:"long"})):"à convenir"}${o.delivery_slot?`, ${esc(o.delivery_slot)}`:""}</dd></dl></div>`;
+}
+async function renderRetour(num,tok,flag){
+  const el=$("flow");el.innerHTML=`<div class="wrap fl-wrap"><p class="skel">Chargement de votre commande…</p></div>`;
+  try{
+    const {order:o,timeline,labels,events}=await api(`status.php?o=${encodeURIComponent(num)}&t=${encodeURIComponent(tok)}`);
+    let head="";
+    if(["financement_accepte","en_preparation","livraison_planifiee","en_livraison","livree"].includes(o.status)){
+      S.cart=[];S.col={};saveCart();renderCartBtn();try{sessionStorage.removeItem("foyo_cmd")}catch(e){}
+      head=`<div class="big-ok g"><svg><use href="#i-check"/></svg></div><h1 class="fl-title">Merci ${esc(o.first_name)}, votre commande est confirmée</h1><p class="fl-sub">Votre contrat est signé. Un e-mail de confirmation vient d'être envoyé à <b>${esc(o.email)}</b>. Vous serez prévenu par e-mail à chaque étape jusqu'à la livraison.</p>`;
+    }else if(o.status==="financement_refuse"){
+      head=`<div class="big-ok a"><svg><use href="#i-check"/></svg></div><h1 class="fl-title">Votre dossier n'a pas été accepté</h1><p class="fl-sub">${esc(CONFIG.PARTNER_NAME.charAt(0).toUpperCase()+CONFIG.PARTNER_NAME.slice(1))} n'a pas pu donner une suite favorable. Aucun prélèvement n'a été effectué. Notre service client peut étudier avec vous une formule plus adaptée.</p><a class="btn btn-blue" href="#aide">Contacter le service client</a>`;
+    }else{
+      head=`<div class="big-ok a"><svg><use href="#i-check"/></svg></div><h1 class="fl-title">${flag==="indisponible"?"Votre commande est enregistrée":"Votre dossier est en cours d'étude"}</h1>
+      <p class="fl-sub">${flag==="indisponible"?`Le service de ${esc(CONFIG.PARTNER_NAME)} est momentanément indisponible. Nous vous avons envoyé un e-mail à <b>${esc(o.email)}</b> avec un lien pour finaliser votre dossier dès que possible.`:`Vous recevrez un e-mail à <b>${esc(o.email)}</b> dès la réponse de ${esc(CONFIG.PARTNER_NAME)}. Si vous n'avez pas terminé la signature, vous pouvez la reprendre à tout moment.`}</p>
+      ${o.can_finalize?`<a class="btn btn-blue" href="${CONFIG.API}partner/start.php?o=${encodeURIComponent(o.number)}&t=${encodeURIComponent(o.token)}">Finaliser mon dossier</a>`:""}`;
+    }
+    el.innerHTML=`<div class="wrap fl-wrap"><div class="fl-grid"><div><div class="box">${head}</div><div class="box"><h2>Suivi</h2>${tlHTML(o,timeline,labels,events)}<a class="linkbtn" href="#suivi/${encodeURIComponent(o.number)}/${encodeURIComponent(o.token)}">Ouvrir la page de suivi</a></div></div><aside class="fl-aside">${orderCard(o)}</aside></div></div>`;
+  }catch(err){el.innerHTML=`<div class="wrap fl-wrap"><h1 class="fl-title">Commande introuvable</h1><p class="fl-sub">${esc(err.message)}</p><a class="btn btn-blue" href="#suivi">Retrouver ma commande</a></div>`}
+}
+async function renderSuivi(num,tok){
+  const el=$("flow");
+  const form=(msg="")=>`<div class="wrap fl-wrap"><h1 class="fl-title">Suivre ma commande</h1><p class="fl-sub">Indiquez le numéro de commande reçu par e-mail (il commence par FY) et l'adresse e-mail utilisée lors de la commande.</p>
+    <div class="help-grid"><form class="box" id="trkForm" novalidate><div class="fld"><label for="t_n">Numéro de commande</label><input id="t_n" name="number" placeholder="FY000000-XXXX" autocapitalize="characters" value="${esc(num||"")}" required></div><div class="fld"><label for="t_e">E-mail</label><input id="t_e" name="email" type="email" inputmode="email" autocomplete="email" required></div><p class="err" id="trkErr" role="alert">${esc(msg)}</p><button class="btn btn-blue btn-full" type="submit">Afficher le suivi</button></form>
+    <div class="box"><h2>Besoin d'aide ?</h2><p style="color:var(--ink-2);margin:0 0 14px">Un problème avec une livraison, un appareil ou votre contrat : notre service client vous répond sous 24 heures ouvrées.</p><a class="btn btn-line btn-full" href="#aide">Contacter le service client</a></div></div></div>`;
+  const show=({order:o,timeline,labels,events})=>{el.innerHTML=`<div class="wrap fl-wrap"><h1 class="fl-title">${esc(o.label)}</h1><p class="fl-sub">${esc(o.message)}</p><div class="fl-grid"><div><div class="box"><h2>Étapes</h2>${tlHTML(o,timeline,labels,events)}${o.carrier||o.tracking?`<p class="notice info">Transporteur : <b>${esc(o.carrier||"")}</b>${o.tracking?` · n° de suivi <b>${esc(o.tracking)}</b>`:""}</p>`:""}${o.can_finalize?`<a class="btn btn-blue" style="margin-top:8px" href="${CONFIG.API}partner/start.php?o=${encodeURIComponent(o.number)}&t=${encodeURIComponent(o.token)}">Finaliser mon dossier</a>`:""}</div>
+    <div class="box"><h2>Une question sur cette commande ?</h2><p style="color:var(--ink-2);margin:0 0 14px">Indiquez le numéro <b>${esc(o.number)}</b> dans votre message pour une réponse plus rapide.</p><a class="btn btn-line" href="#aide/${encodeURIComponent(o.number)}">Contacter le service client</a></div></div><aside class="fl-aside">${orderCard(o)}</aside></div></div>`};
+  if(num&&tok){el.innerHTML=`<div class="wrap fl-wrap"><p class="skel">Chargement…</p></div>`;try{show(await api(`status.php?o=${encodeURIComponent(num)}&t=${encodeURIComponent(tok)}`));return}catch(err){el.innerHTML=form(err.message)}}
+  else el.innerHTML=form();
+  $("trkForm").onsubmit=async e=>{e.preventDefault();const n=$("t_n").value.trim(),m=$("t_e").value.trim();if(!n||!m){$("trkErr").textContent="Renseignez les deux champs.";return}
+    const b=e.target.querySelector("button");b.disabled=true;try{const r=await postJ("status.php",{number:n,email:m});history.replaceState(null,"",`#suivi/${encodeURIComponent(r.order.number)}/${r.order.token}`);show(r)}catch(err){$("trkErr").textContent=err.message;b.disabled=false}};
+}
+const TOPICS=[["commande","Ma commande"],["livraison","Livraison"],["panne","Panne ou appareil abîmé"],["retractation","Rétractation ou annulation"],["contrat","Contrat, loyers, rachat"],["demenagement","Changement d'adresse"],["autre","Autre question"]];
+function renderAide(num){
+  const el=$("flow");
+  el.innerHTML=`<div class="wrap fl-wrap"><h1 class="fl-title">Service client</h1><p class="fl-sub">Une question sur une commande, une livraison, une panne ou votre contrat ? Écrivez-nous : un conseiller vous répond par e-mail sous 24 heures ouvrées.</p>
+  <div class="help-grid"><div><form class="box" id="ctForm" novalidate><h2>Nous écrire</h2>
+    <div class="fld"><label for="ct_t">Sujet</label><select id="ct_t" name="topic"><option value="">Choisissez un sujet</option>${TOPICS.map(([k,t])=>`<option value="${k}">${t}</option>`).join("")}</select></div>
+    <div class="two"><div class="fld"><label for="ct_n">Nom et prénom</label><input id="ct_n" name="name" autocomplete="name" required></div><div class="fld"><label for="ct_e">E-mail</label><input id="ct_e" name="email" type="email" inputmode="email" autocomplete="email" required></div></div>
+    <div class="two"><div class="fld"><label for="ct_p">Téléphone <span class="hint">(facultatif)</span></label><input id="ct_p" name="phone" type="tel" autocomplete="tel"></div><div class="fld"><label for="ct_o">N° de commande <span class="hint">(si vous en avez un)</span></label><input id="ct_o" name="order_number" value="${esc(num||"")}" placeholder="FY000000-XXXX"></div></div>
+    <div class="fld"><label for="ct_m">Votre message</label><textarea id="ct_m" name="message" required></textarea><span class="hint">Pour une panne : indiquez l'appareil et ce qui se passe. Nous organisons la réparation ou le remplacement.</span></div>
+    <div class="hp" aria-hidden="true"><label>Site web<input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <p class="err" id="ctErr" role="alert"></p><button class="btn btn-blue" type="submit">Envoyer ma demande</button></form>
+    <div class="box"><h2>Réponses rapides</h2><div class="qa">
+      <details><summary>Où en est ma commande ?</summary><p>Suivez chaque étape sur la page <a href="#suivi">Suivre ma commande</a> avec votre numéro de commande et votre e-mail. Vous recevez aussi un e-mail à chaque étape.</p></details>
+      <details><summary>Je veux changer ma date de livraison</summary><p>Écrivez-nous au moins 48 heures avant la date prévue en indiquant votre numéro de commande et la nouvelle date souhaitée.</p></details>
+      <details><summary>Mon appareil est en panne</summary><p>Les pannes sont couvertes pendant toute la durée du contrat. Décrivez le problème avec le sujet « Panne » : nous réparons ou remplaçons l'appareil, déplacement compris.</p></details>
+      <details><summary>Je veux me rétracter</summary><p>Vous disposez de 14 jours après la signature du contrat. Envoyez-nous votre demande avec le sujet « Rétractation » : nous organisons la reprise des appareils.</p></details>
+      <details><summary>Je déménage pendant mon contrat</summary><p>Votre contrat continue. Indiquez votre nouvelle adresse avec le sujet « Changement d'adresse ».</p></details>
+    </div></div></div>
+  <aside class="fl-aside"><div class="box"><h2>Nous contacter</h2><ul class="contact-l">
+    ${CONFIG.SUPPORT_PHONE?`<li><b>Téléphone</b><a href="tel:${esc(CONFIG.SUPPORT_PHONE.replace(/\s/g,""))}">${esc(CONFIG.SUPPORT_PHONE)}</a><br>${esc(CONFIG.SUPPORT_HOURS)}</li>`:""}
+    <li><b>E-mail</b><a href="mailto:${esc(CONFIG.SUPPORT_EMAIL)}">${esc(CONFIG.SUPPORT_EMAIL)}</a><br>Réponse sous 24 heures ouvrées</li>
+    <li><b>Conseiller en ligne</b>Pour choisir un appareil ou composer un pack.<br><button class="linkbtn" type="button" data-chat>Ouvrir le conseiller</button></li>
+    <li><b>Suivi de commande</b><a href="#suivi">Suivre ma commande</a></li></ul></div></aside></div></div>`;
+  $("ctForm").onsubmit=async e=>{e.preventDefault();const fm=e.target,g=n=>fm.elements[n].value.trim();
+    const d={topic:g("topic"),name:g("name"),email:g("email"),phone:g("phone"),order_number:g("order_number"),message:g("message"),website:g("website")};
+    const err=!d.topic?"Choisissez le sujet de votre demande.":!d.name?"Indiquez votre nom.":!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)?"L'adresse e-mail n'est pas valide.":d.message.length<10?"Décrivez votre demande en quelques mots.":"";
+    if(err){$("ctErr").textContent=err;return}
+    const b=fm.querySelector("button[type=submit]");b.disabled=true;b.textContent="Envoi…";
+    try{const r=await postJ("contact.php",d);fm.innerHTML=`<div class="big-ok g"><svg><use href="#i-check"/></svg></div><h2>Demande envoyée</h2><p style="color:var(--ink-2)">Merci ${esc(d.name)}. Votre demande n° <b>${esc(r.number)}</b> est enregistrée et un accusé de réception vous a été envoyé à <b>${esc(d.email)}</b>. Un conseiller vous répond sous 24 heures ouvrées.</p>`}
+    catch(x){$("ctErr").textContent=x.message;b.disabled=false;b.textContent="Envoyer ma demande"}};
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t||!t.closest("#flow"))return;const ds=t.dataset;
+  if(ds.fld){FL.d=+ds.fld;saveFL();renderCommande();return}
+  if(ds.flrm!==undefined){const id=S.cart[+ds.flrm];S.cart.splice(+ds.flrm,1);if(!S.cart.includes(id))delete S.col[id];saveCart();renderCartBtn();renderCommande();return}
+  if(ds.flgo){const n=+ds.flgo;if(n===3&&!FL.f.email)return;FL.step=n;renderCommande();window.scrollTo(0,0);return}
+});
 const TITLE0=document.title;
 function route(){
+  const h=decodeURIComponent(location.hash);
+  const fm=h.match(/^#(commande|suivi|aide)(?:\/(.*))?$/);
+  $("flow").hidden=!fm;
+  if(fm){$("top").hidden=true;$("pp").hidden=true;const a=(fm[2]||"").split("/");closePanel();
+    if(fm[1]==="commande"){if(a[0]==="retour"){document.title="Votre commande | Foyo";renderRetour(a[1],a[2],a[3])}else{document.title="Commande | Foyo";if(FL.step===3&&!FL.f.email)FL.step=2;renderCommande()}}
+    else if(fm[1]==="suivi"){document.title="Suivre ma commande | Foyo";renderSuivi(a[0],a[1])}
+    else{document.title="Service client | Foyo";renderAide(a[0])}
+    window.scrollTo(0,0);return}
   const mm=location.hash.match(/^#produit\/([\w-]+)$/);const p=mm&&BY[mm[1]];
   $("top").hidden=!!p;$("pp").hidden=!p;
   if(p){if(PP.id!==p.id){PP.id=p.id;PP.c=0;const sc=S.col[p.id];if(sc&&COL[p.id]){const k=COL[p.id].findIndex(c=>c[0]===sc);if(k>-1)PP.c=k}}
@@ -1165,6 +1383,7 @@ document.addEventListener("click",e=>{
   const t=e.target.closest("button");if(!t)return;const ds=t.dataset;
   if(ds.ppc!==undefined){PP.c=+ds.ppc;renderPP();return}
   if(ds.ppd){PP.d=+ds.ppd;renderPP();return}
+  if(ds.ppbuy){const c=COL[ds.ppbuy];if(c)S.col[ds.ppbuy]=c[PP.c][0];if(!S.cart.includes(ds.ppbuy))addCart([ds.ppbuy],true);else saveCart();FL.d=PP.d;FL.step=1;location.hash="#commande";return}
   if(ds.ppadd){const c=COL[ds.ppadd];if(c)S.col[ds.ppadd]=c[PP.c][0];addCart([ds.ppadd],true);toast(c?`Ajouté au panier, coloris ${c[PP.c][0]}`:"Ajouté au panier");return}
 });
 $("yr").textContent=new Date().getFullYear();

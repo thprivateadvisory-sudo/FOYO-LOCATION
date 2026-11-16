@@ -1,0 +1,5 @@
+# Fichiers internes inaccessibles depuis le web
+<FilesMatch "^(lib|partner|config|config\.sample)\.php$|\.json$">
+  Require all denied
+</FilesMatch>
+Options -Indexes
