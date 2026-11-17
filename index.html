@@ -107,9 +107,9 @@ nav.main a:hover{color:var(--blue)}
 
 /* Bon de livraison */
 .slip{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);position:relative}
-.slip-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px dashed #C5CAD5}
-.slip-head .ref{font-family:var(--font-display);font-weight:600;font-size:15px}
-.stamp{border:1.5px solid var(--green);color:var(--green);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:4px;transform:rotate(-3deg)}
+.slip-head{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px dashed #C5CAD5}
+.slip-head .ref{font-family:var(--font-display);font-weight:600;font-size:15px;white-space:nowrap}
+.stamp{white-space:nowrap;border:1.5px solid var(--green);color:var(--green);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:4px;transform:rotate(-3deg)}
 .stamp.over{border-color:var(--amber);color:var(--amber)}
 .slip-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px dashed #C5CAD5}
 .slip-meta div{padding:14px 20px}
@@ -169,8 +169,8 @@ section.s{padding:64px 0}
 .pk.feat .tag{background:var(--blue);color:#fff}
 .pk h3{font-size:24px}
 .pk .muted{color:var(--muted);font-size:15px}
-.pk .pp{font-family:var(--font-display);font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1}
-.pk .pp small{font-size:14px;font-weight:500;letter-spacing:0;opacity:.75}
+.pk .pp{font-family:var(--font-display);font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:4px;row-gap:6px}
+.pk .pp small{font-size:14px;font-weight:500;letter-spacing:0;opacity:.75;display:inline-block;white-space:nowrap}
 .pk ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
 .pk li{display:grid;grid-template-columns:20px 1fr;gap:8px;color:var(--ink-2)}
 .pk li svg{width:18px;height:18px;margin-top:2px;color:var(--blue)}
@@ -200,7 +200,7 @@ section.s{padding:64px 0}
 .prod h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
 .prod .sp{font-size:13px;color:var(--muted);line-height:1.4}
 .prod .pr{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:-.02em;margin-top:auto}
-.prod .pr small{font-family:var(--font-body);font-size:13px;color:var(--muted);font-weight:600;letter-spacing:0}
+.prod .pr small{font-family:var(--font-body);font-size:13px;color:var(--muted);font-weight:600;letter-spacing:0;white-space:nowrap}
 .prod .act{display:flex;gap:8px;align-items:center;justify-content:space-between}
 .cmpck{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
 .cmpck input{accent-color:var(--blue);width:16px;height:16px}
@@ -389,7 +389,7 @@ footer.ft a:hover{color:#fff}
 .spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
 .spec th{color:var(--muted);font-weight:600;width:42%;padding-right:16px}
 .spec td{color:var(--ink);font-weight:600}
-.score{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:14px;color:var(--ink-2);padding:6px 0}
+.score{display:grid;grid-template-columns:90px 1fr auto;gap:10px;align-items:center;font-size:14px;color:var(--ink-2);padding:6px 0}
 .score i{display:block;height:6px;border-radius:3px;background:var(--rule);overflow:hidden}.score i b{display:block;height:100%;background:var(--blue)}
 .ends-mini{display:grid;gap:12px}
 .ends-mini div{border:1px solid var(--rule);border-radius:var(--r);padding:14px 16px;font-size:14.5px;color:var(--ink-2)}
@@ -484,6 +484,7 @@ ol.tl{list-style:none;margin:0;padding:0}
 /* ---------- Personnage du conseiller ---------- */
 .fab{padding:0;width:128px;height:118px;background:none;box-shadow:none;border-radius:0;overflow:visible;right:10px;bottom:6px}
 .fab:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:12px}
+@media(max-width:899px){body.in-order .fab,body.in-order .fab-tip{display:none}}
 .fab .perso{position:absolute;left:0;bottom:0;width:128px;height:auto;transform-origin:50% 100%;filter:drop-shadow(0 6px 10px rgba(16,26,44,.28));animation:p-idle 6s ease-in-out infinite;pointer-events:none}
 .fab .fab-dot{position:absolute;left:58px;top:2px;width:14px;height:14px;border-radius:50%;background:#22A06B;border:2px solid #fff;box-shadow:0 0 0 0 rgba(34,160,107,.5);animation:p-dot 2.4s ease-out infinite}
 @keyframes p-dot{0%{box-shadow:0 0 0 0 rgba(34,160,107,.5)}70%{box-shadow:0 0 0 8px rgba(34,160,107,0)}100%{box-shadow:0 0 0 0 rgba(34,160,107,0)}}
@@ -1431,7 +1432,7 @@ const TITLE0=document.title;
 function route(){
   const h=decodeURIComponent(location.hash);
   const fm=h.match(/^#(commande|suivi|aide)(?:\/(.*))?$/);
-  $("flow").hidden=!fm;
+  $("flow").hidden=!fm;document.body.classList.toggle("in-order",!!fm&&fm[1]==="commande");
   if(fm){$("top").hidden=true;$("pp").hidden=true;const a=(fm[2]||"").split("/");closePanel();
     if(fm[1]==="commande"){if(a[0]==="envoyee"){document.title="Demande envoyée | Foyo";renderEnvoyee()}else if(a[0]==="retour"){document.title="Votre commande | Foyo";renderRetour(a[1],a[2],a[3])}else{document.title="Commande | Foyo";if(FL.step===3&&!FL.f.email)FL.step=2;renderCommande()}}
     else if(fm[1]==="suivi"){document.title="Suivre ma commande | Foyo";renderSuivi(a[0],a[1])}
