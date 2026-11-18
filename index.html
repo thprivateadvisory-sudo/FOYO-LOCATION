@@ -101,6 +101,22 @@ nav.main a:hover{color:var(--blue)}
 .slot:focus-within{background:var(--blue-wash)}
 .slot svg{width:.55em;height:.55em;margin-left:5px}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.own{display:inline-flex;align-items:center;gap:8px;background:var(--green-wash);color:var(--green);font-weight:700;font-size:14px;padding:7px 12px;border-radius:999px;margin-bottom:18px}
+.own svg{width:16px;height:16px}
+.lead{margin-top:16px;font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:40em}
+.lead b{color:var(--ink)}
+.steps3{margin-top:22px;display:grid;gap:8px;grid-template-columns:repeat(3,1fr)}
+.steps3 small{display:none;font-size:inherit}
+@media(min-width:640px){.steps3{gap:10px}.steps3 small{display:block}}
+@media(max-width:639px){.steps3 div{padding:10px;font-size:13px}.steps3 b{font-size:14px}.steps3 .k{font-size:10.5px}}
+.steps3 div{border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;font-size:14.5px;color:var(--ink-2);background:var(--white)}
+.steps3 b{display:block;color:var(--ink);font-family:var(--font-display);font-size:16px}
+.steps3 .k{display:block;font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.steps3 .fin{border-color:var(--green);background:var(--green-wash)}
+.steps3 .fin .k{color:var(--green)}
+.prod .own-l{display:block;font-size:12.5px;color:var(--green);font-weight:600;margin-top:2px}
+.end.main{border-top-color:var(--green)}
+.end.main .label{color:var(--green)}
 .hero-note{margin-top:18px;font-size:14px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
 .hero-note span{display:flex;gap:7px;align-items:center}
 .tick{width:16px;height:16px;color:var(--green);flex:none}
@@ -511,6 +527,7 @@ ol.tl{list-style:none;margin:0;padding:0}
 </svg>
 
 <div class="band"><div class="wrap">
+  <span><b>Payez par mois,</b> l'appareil est à vous à la fin</span>
   <span><b>Réponse immédiate</b> sur votre dossier</span>
   <span><b>Livraison et installation</b> la veille de votre arrivée</span>
   <span><b>Reprise</b> de vos anciens appareils</span>
@@ -542,7 +559,14 @@ ol.tl{list-style:none;margin:0;padding:0}
   <div class="hero">
     <div class="wrap">
       <div>
+        <span class="own"><svg><use href="#i-check"/></svg>Payez par mois, à la fin c'est à vous</span>
         <h1>Votre logement équipé <span class="b">avant même d'y entrer.</span></h1>
+        <p class="lead">Ce n'est pas une location où l'on rend tout. <b>Vous payez en petites mensualités, et à la fin du contrat l'appareil devient le vôtre</b> pour un dernier petit montant, connu dès le départ.</p>
+        <div class="steps3">
+          <div><span class="k">Aujourd'hui</span><b>Livré et installé</b><small>Sans apport, seul le premier mois est prélevé.</small></div>
+          <div><span class="k">Chaque mois</span><b>Une petite mensualité</b><small>De 12 à 36 mois, vous choisissez.</small></div>
+          <div class="fin"><span class="k">À la fin</span><b>Il est à vous</b><small>Pour 3 % de son prix sur 36 mois. Vous le gardez pour toujours.</small></div>
+        </div>
         <p class="sentence" id="sentence">
           J'emménage le
           <label class="slot"><span id="vDate">15 décembre</span><svg><use href="#i-down"/></svg><input type="date" id="fDate" aria-label="Date d'emménagement"></label>
@@ -565,7 +589,7 @@ ol.tl{list-style:none;margin:0;padding:0}
         </div>
         <div class="hero-note">
           <span><svg class="tick"><use href="#i-check"/></svg>Coût total affiché avant de signer</span>
-          <span><svg class="tick"><use href="#i-check"/></svg>Option d'achat en fin de contrat</span>
+          <span><svg class="tick"><use href="#i-check"/></svg>À vous en fin de contrat, sans rien rendre</span>
         </div>
       </div>
 
@@ -595,7 +619,7 @@ ol.tl{list-style:none;margin:0;padding:0}
           </div>
         </div>
         <div class="slip-foot">
-          <button class="btn btn-blue btn-full" type="button" id="rentPack">Louer ce pack</button>
+          <button class="btn btn-blue btn-full" type="button" id="rentPack">Prendre ce pack</button>
           <button class="btn btn-line btn-full btn-sm" type="button" id="askPack">L'ajuster avec le conseiller</button>
         </div>
       </aside>
@@ -603,7 +627,7 @@ ol.tl{list-style:none;margin:0;padding:0}
   </div>
 
   <div class="facts"><div class="wrap">
-    <div class="fact"><b>5 min</b><span>pour commander depuis votre téléphone</span></div>
+    <div class="fact"><b>À vous</b><span>à la fin du contrat, vous gardez tout</span></div>
     <div class="fact"><b>J-1</b><span>livraison la veille de votre arrivée</span></div>
     <div class="fact"><b class="num">12 à 36 mois</b><span>vous choisissez la durée</span></div>
     <div class="fact"><b>Sans apport</b><span>seul le premier loyer est prélevé</span></div>
@@ -671,13 +695,13 @@ ol.tl{list-style:none;margin:0;padding:0}
   <section class="s">
     <div class="wrap">
       <div class="shead">
-        <h2>À la fin du contrat, vous décidez</h2>
-        <p>Le prix de rachat est fixé dès la signature et affiché sur chaque produit. Pas de surprise au dernier mois.</p>
+        <h2>À la fin du contrat, l'appareil est à vous</h2>
+        <p>Vous ne louez pas pour rendre : vous payez votre appareil petit à petit. Le dernier montant pour le garder est fixé dès la signature et affiché sur chaque produit. Pas de surprise au dernier mois.</p>
       </div>
       <div class="ends">
-        <div class="end"><span class="label">Option 1</span><h3>Vous gardez</h3><p>Vous réglez le prix de rachat prévu au contrat et l'appareil est à vous.</p></div>
-        <div class="end"><span class="label">Option 2</span><h3>Vous rendez</h3><p>Nous venons le récupérer chez vous. Vous ne payez plus rien.</p></div>
-        <div class="end"><span class="label">Option 3</span><h3>Vous changez</h3><p>Vous passez au modèle récent avec un nouveau contrat, sans période sans appareil.</p></div>
+        <div class="end main"><span class="label">Ce que font la plupart</span><h3>Vous le gardez</h3><p>Vous réglez le petit montant prévu au contrat (3 % du prix sur 36 mois) et l'appareil est à vous, définitivement.</p></div>
+        <div class="end"><span class="label">Si vous préférez</span><h3>Vous rendez</h3><p>Nous venons le récupérer chez vous. Vous ne payez plus rien.</p></div>
+        <div class="end"><span class="label">Ou bien</span><h3>Vous changez</h3><p>Vous passez au modèle récent avec un nouveau contrat, sans période sans appareil.</p></div>
       </div>
     </div>
   </section>
@@ -687,6 +711,7 @@ ol.tl{list-style:none;margin:0;padding:0}
     <div class="wrap">
       <div class="shead"><h2>Questions fréquentes</h2><p>Si votre question n'y est pas, le conseiller y répond à toute heure.</p></div>
       <div class="faq">
+        <details open><summary>Est-ce que je dois rendre l'appareil à la fin ?</summary><p>Non. Foyo est une location avec option d'achat : vous payez l'appareil en mensualités, et à la fin vous le gardez en réglant un dernier petit montant, fixé dès la signature (par exemple 3 % du prix sur 36 mois). Le rendre reste possible si vous le souhaitez, mais ce n'est jamais une obligation.</p></details>
         <details><summary>Qui peut louer chez Foyo ?</summary><p>Toute personne majeure résidant en France métropolitaine, avec une pièce d'identité valide et un compte bancaire en France pour les prélèvements. Le dossier est étudié par notre partenaire financier, qui peut l'accepter ou le refuser.</p></details>
         <details><summary>Combien de temps pour avoir une réponse ?</summary><p>La réponse est donnée pendant la commande, en général en quelques secondes. Vous n'attendez pas d'appel et personne ne vous rappelle.</p></details>
         <details><summary>Que se passe-t-il si un appareil tombe en panne ?</summary><p>Les pannes sont couvertes pendant toute la durée du contrat. Nous réparons ou remplaçons l'appareil, déplacement compris.</p></details>
@@ -907,7 +932,7 @@ function renderSlip(){
   $("slipHome").textContent=`${S.type==="maison"?"Maison":"Appartement"} ${SIZE_TXT[S.size]}, ${S.people>=4?"4+":S.people} pers.`;
   $("slipLines").innerHTML=S.pack.map(id=>{const p=BY[id];return `<div class="sl"><span class="pic">${pic(p)}</span><span class="n">${esc(p.name)}<small>${CAT[p.cat]} · <button class="chg" type="button" data-swap="${id}">Changer</button></small></span><span class="p num">${eur(monthly(p.price,d))}</span></div>`}).join("");
   $("slipTotal").innerHTML=`${eur(t)}<small> /mois</small>`;
-  $("slipCost").innerHTML=`${S.pack.length} appareils · total ${eur(Math.round(t*d))} sur ${d} mois<br>rachat final ${eur(Math.round(r))}`;
+  $("slipCost").innerHTML=`${S.pack.length} appareils · total ${eur(Math.round(t*d))} sur ${d} mois<br>puis tout est à vous pour ${eur(Math.round(r))}`;
 }
 function swapPanel(id){
   const p=BY[id],alts=P.filter(x=>x.cat===p.cat).sort((a,b)=>a.price-b.price);
@@ -937,7 +962,7 @@ function renderFilters(){$("filters").innerHTML=TABS.map(([n],i)=>`<button type=
 const card=p=>`<article class="prod">
     <a class="plink" href="#produit/${p.id}"><div class="plate">${pic(p)}<span class="dim num">${esc(p.dim)}</span>${p.badge?`<span class="badge">${esc(p.badge)}</span>`:""}</div>
     <div><div class="br">${esc(p.brand)}</div><h3>${esc(p.name)}</h3><p class="sp">${esc(p.spec)}</p></div></a>
-    <div class="pr num">${eur(monthly(p.price,24))}<small> /mois</small></div>
+    <div class="pr num">${eur(monthly(p.price,24))}<small> /mois</small><span class="own-l">puis à vous pour ${eur(Math.round(p.price*RES[24]))}</span></div>
     <div class="act"><label class="cmpck"><input type="checkbox" data-cmp="${p.id}" ${S.cmp.includes(p.id)?"checked":""}>Comparer</label><button class="btn btn-ink btn-sm" type="button" data-add="${p.id}">Louer</button></div>
   </article>`;
 function renderGrid(){
@@ -1089,7 +1114,7 @@ function local(q){
   else{const d2=s.match(/\b(\d{1,2})\/(\d{1,2})\b/);if(d2){const now=new Date();date=new Date(now.getFullYear(),+d2[2]-1,+d2[1],12);if(date<now)date.setFullYear(date.getFullYear()+1)}}
 
   // Questions courantes
-  if(has("fin du contrat","fin de contrat","a la fin","racheter","rachat","le garder","les garder","je garde"))return R("À la fin du contrat, trois choix : vous gardez l'appareil en payant le prix de rachat fixé dès la signature, vous le rendez et on vient le chercher, ou vous passez à un modèle récent. Vous pouvez aussi solder avant la fin si vous le souhaitez.");
+  if(has("fin du contrat","fin de contrat","a la fin","racheter","rachat","le garder","les garder","je garde","le rendre","les rendre","dois rendre","faut rendre","rendre l","proprietaire"))return R("À la fin du contrat, l'appareil est à vous : vous le gardez en réglant un dernier petit montant fixé dès la signature (3 % du prix sur 36 mois). Vous n'êtes pas obligé de le rendre. Si vous préférez, vous pouvez aussi le rendre ou passer à un modèle récent, et solder avant la fin si vous le souhaitez.");
   if(has("panne","casse","cass","repar","garantie"))return R("Les pannes sont couvertes pendant toute la durée du contrat : nous réparons ou remplaçons l'appareil, déplacement compris.");
   if(has("refus","accept","dossier","fiche","banque de france","credit"))return R("Votre dossier est étudié pendant la commande par notre partenaire financier, avec une réponse en général en quelques secondes. Il vous faut une pièce d'identité, un compte bancaire en France et un mobile. Je ne peux pas garantir l'acceptation, mais vous êtes fixé tout de suite.");
   if(has("livr","install","reprise","ancien"))return R("La livraison et l'installation sont comprises. Deux techniciens livrent la veille de votre emménagement, branchent, testent, et repartent avec vos anciens appareils.");
@@ -1204,7 +1229,7 @@ function renderPP(){
       <div class="pp-price"><span class="big num">${eur(m)}</span><small>par mois pendant ${d} mois</small></div>
       ${cols.length?`<div class="pp-row"><div class="label">Coloris <b>${esc(cols[PP.c][0])}</b></div><div class="sws" role="group" aria-label="Coloris">${cols.map((c,i)=>`<button type="button" class="sw" style="background:${c[1]}" data-ppc="${i}" aria-pressed="${i===PP.c}" aria-label="${esc(c[0])}" title="${esc(c[0])}"></button>`).join("")}</div></div>`:""}
       <div class="pp-row"><div class="label">Durée du contrat</div><div class="durs" role="group" aria-label="Durée du contrat">${[12,24,36].map(x=>`<button type="button" data-ppd="${x}" aria-pressed="${x===d}">${x} mois</button>`).join("")}</div>
-        <dl class="pp-sum num"><dt>Mensualité</dt><dd>${eur(m)}</dd><dt>Total des ${d} loyers</dt><dd>${eur(tot)}</dd><dt>Prix de rachat en fin de contrat</dt><dd>${eur(rach)}</dd><dt>Prix de l'appareil neuf</dt><dd>${eur(p.price)}</dd></dl></div>
+        <dl class="pp-sum num"><dt>Mensualité</dt><dd>${eur(m)}</dd><dt>Total des ${d} loyers</dt><dd>${eur(tot)}</dd><dt>Pour le garder à la fin</dt><dd>${eur(rach)}</dd><dt>Prix de l'appareil neuf</dt><dd>${eur(p.price)}</dd></dl></div>
       <div class="pp-cta"><button class="btn btn-blue btn-full" type="button" data-ppbuy="${p.id}">Louer pour ${eur(m)} /mois</button><button class="btn btn-line btn-full btn-sm" type="button" data-ppadd="${p.id}">Ajouter au panier</button><button class="linkbtn" type="button" data-chat style="justify-self:center;margin-top:4px">Une question ? Demandez au conseiller</button></div>
       <ul class="pp-inc">
         <li><svg><use href="#i-check"/></svg><span>Livraison${["phone","console","pc","aspirateur"].includes(p.cat)?"":" et installation"} la veille de votre arrivée</span></li>
@@ -1218,7 +1243,7 @@ function renderPP(){
   <section class="pp-sec"><div class="wrap">
     <div><h2>Caractéristiques</h2><table class="spec">${rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("")}</table></div>
     <div>${p.s?`<h2>Notre évaluation</h2>${[["Photo","photo"],["Batterie","batterie"],["Puissance","perf"],["Écran","ecran"]].map(([n,k])=>`<div class="score"><span>${n}</span><i><b style="width:${p.s[k]*10}%"></b></i><b class="num">${p.s[k]}/10</b></div>`).join("")}<div style="height:28px"></div>`:""}
-      <h2>À la fin du contrat</h2><div class="ends-mini"><div><b>Vous gardez</b>Vous réglez ${eur(rach)} et l'appareil est à vous.</div><div><b>Vous rendez</b>Nous venons le récupérer, vous ne payez plus rien.</div><div><b>Vous changez</b>Vous passez au modèle récent avec un nouveau contrat.</div></div></div>
+      <h2>À la fin du contrat, il est à vous</h2><div class="ends-mini"><div><b>Vous le gardez</b>Vous réglez ${eur(rach)} et l'appareil est à vous, définitivement.</div><div><b>Vous rendez</b>Nous venons le récupérer, vous ne payez plus rien.</div><div><b>Vous changez</b>Vous passez au modèle récent avec un nouveau contrat.</div></div></div>
   </div></section>
   ${sim.length?`<section class="pp-more"><div class="wrap"><h2>Vous pourriez aussi louer</h2><div class="grid">${sim.map(card).join("")}</div></div></section>`:""}`;
 }
